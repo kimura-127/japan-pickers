@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import PremiumButton from "../ui/PremiumButton";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -56,6 +55,9 @@ const HeroSection = () => {
     // Clear any existing particles
     particlesRef.current.innerHTML = '';
     
+    // Save a reference to particlesRef.current to use in cleanup function
+    const particlesElement = particlesRef.current;
+    
     // Create new particles
     for (let i = 0; i < 50; i++) {
       const particle = document.createElement("div");
@@ -70,12 +72,10 @@ const HeroSection = () => {
       const animationDuration = `${Math.random() * 10 + 10}s`;
       particle.style.animation = `float ${animationDuration} linear infinite`;
       
-      particlesRef.current.appendChild(particle);
+      particlesElement.appendChild(particle);
     }
     
     return () => {
-      // Save a reference to particlesRef.current
-      const particlesElement = particlesRef.current;
       if (particlesElement) {
         particlesElement.innerHTML = '';
       }

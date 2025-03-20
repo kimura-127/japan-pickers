@@ -28,10 +28,6 @@ const Header = () => {
     };
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   const navLinks = [
     { name: "車両ラインナップ", href: "#vehicles" },
     { name: "予約システム", href: "#booking" },

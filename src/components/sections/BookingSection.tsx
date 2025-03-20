@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Check, ChevronDown, Calendar, Info, Settings } from "lucide-react";
+import { Check, ChevronDown, Calendar, Settings } from "lucide-react";
 import PremiumButton from "../ui/PremiumButton";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
