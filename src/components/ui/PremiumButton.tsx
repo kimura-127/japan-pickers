@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ButtonHTMLAttributes, forwardRef } from "react";
+import { type ButtonHTMLAttributes, forwardRef } from "react";
 
 interface PremiumButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "gold" | "black";

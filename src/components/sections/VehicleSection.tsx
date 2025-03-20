@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
+import { useRouter } from "next/navigation";
 
 const vehicles = [
   {
@@ -39,17 +40,18 @@ const vehicles = [
 ];
 
 const VehicleSection = () => {
+  const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const vehicleRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
           }
-        });
+        }
       },
       {
         root: null,
@@ -59,28 +61,28 @@ const VehicleSection = () => {
     );
 
     const section = sectionRef.current;
-    const cards = cardsRef.current.filter(Boolean);
+    const cards = Object.values(vehicleRefs.current).filter(Boolean);
 
     if (section) {
       observer.observe(section);
     }
 
-    cards.forEach((card) => {
+    for (const card of cards) {
       if (card) {
         card.classList.add("reveal");
         observer.observe(card);
       }
-    });
+    }
 
     return () => {
       if (section) {
         observer.unobserve(section);
       }
-      cards.forEach((card) => {
+      for (const card of cards) {
         if (card) {
           observer.unobserve(card);
         }
-      });
+      }
     };
   }, []);
 
@@ -99,26 +101,30 @@ const VehicleSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {vehicles.map((vehicle, index) => (
-            <div
-              key={vehicle.id}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={`reveal reveal-delay-${index + 1}`}
-            >
-              <VehicleCard
-                image={vehicle.image}
-                name={vehicle.name}
-                capacity={vehicle.capacity}
-                features={vehicle.features}
-                pricePerNight={vehicle.pricePerNight}
-                onClick={() => {
-                  console.log(`Vehicle ${vehicle.id} clicked`);
-                  // In a real app, this would navigate to a detailed view
-                  window.location.href = "#booking";
+          {vehicles.map((vehicle, index) => {
+            const key = `vehicle-${vehicle.id}`;
+            
+            return (
+              <div
+                key={key}
+                ref={(el) => {
+                  vehicleRefs.current[key] = el;
                 }}
-              />
-            </div>
-          ))}
+                className={`reveal reveal-delay-${index + 1}`}
+              >
+                <VehicleCard
+                  image={vehicle.image}
+                  name={vehicle.name}
+                  capacity={vehicle.capacity}
+                  features={vehicle.features}
+                  pricePerNight={vehicle.pricePerNight}
+                  onClick={() => {
+                    router.push("#booking");
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

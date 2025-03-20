@@ -24,16 +24,16 @@ const features = [
 
 const FeaturesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const featureRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
           }
-        });
+        }
       },
       {
         root: null,
@@ -43,28 +43,28 @@ const FeaturesSection = () => {
     );
 
     const section = sectionRef.current;
-    const cards = cardsRef.current.filter(Boolean);
+    const cards = Object.values(featureRefs.current).filter(Boolean);
 
     if (section) {
       observer.observe(section);
     }
 
-    cards.forEach((card) => {
+    for (const card of cards) {
       if (card) {
         card.classList.add("reveal");
         observer.observe(card);
       }
-    });
+    }
 
     return () => {
       if (section) {
         observer.unobserve(section);
       }
-      cards.forEach((card) => {
+      for (const card of cards) {
         if (card) {
           observer.unobserve(card);
         }
-      });
+      }
     };
   }, []);
 
@@ -110,19 +110,25 @@ const FeaturesSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={`reveal reveal-delay-${index + 1}`}
-            >
-              <FeatureCard
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-              />
-            </div>
-          ))}
+          {features.map((feature, index) => {
+            const key = `feature-${index}`;
+
+            return (
+              <div
+                key={key}
+                ref={(el) => {
+                  featureRefs.current[key] = el;
+                }}
+                className={`reveal reveal-delay-${index + 1}`}
+              >
+                <FeatureCard
+                  icon={feature.icon}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

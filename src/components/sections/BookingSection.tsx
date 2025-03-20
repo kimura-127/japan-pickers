@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Calendar, Info, Settings } from "lucide-react";
 import PremiumButton from "../ui/PremiumButton";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { useRouter } from 'next/navigation';
 
 interface AccordionItemProps {
   title: string;
@@ -15,7 +17,7 @@ interface AccordionItemProps {
 const AccordionItem = ({ title, children, isOpen, onClick }: AccordionItemProps) => {
   return (
     <div className="border-b border-jp-gold/20">
-      <button
+      <Button
         className="flex justify-between items-center w-full py-4 text-left focus:outline-none"
         onClick={onClick}
       >
@@ -26,7 +28,7 @@ const AccordionItem = ({ title, children, isOpen, onClick }: AccordionItemProps)
             isOpen ? "transform rotate-180" : ""
           )}
         />
-      </button>
+      </Button>
       <div
         className={cn(
           "overflow-hidden transition-all duration-300",
@@ -60,8 +62,10 @@ const BookingProcess = () => {
         },
       ].map((step, index) => {
         const Icon = step.icon;
+        const key = `booking-step-${index}`;
+
         return (
-          <div key={index} className="glass-card p-6 text-center">
+          <div key={key} className="glass-card p-6 text-center">
             <div className="rounded-full bg-jp-gold/10 p-4 inline-flex items-center justify-center mb-4">
               <Icon className="h-8 w-8 text-jp-gold" />
             </div>
@@ -117,33 +121,39 @@ const FAQ = () => {
         よくある質問
       </h3>
       <div className="space-y-2">
-        {faqs.map((faq, index) => (
-          <AccordionItem
-            key={index}
-            title={faq.question}
-            isOpen={openIndex === index}
-            onClick={() => toggleAccordion(index)}
-          >
-            {faq.answer}
-          </AccordionItem>
-        ))}
+        {faqs.map((faq, index) => {
+          const key = `faq-${index}`;
+          return (
+            <AccordionItem
+              key={key}
+              title={faq.question}
+              isOpen={openIndex === index}
+              onClick={() => toggleAccordion(index)}
+            >
+              {faq.answer}
+            </AccordionItem>
+          );
+        })}
       </div>
     </div>
   );
 };
 
 const BookingSection = () => {
+  const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const process = useRef<HTMLDivElement>(null);
+  const faq = useRef<HTMLDivElement>(null);
+  const cta = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
           }
-        });
+        }
       },
       {
         root: null,
@@ -153,28 +163,28 @@ const BookingSection = () => {
     );
 
     const section = sectionRef.current;
-    const elements = elementsRef.current.filter(Boolean);
+    const elements = [process.current, faq.current, cta.current].filter(Boolean);
 
     if (section) {
       observer.observe(section);
     }
 
-    elements.forEach((el) => {
+    for (const el of elements) {
       if (el) {
         el.classList.add("reveal");
         observer.observe(el);
       }
-    });
+    }
 
     return () => {
       if (section) {
         observer.unobserve(section);
       }
-      elements.forEach((el) => {
+      for (const el of elements) {
         if (el) {
           observer.unobserve(el);
         }
-      });
+      }
     };
   }, []);
 
@@ -212,14 +222,14 @@ const BookingSection = () => {
         </div>
         
         <div 
-          ref={(el) => (elementsRef.current[0] = el)}
+          ref={process}
           className="reveal"
         >
           <BookingProcess />
         </div>
         
         <div 
-          ref={(el) => (elementsRef.current[1] = el)}
+          ref={faq}
           className="reveal reveal-delay-2"
         >
           <FAQ />
@@ -227,7 +237,7 @@ const BookingSection = () => {
         
         <div className="text-center mt-16">
           <div 
-            ref={(el) => (elementsRef.current[2] = el)}
+            ref={cta}
             className="reveal reveal-delay-3"
           >
             <div className="inline-block p-px bg-gold-gradient rounded-lg mb-8">
@@ -242,7 +252,7 @@ const BookingSection = () => {
                 <PremiumButton 
                   size="lg"
                   withShimmer
-                  onClick={() => window.location.href = "#contact"}
+                  onClick={() => router.push("#contact")}
                 >
                   今すぐ予約
                 </PremiumButton>

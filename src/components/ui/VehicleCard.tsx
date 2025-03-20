@@ -58,12 +58,15 @@ const VehicleCard = ({
         </div>
         
         <div className="space-y-2 mb-4">
-          {features.map((feature, index) => (
-            <div key={index} className="flex items-center text-jp-silver">
+          {features.map((feature, index) => {
+            const key = `feature-${index}`;
+
+            return(
+            <div key={key} className="flex items-center text-jp-silver">
               <Cpu className="gold-icon mr-2 h-4 w-4" />
               <span className="text-sm">{feature}</span>
             </div>
-          ))}
+          )})}
         </div>
         
         <div className="flex items-center justify-between mt-4">

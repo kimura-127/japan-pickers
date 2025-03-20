@@ -1,6 +1,7 @@
 "use client";
 
 import { Facebook, Instagram, Twitter, Youtube, Phone, Mail, MapPin } from "lucide-react";
+import Link from "next/link";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -27,24 +28,24 @@ const Footer = () => {
             <h3 className="text-jp-gold text-lg font-medium mb-4">サービス案内</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#vehicles" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link href="#vehicles" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
                   車両ラインナップ
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#features" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link href="#features" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
                   サービスの特徴
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#plans" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link href="#plans" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
                   旅のプラン
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#booking" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link href="#booking" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
                   予約システム
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -81,43 +82,43 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-jp-gold text-lg font-medium mb-4">フォローする</h3>
             <div className="flex space-x-4">
-              <a 
+              <Link 
                 href="#" 
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="#" 
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="#" 
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="#" 
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="YouTube"
               >
                 <Youtube className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
             
             <div className="pt-4 space-y-2">
-              <a href="#" className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+              <Link href="#" className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
                 プライバシーポリシー
-              </a>
-              <a href="#" className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+              </Link>
+              <Link href="#" className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
                 利用規約
-              </a>
+              </Link>
             </div>
           </div>
         </div>

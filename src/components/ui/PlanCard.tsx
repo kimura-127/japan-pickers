@@ -53,12 +53,15 @@ const PlanCard = ({
         </p>
         
         <div className="space-y-2 mb-6">
-          {highlights.map((highlight, index) => (
-            <div key={index} className="flex items-start">
+          {highlights.map((highlight, index) => {
+            const key = `highlight-${index}`;
+
+            return(
+            <div key={key} className="flex items-start">
               <span className="text-jp-gold mr-2 text-lg">•</span>
               <span className="text-sm text-jp-silver">{highlight}</span>
             </div>
-          ))}
+          )})}
         </div>
         
         <PremiumButton

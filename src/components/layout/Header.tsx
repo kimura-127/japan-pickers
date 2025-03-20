@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, PhoneCall } from "lucide-react";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import PremiumButton from "../ui/PremiumButton";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +81,7 @@ const Header = () => {
           </a>
           <PremiumButton 
             withShimmer
-            onClick={() => window.location.href = "#booking"}
+            onClick={() => router.push("#booking")}
           >
             ご予約はこちら
           </PremiumButton>
@@ -127,7 +129,7 @@ const Header = () => {
                 withShimmer
                 className="w-full"
                 onClick={() => {
-                  window.location.href = "#booking";
+                  router.push("#booking");
                   setIsMenuOpen(false);
                 }}
               >

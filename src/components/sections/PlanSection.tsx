@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import PlanCard from "../ui/PlanCard";
+import { useRouter } from "next/navigation";
 
 const plans = [
   {
@@ -55,17 +56,18 @@ const plans = [
 ];
 
 const PlanSection = () => {
+  const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const planRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
           }
-        });
+        }
       },
       {
         root: null,
@@ -75,28 +77,28 @@ const PlanSection = () => {
     );
 
     const section = sectionRef.current;
-    const cards = cardsRef.current.filter(Boolean);
+    const cards = Object.values(planRefs.current).filter(Boolean);
 
     if (section) {
       observer.observe(section);
     }
 
-    cards.forEach((card) => {
+    for (const card of cards) {
       if (card) {
         card.classList.add("reveal");
         observer.observe(card);
       }
-    });
+    }
 
     return () => {
       if (section) {
         observer.unobserve(section);
       }
-      cards.forEach((card) => {
+      for (const card of cards) {
         if (card) {
           observer.unobserve(card);
         }
-      });
+      }
     };
   }, []);
 
@@ -115,26 +117,32 @@ const PlanSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {plans.map((plan, index) => (
-            <div
-              key={plan.id}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={`reveal reveal-delay-${index + 1}`}
-            >
-              <PlanCard
-                image={plan.image}
-                title={plan.title}
-                duration={plan.duration}
-                description={plan.description}
-                highlights={plan.highlights}
-                onClick={() => {
-                  console.log(`Plan ${plan.id} clicked`);
-                  // In a real app, this would pre-select this plan in the booking form
-                  window.location.href = "#booking";
+          {plans.map((plan, index) => {
+            const key = `plan-${plan.id}`;
+            
+            return (
+              <div
+                key={key}
+                ref={(el) => {
+                  planRefs.current[key] = el;
                 }}
-              />
-            </div>
-          ))}
+                className={`reveal reveal-delay-${index + 1}`}
+              >
+                <PlanCard
+                  image={plan.image}
+                  title={plan.title}
+                  duration={plan.duration}
+                  description={plan.description}
+                  highlights={plan.highlights}
+                  onClick={() => {
+                    console.log(`Plan ${plan.id} clicked`);
+                    // In a real app, this would pre-select this plan in the booking form
+                    router.push("#booking");
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
