@@ -5,13 +5,11 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import type { Metadata } from "next/types";
 
-type Props = {
-  params: {
-    slug: string;
-  };
+type Params = {
+  slug: string;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const vehicle = getVehicleBySlug(params.slug);
   
   if (!vehicle) {
@@ -47,7 +45,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function VehiclePage({ params }: Props) {
+export default function VehiclePage({ params }: { params: Params }) {
   const vehicle = getVehicleBySlug(params.slug);
   
   if (!vehicle) {
