@@ -3,39 +3,35 @@
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
 import { useRouter } from "next/navigation";
+import { vehicles as vehiclesData } from "@/lib/vehicles";
 
 const vehicles = [
   {
     id: 1,
-    name: "グランドクルーザー EX",
-    image: "https://images.unsplash.com/photo-1591127241866-5207169c7097?q=80&w=1000&auto=format&fit=crop",
+    name: "ランドホームグランデ",
+    slug: "land-home-grande",
+    image: "/images/IMG_8936.JPG",
     capacity: 4,
     features: ["フルキッチン", "シャワー/トイレ", "エアコン/暖房", "ソーラーパネル"],
     pricePerNight: 38000,
   },
   {
     id: 2,
-    name: "ラグジュアリーライナー プレミアム",
-    image: "https://images.unsplash.com/photo-1565775449245-5b58b4636107?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    name: "カムロードZiL",
+    slug: "camroad-zil",
+    image: "/images/IMG_8936.JPG",
     capacity: 6,
     features: ["キングサイズベッド", "プレミアムサウンドシステム", "Bose®スピーカー", "広々リビングスペース"],
     pricePerNight: 45000,
   },
   {
     id: 3,
-    name: "エレガントトラベラー スイート",
-    image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    name: "コースター ベガ",
+    slug: "coaster-vega",
+    image: "/images/IMG_8936.JPG",
     capacity: 5,
     features: ["革張りインテリア", "ガラスルーフ", "ワークステーション", "ワインセラー"],
     pricePerNight: 40000,
-  },
-  {
-    id: 4,
-    name: "エグゼクティブモービル VIP",
-    image: "https://images.unsplash.com/photo-1504280530523-5b5d5bfb3b9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    capacity: 4,
-    features: ["プライベートラウンジ", "ジャグジー", "スマートホームシステム", "サテライトTV"],
-    pricePerNight: 52000,
   },
 ];
 
@@ -100,7 +96,7 @@ const VehicleSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vehicles.map((vehicle, index) => {
             const key = `vehicle-${vehicle.id}`;
             
@@ -119,7 +115,7 @@ const VehicleSection = () => {
                   features={vehicle.features}
                   pricePerNight={vehicle.pricePerNight}
                   onClick={() => {
-                    router.push("#booking");
+                    router.push(`/vehicles/${vehicle.slug}`);
                   }}
                 />
               </div>
