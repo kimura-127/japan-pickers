@@ -22,7 +22,7 @@ interface VehicleDetailProps {
 }
 
 const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
-  const [activeTab, setActiveTab] = useState<string>("specs");
+  const [activeTab] = useState<string>("specs");
   // 現在は使用していませんが、将来的に使用する予定の状態
   // const [isScrolled, setIsScrolled] = useState(false);
 

@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
 import { useRouter } from "next/navigation";
-import { vehicles as vehiclesData } from "@/lib/vehicles";
 
 const vehicles = [
   {
