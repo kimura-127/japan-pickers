@@ -9,8 +9,9 @@ type Params = {
   slug: string;
 };
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const vehicle = getVehicleBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params;
+  const vehicle = getVehicleBySlug(slug);
   
   if (!vehicle) {
     return {
@@ -45,8 +46,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function VehiclePage({ params }: { params: Params }) {
-  const vehicle = getVehicleBySlug(params.slug);
+export default async function VehiclePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
+  const vehicle = getVehicleBySlug(slug);
   
   if (!vehicle) {
     notFound();
