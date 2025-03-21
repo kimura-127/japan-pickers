@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Calendar as CalendarIcon, 
+import {
+  Calendar as CalendarIcon,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -36,9 +36,9 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   ];
 
   const toggleOption = (optionId: string) => {
-    setSelectedOptions(prev => 
-      prev.includes(optionId) 
-        ? prev.filter(id => id !== optionId) 
+    setSelectedOptions(prev =>
+      prev.includes(optionId)
+        ? prev.filter(id => id !== optionId)
         : [...prev, optionId]
     );
   };
@@ -52,9 +52,9 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   const calculateTotal = () => {
     const days = getTotalDays();
     if (days === 0) return 0;
-    
+
     let total = vehicle.pricePerNight * days;
-    
+
     // オプション料金を追加
     for (const optionId of selectedOptions) {
       const option = options.find(opt => opt.id === optionId);
@@ -68,7 +68,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
         }
       }
     }
-    
+
     return total;
   };
 
@@ -81,24 +81,24 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   const generateAvailableDates = () => {
     const today = new Date();
     const availableDates: Date[] = [];
-    
+
     for (let i = 1; i <= 90; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      
+
       // 仮に70%の確率で予約可能とする
       if (Math.random() > 0.3) {
         availableDates.push(date);
       }
     }
-    
+
     return availableDates;
   };
 
   const availableDates = generateAvailableDates();
 
   const isDateAvailable = (date: Date) => {
-    return availableDates.some(availableDate => 
+    return availableDates.some(availableDate =>
       availableDate.getFullYear() === date.getFullYear() &&
       availableDate.getMonth() === date.getMonth() &&
       availableDate.getDate() === date.getDate()
@@ -110,25 +110,25 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     const today = new Date();
     const threemonthsLater = new Date();
     threemonthsLater.setMonth(today.getMonth() + 3);
-    
+
     // 過去の日付と3ヶ月後以降の日付を無効化
     const disabledDates: Date[] = [];
-    
+
     // 予約可能日以外の日付を無効化
     const allDates: Date[] = [];
     const startDate = new Date(today);
     const endDate = new Date(threemonthsLater);
-    
+
     for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
       allDates.push(new Date(d));
     }
-    
+
     for (const date of allDates) {
       if (!isDateAvailable(date)) {
         disabledDates.push(date);
       }
     }
-    
+
     return [
       { before: today },
       { after: threemonthsLater },
@@ -164,7 +164,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     const today = new Date();
     const threeMonthsLater = new Date(today);
     threeMonthsLater.setMonth(today.getMonth() + 2); // 0, 1, 2の3ヶ月
-    
+
     return (
       currentMonth.getMonth() === threeMonthsLater.getMonth() &&
       currentMonth.getFullYear() === threeMonthsLater.getFullYear()
@@ -181,7 +181,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     const isUnavailable = !isDateAvailable(day) && day > new Date();
     const isStart = dateRange?.from && day.getTime() === dateRange.from.getTime();
     const isEnd = dateRange?.to && day.getTime() === dateRange.to.getTime();
-    
+
     if (isUnavailable) {
       return (
         <div className="relative flex items-center justify-center w-full h-full">
@@ -190,7 +190,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
         </div>
       );
     }
-    
+
     if (isStart) {
       return (
         <div className="relative flex items-center justify-center w-full h-full">
@@ -199,7 +199,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
         </div>
       );
     }
-    
+
     if (isEnd) {
       return (
         <div className="relative flex items-center justify-center w-full h-full">
@@ -208,7 +208,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
         </div>
       );
     }
-    
+
     return day.getDate();
   };
 
@@ -220,7 +220,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
             <CalendarIcon className="gold-icon w-5 h-5" />
             <h3 className="text-xl font-medium text-white">予約日を選択</h3>
           </div>
-          
+
           <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50 w-fit">
             <div className="flex justify-between items-center mb-4">
               <Button
@@ -276,23 +276,22 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
             </div>
           </div>
         </div>
-        
+
         <div>
           <div className="flex items-center gap-3 mb-4">
             <Check className="gold-icon w-5 h-5" />
             <h3 className="text-xl font-medium text-white">オプションを選択</h3>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {options.map((option) => (
-              <button 
+              <button
                 key={option.id}
                 type="button"
-                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 border transition-colors ${
-                  selectedOptions.includes(option.id) 
-                    ? "border-jp-gold" 
+                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 border transition-colors ${selectedOptions.includes(option.id)
+                    ? "border-jp-gold"
                     : "border-jp-darkgray/50 hover:border-jp-gold/50"
-                }`}
+                  }`}
                 onClick={() => toggleOption(option.id)}
                 aria-pressed={selectedOptions.includes(option.id)}
               >
@@ -301,11 +300,10 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                     <p className="text-white">{option.name}</p>
                     <p className="text-sm text-jp-silver">¥{option.price.toLocaleString()}/{option.unit}</p>
                   </div>
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                    selectedOptions.includes(option.id) 
-                      ? "bg-jp-gold text-jp-black" 
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${selectedOptions.includes(option.id)
+                      ? "bg-jp-gold text-jp-black"
                       : "border border-jp-silver text-jp-silver"
-                  }`}>
+                    }`}>
                     {selectedOptions.includes(option.id) && <Check className="w-4 h-4" />}
                   </div>
                 </div>
@@ -314,17 +312,17 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
           </div>
         </div>
       </div>
-      
+
       <div className="lg:col-span-1">
         <div className="bg-jp-darkgray/30 rounded-xl p-6 border border-jp-darkgray/50 sticky top-24">
           <h3 className="text-xl font-medium text-white mb-4">予約内容</h3>
-          
+
           <div className="space-y-4 mb-6">
             <div>
               <p className="text-jp-silver mb-1">車両</p>
               <p className="text-white font-medium">{vehicle.name}</p>
             </div>
-            
+
             <div>
               <p className="text-jp-silver mb-1">日程</p>
               {dateRange?.from && dateRange?.to ? (
@@ -336,7 +334,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                 <p className="text-jp-silver italic">日程を選択してください</p>
               )}
             </div>
-            
+
             {selectedOptions.length > 0 && (
               <div>
                 <p className="text-jp-silver mb-1">選択オプション</p>
@@ -356,53 +354,52 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
               </div>
             )}
           </div>
-          
+
           <div className="border-t border-jp-darkgray/50 pt-4 mb-6">
             <div className="flex justify-between items-center mb-2">
               <p className="text-jp-silver">基本料金</p>
               <p className="text-white">
-                {dateRange?.from && dateRange?.to 
+                {dateRange?.from && dateRange?.to
                   ? `¥${(vehicle.pricePerNight * getTotalDays()).toLocaleString()}`
                   : "-"
                 }
               </p>
             </div>
-            
+
             {selectedOptions.length > 0 && (
               <div className="flex justify-between items-center mb-2">
                 <p className="text-jp-silver">オプション料金</p>
                 <p className="text-white">
-                  {dateRange?.from && dateRange?.to 
+                  {dateRange?.from && dateRange?.to
                     ? `¥${(calculateTotal() - vehicle.pricePerNight * getTotalDays()).toLocaleString()}`
                     : "-"
                   }
                 </p>
               </div>
             )}
-            
+
             <div className="flex justify-between items-center text-lg font-medium mt-4">
               <p className="text-white">合計</p>
               <p className="text-jp-gold">
-                {dateRange?.from && dateRange?.to 
+                {dateRange?.from && dateRange?.to
                   ? `¥${calculateTotal().toLocaleString()}`
                   : "-"
                 }
               </p>
             </div>
           </div>
-          
+
           <button
             type="button"
-            className={`w-full py-4 rounded-full font-bold transition-colors ${
-              dateRange?.from && dateRange?.to
+            className={`w-full py-4 rounded-full font-bold transition-colors ${dateRange?.from && dateRange?.to
                 ? "bg-jp-gold text-jp-black hover:bg-jp-gold/90"
                 : "bg-jp-darkgray text-jp-silver/50 cursor-not-allowed"
-            }`}
+              }`}
             disabled={!dateRange?.from || !dateRange?.to}
           >
             予約を確定する
           </button>
-          
+
           <p className="text-center text-jp-silver text-sm mt-4">
             予約確定後、お支払い情報の入力に進みます
           </p>
