@@ -209,7 +209,11 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
       );
     }
 
-    return day.getDate();
+    return (
+      <div className="flex items-center justify-center">
+        {day.getDate()}
+      </div>
+    );
   };
 
   return (
