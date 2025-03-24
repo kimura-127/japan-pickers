@@ -1,7 +1,8 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
-import { Menu, PhoneCall, X } from "lucide-react";
+import { LogOut, Menu, PhoneCall, User, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +35,11 @@ const Header = () => {
     { name: "予約システム", href: "#booking" },
     { name: "よくある質問", href: "#faq" },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+    // 必要に応じてここにリダイレクト処理を追加
+  };
 
   return (
     <header
@@ -62,6 +69,58 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
+          {/* 認証状態によって表示切り替え */}
+          {user ? (
+            <div className="relative group">
+              <button
+                type="button"
+                className="flex items-center space-x-1 text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm font-medium"
+              >
+                <User size={18} />
+                <span>マイページ</span>
+              </button>
+              <div className="absolute right-0 mt-2 w-48 bg-jp-black border border-jp-gold/20 rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <Link
+                  href="/profile"
+                  className="block px-4 py-2 text-sm text-jp-silver hover:bg-jp-darkgray/50 hover:text-jp-gold"
+                >
+                  プロフィール
+                </Link>
+                <Link
+                  href="/bookings"
+                  className="block px-4 py-2 text-sm text-jp-silver hover:bg-jp-darkgray/50 hover:text-jp-gold"
+                >
+                  予約履歴
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="flex items-center w-full text-left px-4 py-2 text-sm text-jp-silver hover:bg-jp-darkgray/50 hover:text-jp-gold"
+                >
+                  <LogOut size={16} className="mr-2" />
+                  ログアウト
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm font-medium"
+              >
+                ログイン
+              </Link>
+              <Link
+                href="/auth/register"
+                className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm font-medium"
+              >
+                会員登録
+              </Link>
+            </>
+          )}
+          <PremiumButton withShimmer onClick={() => router.push("#booking")}>
+            ご予約はこちら
+          </PremiumButton>
         </nav>
 
         {/* Desktop CTA */}
@@ -73,9 +132,6 @@ const Header = () => {
             <PhoneCall className="h-4 w-4 mr-2" />
             <span className="text-sm">0120-000-000</span>
           </a>
-          <PremiumButton withShimmer onClick={() => router.push("#booking")}>
-            ご予約はこちら
-          </PremiumButton>
         </div>
 
         {/* Mobile Menu Button */}
@@ -107,7 +163,53 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-
+            {/* モバイル用認証メニュー */}
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-lg font-medium"
+                >
+                  プロフィール
+                </Link>
+                <Link
+                  href="/bookings"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-lg font-medium"
+                >
+                  予約履歴
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleSignOut();
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-lg font-medium flex items-center"
+                >
+                  <LogOut size={18} className="mr-2" />
+                  ログアウト
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-lg font-medium"
+                >
+                  ログイン
+                </Link>
+                <Link
+                  href="/auth/register"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-lg font-medium"
+                >
+                  会員登録
+                </Link>
+              </>
+            )}
             <div className="pt-6 space-y-4 w-full px-8">
               <a
                 href="tel:+0120-000-000"
