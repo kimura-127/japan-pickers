@@ -3,12 +3,8 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function RegisterPage() {
-  const router = useRouter();
-
   const handleRegister = async ({
     email,
     password,
@@ -20,7 +16,7 @@ export default function RegisterPage() {
   }) => {
     try {
       // Supabaseでユーザー登録
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {

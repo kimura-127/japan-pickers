@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-// グローバルスコープでPrismaClientのインスタンスを保持するための型宣言
+// PrismaClientのグローバルインスタンス用の型定義
 declare global {
   var prisma: PrismaClient | undefined;
 }
@@ -12,6 +12,6 @@ const prismaClient =
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   });
 
-if (process.env.NODE_ENV !== "production") global.prisma = prisma;
+if (process.env.NODE_ENV !== "production") global.prisma = prismaClient;
 
 export default prismaClient;
