@@ -323,7 +323,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
               <Button
                 key={option.id}
                 type="button"
-                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 border transition-colors ${
+                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 py-6 border transition-colors ${
                   selectedOptions.includes(option.id)
                     ? "border-jp-gold"
                     : "border-jp-darkgray/50 hover:border-jp-gold/50"

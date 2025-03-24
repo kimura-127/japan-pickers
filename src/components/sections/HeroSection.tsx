@@ -129,7 +129,7 @@ const HeroSection = () => {
             transform: isClient ? `translateY(${calculateParallax(0, 0.2)}px)` : "none",
           }}
         >
-          群馬県 プレミアムキャンピングカーレンタル
+          プレミアムキャンピングカーレンタル
         </h1>
 
         <p
