@@ -12,14 +12,14 @@ type Params = {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const vehicle = getVehicleBySlug(slug);
-  
+
   if (!vehicle) {
     return {
       title: "車両が見つかりません | ジャパンピッカーズ",
       description: "お探しの車両情報は見つかりませんでした。",
     };
   }
-  
+
   return {
     title: `${vehicle.name} | ジャパンピッカーズ`,
     description: vehicle.description,
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export async function generateStaticParams() {
   const slugs = getAllVehicleSlugs();
-  
+
   return slugs.map((slug) => ({
     slug,
   }));
@@ -49,11 +49,11 @@ export async function generateStaticParams() {
 export default async function VehiclePage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const vehicle = getVehicleBySlug(slug);
-  
+
   if (!vehicle) {
     notFound();
   }
-  
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

@@ -26,7 +26,7 @@ const VehicleSpecifications = ({
   vehicle, // 車両情報（メタデータとして使用）
   features,
   specs,
-  floorPlan 
+  floorPlan
 }: VehicleSpecificationsProps) => {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -154,24 +154,6 @@ const VehicleSpecifications = ({
           </div>
         </div>
       </div>
-
-      {/* 間取り図セクション */}
-      {floorPlan && (
-        <div className="mb-16">
-          <h3 className="text-xl font-noto-serif-jp font-bold text-white mb-6">
-            間取り図
-          </h3>
-          <div className="bg-jp-darkgray/30 rounded-xl p-6 border border-jp-darkgray/50">
-            <Image 
-              src={floorPlan} 
-              alt={`${vehicle.name} 間取り図`} 
-              width={800} 
-              height={500} 
-              className="w-full h-auto rounded-lg"
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

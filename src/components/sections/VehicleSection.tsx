@@ -116,6 +116,9 @@ const VehicleSection = () => {
                   onClick={() => {
                     router.push(`/vehicles/${vehicle.slug}`);
                   }}
+                  onBookingClick={() => {
+                    router.push(`/vehicles/${vehicle.slug}#booking`);
+                  }}
                 />
               </div>
             );

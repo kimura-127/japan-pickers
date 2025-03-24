@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { 
-  Users, 
-  Calendar, 
+import {
+  Users,
+  Calendar,
   ArrowLeft,
   Maximize
 } from "lucide-react";
@@ -64,15 +64,15 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
 
         <div className="relative z-10 h-full flex flex-col justify-end">
           <div className="premium-container">
-            <Link 
-              href="/#vehicles" 
+            <Link
+              href="/#vehicles"
               className="inline-flex items-center gap-2 text-jp-silver hover:text-jp-gold transition-colors mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>車両一覧に戻る</span>
             </Link>
 
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={fadeIn}
@@ -87,7 +87,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={fadeIn}
@@ -108,7 +108,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={fadeIn}
@@ -119,8 +119,8 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                 <p className="text-jp-silver text-sm">1泊あたり</p>
                 <p className="text-3xl font-bold text-jp-gold">¥{vehicle.pricePerNight.toLocaleString()}</p>
               </div>
-              <a 
-                href="#booking" 
+              <a
+                href="#booking"
                 className="px-8 py-4 bg-jp-gold text-jp-black font-bold rounded-full hover:bg-jp-gold/90 transition-colors"
               >
                 予約する
@@ -144,18 +144,18 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       <section className="py-16 bg-jp-black">
         <div className="premium-container">
           {activeTab === "specs" && (
-            <VehicleSpecifications 
-              vehicle={vehicle} 
-              features={vehicle.detailedFeatures} 
-              specs={vehicle.specs} 
+            <VehicleSpecifications
+              vehicle={vehicle}
+              features={vehicle.detailedFeatures}
+              specs={vehicle.specs}
               floorPlan={vehicle.floorPlan}
             />
           )}
-          
+
           {activeTab === "equipment" && (
             <VehicleEquipment equipment={vehicle.equipment} />
           )}
-          
+
           {activeTab === "recommended" && (
             <VehicleRecommendedUse recommendedUse={vehicle.recommendedUse} />
           )}

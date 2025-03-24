@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import PremiumButton from "../ui/PremiumButton";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -131,7 +132,7 @@ const HeroSection = () => {
             transform: isClient ? `translateY(${calculateParallax(0, 0.2)}px)` : 'none',
           }}
         >
-          プレミアムキャンピング体験
+          群馬県 プレミアムキャンピングカーレンタル
         </h1>
         
         <p 
@@ -140,8 +141,8 @@ const HeroSection = () => {
             transform: isClient ? `translateY(${calculateParallax(0, 0.15)}px)` : 'none',
           }}
         >
-          自然の中で贅沢な時間を過ごす、新しいキャンピングスタイル。
-          最高級のアメニティと設備で、快適さを損なうことなく自然を満喫できます。
+          群馬県で高品質なキャンピングカー・レンタカーサービスを提供。
+          最高級の装備と快適な車内空間で、忘れられない自然の旅をお楽しみいただけます。
         </p>
         
         <div 
@@ -154,9 +155,9 @@ const HeroSection = () => {
             withShimmer
             onClick={() => {
               if (!isClient) return;
-              const bookingSection = document.getElementById("booking");
-              if (bookingSection) {
-                bookingSection.scrollIntoView({ behavior: "smooth" });
+              const vehiclesSection = document.getElementById("vehicles");
+              if (vehiclesSection) {
+                vehiclesSection.scrollIntoView({ behavior: "smooth" });
               }
             }}
           >

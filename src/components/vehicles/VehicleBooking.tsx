@@ -13,6 +13,8 @@ import { Calendar } from "@/components/ui/calendar";
 import type { DateRange } from "react-day-picker";
 import { ja } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import PremiumButton from "@/components/ui/PremiumButton";
 
 interface VehicleBookingProps {
   vehicle: Vehicle;
@@ -25,6 +27,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   // const [adults, setAdults] = useState(2);
   // const [children, setChildren] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [hasUnavailableDates, setHasUnavailableDates] = useState<boolean>(false);
 
   const options = [
     { id: "wifi", name: "Wi-Fiルーター", price: 1000, unit: "日" },
@@ -86,8 +89,8 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
 
-      // 仮に70%の確率で予約可能とする
-      if (Math.random() > 0.3) {
+      // 水曜日（3）以外の日を予約可能とする
+      if (date.getDay() !== 3) {
         availableDates.push(date);
       }
     }
@@ -216,6 +219,46 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     );
   };
 
+  // 日付選択時のハンドラー
+  const handleDateSelect = (range: DateRange | undefined) => {
+    // 選択がクリアされた場合
+    if (!range || !range.from || !range.to) {
+      setDateRange(range);
+      setHasUnavailableDates(false);
+      return;
+    }
+
+    // 選択範囲内に予約済みの日付があるかチェック
+    const startDate = new Date(range.from);
+    const endDate = new Date(range.to);
+
+    // 日付の範囲内に水曜日が含まれているかチェック
+    let hasWednesday = false;
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      if (currentDate.getDay() === 3) { // 水曜日
+        hasWednesday = true;
+        break;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    if (hasWednesday) {
+      // 警告トーストを表示
+      toast.error("予約エラー", {
+        description: "選択した期間内に既に予約が入っている日付があります。別の日程を選択してください。",
+      });
+      // 予約不可フラグを設定
+      setHasUnavailableDates(true);
+    } else {
+      setHasUnavailableDates(false);
+    }
+
+    // 日付範囲を設定（予約済み日付があっても選択は許可）
+    setDateRange(range);
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2">
@@ -225,7 +268,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
             <h3 className="text-xl font-medium text-white">予約日を選択</h3>
           </div>
 
-          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50 w-fit">
+          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50 w-fit mx-auto">
             <div className="flex justify-between items-center mb-4">
               <Button
                 variant="outline"
@@ -249,11 +292,11 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center w-full">
               <Calendar
                 mode="range"
                 selected={dateRange}
-                onSelect={setDateRange}
+                onSelect={handleDateSelect}
                 month={currentMonth}
                 onMonthChange={setCurrentMonth}
                 numberOfMonths={1}
@@ -274,7 +317,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                   nav: "hidden", // カスタムナビゲーションを使用するため非表示
                   cell: "text-jp-silver h-12", // 高さを増やして「開始日」「終了日」のラベルが入るようにする
                   day_outside: "invisible",
-                  table: "w-full"
+                  table: "w-full border-spacing-1"
                 }}
               />
             </div>
@@ -289,12 +332,12 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {options.map((option) => (
-              <button
+              <Button
                 key={option.id}
                 type="button"
                 className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 border transition-colors ${selectedOptions.includes(option.id)
-                    ? "border-jp-gold"
-                    : "border-jp-darkgray/50 hover:border-jp-gold/50"
+                  ? "border-jp-gold"
+                  : "border-jp-darkgray/50 hover:border-jp-gold/50"
                   }`}
                 onClick={() => toggleOption(option.id)}
                 aria-pressed={selectedOptions.includes(option.id)}
@@ -305,13 +348,13 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                     <p className="text-sm text-jp-silver">¥{option.price.toLocaleString()}/{option.unit}</p>
                   </div>
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center ${selectedOptions.includes(option.id)
-                      ? "bg-jp-gold text-jp-black"
-                      : "border border-jp-silver text-jp-silver"
+                    ? "bg-jp-gold text-jp-black"
+                    : "border border-jp-silver text-jp-silver"
                     }`}>
                     {selectedOptions.includes(option.id) && <Check className="w-4 h-4" />}
                   </div>
                 </div>
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -393,16 +436,28 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
             </div>
           </div>
 
-          <button
-            type="button"
-            className={`w-full py-4 rounded-full font-bold transition-colors ${dateRange?.from && dateRange?.to
-                ? "bg-jp-gold text-jp-black hover:bg-jp-gold/90"
-                : "bg-jp-darkgray text-jp-silver/50 cursor-not-allowed"
-              }`}
-            disabled={!dateRange?.from || !dateRange?.to}
+          <PremiumButton
+            withShimmer
+            className="w-full"
+            onClick={() => {
+              if (!dateRange?.from || !dateRange?.to) {
+                toast.error("予約エラー", {
+                  description: "予約日程を選択してください。",
+                });
+              } else if (hasUnavailableDates) {
+                toast.error("予約エラー", {
+                  description: "選択した期間内に予約できない日付があります。別の日程を選択してください。",
+                });
+              } else {
+                // 予約処理を実行
+                toast.success("予約が完了しました", {
+                  description: "お支払い情報の入力に進みます。",
+                });
+              }
+            }}
           >
             予約を確定する
-          </button>
+          </PremiumButton>
 
           <p className="text-center text-jp-silver text-sm mt-4">
             予約確定後、お支払い情報の入力に進みます

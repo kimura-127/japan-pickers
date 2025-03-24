@@ -12,6 +12,7 @@ interface VehicleCardProps {
   features: string[];
   pricePerNight: number;
   onClick?: () => void;
+  onBookingClick?: () => void;
 }
 
 const VehicleCard = ({
@@ -22,6 +23,7 @@ const VehicleCard = ({
   features,
   pricePerNight,
   onClick,
+  onBookingClick,
 }: VehicleCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -75,14 +77,25 @@ const VehicleCard = ({
             <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}</p>
           </div>
           
-          <PremiumButton
-            variant="black"
-            size="sm"
-            onClick={onClick}
-            className="transform transition-transform duration-300 group-hover:scale-105"
-          >
-            詳細を見る
-          </PremiumButton>
+          <div className="flex space-x-2">
+            <PremiumButton
+              variant="black"
+              size="sm"
+              onClick={onBookingClick}
+              className="transform transition-transform duration-300 group-hover:scale-105"
+            >
+              予約する
+            </PremiumButton>
+            
+            <PremiumButton
+              variant="black"
+              size="sm"
+              onClick={onClick}
+              className="transform transition-transform duration-300 group-hover:scale-105"
+            >
+              詳細を見る
+            </PremiumButton>
+          </div>
         </div>
       </div>
     </div>

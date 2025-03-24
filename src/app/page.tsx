@@ -8,8 +8,11 @@ import BookingSection from "@/components/sections/BookingSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export const metadata = {
-  title: "ジャパンピッカーズ | プレミアムキャンピングカーレンタル",
-  description: "群馬県のプレミアムキャンピングカーレンタル「ジャパンピッカーズ」。最高級の装備と丁寧なサポートで、特別な旅の体験をご提供します。",
+  title: "群馬県のキャンピングカーレンタル・レンタカー | ジャパンピッカーズ",
+  description: "群馬県で最高級のキャンピングカーレンタル・レンタカーを提供するジャパンピッカーズ。充実した装備と丁寧なサポートで、特別な旅の体験をご提供します。キャンピングカーでのアウトドア体験を群馬で満喫しませんか。",
+  alternates: {
+    canonical: "https://japan-pickers.com/",
+  },
 };
 
 export default function Home() {
