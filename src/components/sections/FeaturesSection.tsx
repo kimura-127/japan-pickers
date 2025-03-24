@@ -1,24 +1,27 @@
 "use client";
 
+import { Award, Compass, Settings } from "lucide-react";
 import { useEffect, useRef } from "react";
 import FeatureCard from "../ui/FeatureCard";
-import { Award, Compass, Settings } from "lucide-react";
 
 const features = [
   {
     icon: Award,
     title: "最高級の装備",
-    description: "プレミアムインテリア、高級調理器具、最高品質の寝具、最新の冷暖房システム完備。あらゆる季節で最高の快適さを提供します。",
+    description:
+      "プレミアムインテリア、高級調理器具、最高品質の寝具、最新の冷暖房システム完備。あらゆる季節で最高の快適さを提供します。",
   },
   {
     icon: Compass,
     title: "コンシェルジュサービス",
-    description: "専任スタッフによる丁寧なサポートと現地案内。あなたの旅をより豊かに、より安心して楽しんでいただくためのパーソナルサービスを提供します。",
+    description:
+      "専任スタッフによる丁寧なサポートと現地案内。あなたの旅をより豊かに、より安心して楽しんでいただくためのパーソナルサービスを提供します。",
   },
   {
     icon: Settings,
     title: "カスタマイズオプション",
-    description: "あなたの旅に合わせた柔軟なプランニングとオプション。特別な記念日や家族旅行など、目的に合わせてカスタマイズ可能です。",
+    description:
+      "あなたの旅に合わせた柔軟なプランニングとオプション。特別な記念日や家族旅行など、目的に合わせてカスタマイズ可能です。",
   },
 ];
 
@@ -39,7 +42,7 @@ const FeaturesSection = () => {
         root: null,
         rootMargin: "0px",
         threshold: 0.1,
-      }
+      },
     );
 
     const section = sectionRef.current;
@@ -69,8 +72,8 @@ const FeaturesSection = () => {
   }, []);
 
   return (
-    <section 
-      id="features" 
+    <section
+      id="features"
       className="py-24 relative overflow-hidden"
       style={{
         background: "linear-gradient(to bottom, #121212, #1A1A1A)",
@@ -79,24 +82,26 @@ const FeaturesSection = () => {
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute w-[800px] h-[800px] rounded-full opacity-10" 
+        <div
+          className="absolute w-[800px] h-[800px] rounded-full opacity-10"
           style={{
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(18, 18, 18, 0) 70%)",
+            background:
+              "radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(18, 18, 18, 0) 70%)",
             top: "-400px",
             left: "-200px",
           }}
         />
-        <div 
-          className="absolute w-[600px] h-[600px] rounded-full opacity-10" 
+        <div
+          className="absolute w-[600px] h-[600px] rounded-full opacity-10"
           style={{
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(18, 18, 18, 0) 70%)",
+            background:
+              "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(18, 18, 18, 0) 70%)",
             bottom: "-300px",
             right: "-200px",
           }}
         />
       </div>
-      
+
       <div className="premium-container relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full border border-jp-gold/30 bg-jp-darkgray/50 backdrop-blur-sm text-jp-gold text-sm mb-4">
@@ -108,7 +113,7 @@ const FeaturesSection = () => {
             プレミアムなサービスと設備をご用意しています。
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => {
             const key = `feature-${index}`;

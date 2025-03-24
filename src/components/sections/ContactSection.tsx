@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Phone, Mail, MapPin, Send, Check } from "lucide-react";
-import PremiumButton from "../ui/PremiumButton";
 import { cn } from "@/lib/utils";
+import { Check, Mail, MapPin, Phone, Send } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import PremiumButton from "../ui/PremiumButton";
 
 interface FormInputProps {
   label: string;
@@ -66,16 +66,16 @@ const ContactSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
-  
+
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -83,11 +83,11 @@ const ContactSection = () => {
       [name]: value,
     }));
   };
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted with data:", formData);
-    
+
     // Simulating form submission
     setTimeout(() => {
       setIsSubmitted(true);
@@ -97,7 +97,7 @@ const ContactSection = () => {
         phone: "",
         message: "",
       });
-      
+
       // Reset the submission status after a delay
       setTimeout(() => {
         setIsSubmitted(false);
@@ -118,7 +118,7 @@ const ContactSection = () => {
         root: null,
         rootMargin: "0px",
         threshold: 0.1,
-      }
+      },
     );
 
     const section = sectionRef.current;
@@ -201,9 +201,9 @@ const ContactSection = () => {
                 value={formData.message}
                 onChange={handleChange}
               />
-              
+
               <div className="text-right">
-                <PremiumButton 
+                <PremiumButton
                   type="submit"
                   className="flex items-center justify-center gap-2"
                   disabled={isSubmitted}
@@ -212,12 +212,14 @@ const ContactSection = () => {
                   <Send className="h-4 w-4" />
                 </PremiumButton>
               </div>
-              
+
               {/* Success message */}
-              <div className={cn(
-                "absolute inset-0 bg-jp-black/95 backdrop-blur-md flex items-center justify-center transition-opacity duration-500 rounded-lg",
-                isSubmitted ? "opacity-100" : "opacity-0 pointer-events-none"
-              )}>
+              <div
+                className={cn(
+                  "absolute inset-0 bg-jp-black/95 backdrop-blur-md flex items-center justify-center transition-opacity duration-500 rounded-lg",
+                  isSubmitted ? "opacity-100" : "opacity-0 pointer-events-none",
+                )}
+              >
                 <div className="text-center p-6">
                   <div className="inline-block p-3 bg-jp-gold/10 rounded-full mb-4">
                     <Check className="h-8 w-8 text-jp-gold" />
@@ -230,14 +232,14 @@ const ContactSection = () => {
               </div>
             </form>
           </div>
-          
+
           {/* Contact Info */}
           <div ref={infoRef} className="space-y-8">
             <div className="glass-card p-8">
               <h3 className="text-xl text-white font-noto-serif-jp font-medium mb-6">
                 コンタクト情報
               </h3>
-              
+
               <div className="space-y-6">
                 <div className="flex">
                   <div className="bg-jp-darkgray p-3 rounded-full border border-jp-gold/20 mr-4">
@@ -249,7 +251,7 @@ const ContactSection = () => {
                     <p className="text-jp-silver text-sm">受付時間: 9:00〜18:00（年中無休）</p>
                   </div>
                 </div>
-                
+
                 <div className="flex">
                   <div className="bg-jp-darkgray p-3 rounded-full border border-jp-gold/20 mr-4">
                     <Mail className="h-5 w-5 text-jp-gold" />
@@ -260,7 +262,7 @@ const ContactSection = () => {
                     <p className="text-jp-silver text-sm">24時間受付中</p>
                   </div>
                 </div>
-                
+
                 <div className="flex">
                   <div className="bg-jp-darkgray p-3 rounded-full border border-jp-gold/20 mr-4">
                     <MapPin className="h-5 w-5 text-jp-gold" />
@@ -274,7 +276,7 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Map placeholder */}
             <div className="glass-card p-4">
               <div className="bg-jp-darkgray/50 h-72 flex items-center justify-center">

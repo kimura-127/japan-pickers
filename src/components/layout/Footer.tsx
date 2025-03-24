@@ -1,11 +1,11 @@
 "use client";
 
-import { Facebook, Instagram, Twitter, Youtube, Phone, Mail, MapPin } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-jp-black border-t border-jp-gold/20 pt-16 pb-8">
       <div className="premium-container">
@@ -22,34 +22,46 @@ const Footer = () => {
               最高級の装備と丁寧なサポートで、特別な旅の体験をご提供いたします。
             </p>
           </div>
-          
+
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-jp-gold text-lg font-medium mb-4">サービス案内</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#vehicles" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link
+                  href="#vehicles"
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+                >
                   車両ラインナップ
                 </Link>
               </li>
               <li>
-                <Link href="#features" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link
+                  href="#features"
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+                >
                   サービスの特徴
                 </Link>
               </li>
               <li>
-                <Link href="#plans" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link
+                  href="#plans"
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+                >
                   旅のプラン
                 </Link>
               </li>
               <li>
-                <Link href="#booking" className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+                <Link
+                  href="#booking"
+                  className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+                >
                   予約システム
                 </Link>
               </li>
             </ul>
           </div>
-          
+
           {/* Contact */}
           <div className="space-y-4">
             <h3 className="text-jp-gold text-lg font-medium mb-4">コンタクト</h3>
@@ -77,54 +89,60 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Social & Legal */}
           <div className="space-y-4">
             <h3 className="text-jp-gold text-lg font-medium mb-4">フォローする</h3>
             <div className="flex space-x-4">
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link 
-                href="#" 
+              <Link
+                href="#"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="YouTube"
               >
                 <Youtube className="h-5 w-5" />
               </Link>
             </div>
-            
+
             <div className="pt-4 space-y-2">
-              <Link href="#" className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+              <Link
+                href="#"
+                className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+              >
                 プライバシーポリシー
               </Link>
-              <Link href="#" className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm">
+              <Link
+                href="#"
+                className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+              >
                 利用規約
               </Link>
             </div>
           </div>
         </div>
-        
+
         <div className="section-divider" />
-        
+
         <div className="text-center text-jp-silver text-sm">
           <p>&copy; {currentYear} ジャパンピッカーズ All Rights Reserved.</p>
         </div>

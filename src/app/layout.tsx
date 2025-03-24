@@ -15,11 +15,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "ジャパンピッカーズ | 群馬県のキャンピングカーレンタル・レンタカーサービス",
-  description: "群馬県で最高級のキャンピングカーレンタル・レンタカーを提供する「ジャパンピッカーズ」。快適な車内空間と充実した装備で、特別な旅の思い出を作りませんか。",
+  description:
+    "群馬県で最高級のキャンピングカーレンタル・レンタカーを提供する「ジャパンピッカーズ」。快適な車内空間と充実した装備で、特別な旅の思い出を作りませんか。",
   keywords: "キャンピングカー, レンタル, 群馬, レンタカー, ジャパンピッカーズ, アウトドア, 旅行",
   openGraph: {
     title: "ジャパンピッカーズ | 群馬県のキャンピングカーレンタル・レンタカーサービス",
-    description: "群馬県で最高級のキャンピングカーレンタル・レンタカーを提供する「ジャパンピッカーズ」。快適な車内空間と充実した装備で、特別な旅の思い出を作りませんか。",
+    description:
+      "群馬県で最高級のキャンピングカーレンタル・レンタカーを提供する「ジャパンピッカーズ」。快適な車内空間と充実した装備で、特別な旅の思い出を作りませんか。",
     locale: "ja_JP",
     type: "website",
   },
@@ -32,9 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
         <Toaster richColors position="top-center" />
       </body>

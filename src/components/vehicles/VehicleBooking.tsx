@@ -1,20 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Calendar as CalendarIcon,
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  X
-} from "lucide-react";
-import type { Vehicle } from "@/lib/vehicles";
-import { Calendar } from "@/components/ui/calendar";
-import type { DateRange } from "react-day-picker";
-import { ja } from "date-fns/locale";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import PremiumButton from "@/components/ui/PremiumButton";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import type { Vehicle } from "@/lib/vehicles";
+import { ja } from "date-fns/locale";
+import { Calendar as CalendarIcon, Check, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useState } from "react";
+import type { DateRange } from "react-day-picker";
+import { toast } from "sonner";
 
 interface VehicleBookingProps {
   vehicle: Vehicle;
@@ -39,10 +33,8 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   ];
 
   const toggleOption = (optionId: string) => {
-    setSelectedOptions(prev =>
-      prev.includes(optionId)
-        ? prev.filter(id => id !== optionId)
-        : [...prev, optionId]
+    setSelectedOptions((prev) =>
+      prev.includes(optionId) ? prev.filter((id) => id !== optionId) : [...prev, optionId],
     );
   };
 
@@ -60,7 +52,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
 
     // オプション料金を追加
     for (const optionId of selectedOptions) {
-      const option = options.find(opt => opt.id === optionId);
+      const option = options.find((opt) => opt.id === optionId);
       if (option) {
         if (option.unit.includes("日")) {
           total += option.price * days;
@@ -101,10 +93,11 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   const availableDates = generateAvailableDates();
 
   const isDateAvailable = (date: Date) => {
-    return availableDates.some(availableDate =>
-      availableDate.getFullYear() === date.getFullYear() &&
-      availableDate.getMonth() === date.getMonth() &&
-      availableDate.getDate() === date.getDate()
+    return availableDates.some(
+      (availableDate) =>
+        availableDate.getFullYear() === date.getFullYear() &&
+        availableDate.getMonth() === date.getMonth() &&
+        availableDate.getDate() === date.getDate(),
     );
   };
 
@@ -132,11 +125,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
       }
     }
 
-    return [
-      { before: today },
-      { after: threemonthsLater },
-      ...disabledDates
-    ];
+    return [{ before: today }, { after: threemonthsLater }, ...disabledDates];
   };
 
   // 前の月に移動
@@ -176,7 +165,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
 
   // カスタムモディファイアを作成
   const modifiers = {
-    unavailable: (date: Date) => !isDateAvailable(date) && date > new Date()
+    unavailable: (date: Date) => !isDateAvailable(date) && date > new Date(),
   };
 
   // カスタムコンテンツを作成
@@ -212,11 +201,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
       );
     }
 
-    return (
-      <div className="flex items-center justify-center">
-        {day.getDate()}
-      </div>
-    );
+    return <div className="flex items-center justify-center">{day.getDate()}</div>;
   };
 
   // 日付選択時のハンドラー
@@ -234,10 +219,11 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
 
     // 日付の範囲内に水曜日が含まれているかチェック
     let hasWednesday = false;
-    let currentDate = new Date(startDate);
+    const currentDate = new Date(startDate);
 
     while (currentDate <= endDate) {
-      if (currentDate.getDay() === 3) { // 水曜日
+      if (currentDate.getDay() === 3) {
+        // 水曜日
         hasWednesday = true;
         break;
       }
@@ -247,7 +233,8 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     if (hasWednesday) {
       // 警告トーストを表示
       toast.error("予約エラー", {
-        description: "選択した期間内に既に予約が入っている日付があります。別の日程を選択してください。",
+        description:
+          "選択した期間内に既に予約が入っている日付があります。別の日程を選択してください。",
       });
       // 予約不可フラグを設定
       setHasUnavailableDates(true);
@@ -305,11 +292,12 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                 showOutsideDays={false}
                 modifiers={modifiers}
                 components={{
-                  DayContent: ({ date }) => dayContent(date)
+                  DayContent: ({ date }) => dayContent(date),
                 }}
                 className="text-white"
                 classNames={{
-                  day_selected: "bg-jp-gold text-jp-black hover:bg-jp-gold hover:text-jp-black font-bold",
+                  day_selected:
+                    "bg-jp-gold text-jp-black hover:bg-jp-gold hover:text-jp-black font-bold",
                   day_today: "border border-jp-silver text-jp-silver",
                   day_range_middle: "bg-jp-gold/30 text-white",
                   day_disabled: "text-jp-silver/30 line-through",
@@ -317,7 +305,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                   nav: "hidden", // カスタムナビゲーションを使用するため非表示
                   cell: "text-jp-silver h-12", // 高さを増やして「開始日」「終了日」のラベルが入るようにする
                   day_outside: "invisible",
-                  table: "w-full border-spacing-1"
+                  table: "w-full border-spacing-1",
                 }}
               />
             </div>
@@ -335,22 +323,28 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
               <Button
                 key={option.id}
                 type="button"
-                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 border transition-colors ${selectedOptions.includes(option.id)
-                  ? "border-jp-gold"
-                  : "border-jp-darkgray/50 hover:border-jp-gold/50"
-                  }`}
+                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 border transition-colors ${
+                  selectedOptions.includes(option.id)
+                    ? "border-jp-gold"
+                    : "border-jp-darkgray/50 hover:border-jp-gold/50"
+                }`}
                 onClick={() => toggleOption(option.id)}
                 aria-pressed={selectedOptions.includes(option.id)}
               >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-white">{option.name}</p>
-                    <p className="text-sm text-jp-silver">¥{option.price.toLocaleString()}/{option.unit}</p>
+                    <p className="text-sm text-jp-silver">
+                      ¥{option.price.toLocaleString()}/{option.unit}
+                    </p>
                   </div>
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${selectedOptions.includes(option.id)
-                    ? "bg-jp-gold text-jp-black"
-                    : "border border-jp-silver text-jp-silver"
-                    }`}>
+                  <div
+                    className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                      selectedOptions.includes(option.id)
+                        ? "bg-jp-gold text-jp-black"
+                        : "border border-jp-silver text-jp-silver"
+                    }`}
+                  >
                     {selectedOptions.includes(option.id) && <Check className="w-4 h-4" />}
                   </div>
                 </div>
@@ -386,8 +380,8 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
               <div>
                 <p className="text-jp-silver mb-1">選択オプション</p>
                 <ul className="space-y-1">
-                  {selectedOptions.map(optionId => {
-                    const option = options.find(opt => opt.id === optionId);
+                  {selectedOptions.map((optionId) => {
+                    const option = options.find((opt) => opt.id === optionId);
                     return option ? (
                       <li key={optionId} className="text-white">
                         {option.name}
@@ -408,8 +402,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
               <p className="text-white">
                 {dateRange?.from && dateRange?.to
                   ? `¥${(vehicle.pricePerNight * getTotalDays()).toLocaleString()}`
-                  : "-"
-                }
+                  : "-"}
               </p>
             </div>
 
@@ -419,8 +412,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                 <p className="text-white">
                   {dateRange?.from && dateRange?.to
                     ? `¥${(calculateTotal() - vehicle.pricePerNight * getTotalDays()).toLocaleString()}`
-                    : "-"
-                  }
+                    : "-"}
                 </p>
               </div>
             )}
@@ -428,10 +420,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
             <div className="flex justify-between items-center text-lg font-medium mt-4">
               <p className="text-white">合計</p>
               <p className="text-jp-gold">
-                {dateRange?.from && dateRange?.to
-                  ? `¥${calculateTotal().toLocaleString()}`
-                  : "-"
-                }
+                {dateRange?.from && dateRange?.to ? `¥${calculateTotal().toLocaleString()}` : "-"}
               </p>
             </div>
           </div>
@@ -446,7 +435,8 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
                 });
               } else if (hasUnavailableDates) {
                 toast.error("予約エラー", {
-                  description: "選択した期間内に予約できない日付があります。別の日程を選択してください。",
+                  description:
+                    "選択した期間内に予約できない日付があります。別の日程を選択してください。",
                 });
               } else {
                 // 予約処理を実行

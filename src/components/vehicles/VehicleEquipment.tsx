@@ -1,16 +1,8 @@
 "use client";
 
+import type { VehicleEquipment as EquipmentType } from "@/lib/vehicles";
 import { motion } from "framer-motion";
-import {
-  UtensilsCrossed,
-
-  Bed,
-  Thermometer,
-  Tv,
-  Tent,
-  Check
-} from "lucide-react";
-import { VehicleEquipment as EquipmentType } from "@/lib/vehicles";
+import { Bed, Check, Tent, Thermometer, Tv, UtensilsCrossed } from "lucide-react";
 
 interface VehicleEquipmentProps {
   equipment: EquipmentType;
@@ -60,9 +52,7 @@ const VehicleEquipment = ({ equipment }: VehicleEquipmentProps) => {
               className="bg-jp-darkgray/30 rounded-xl p-6 border border-jp-darkgray/50"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="gold-icon p-3 bg-jp-black/50 rounded-full">
-                  {category.icon}
-                </div>
+                <div className="gold-icon p-3 bg-jp-black/50 rounded-full">{category.icon}</div>
                 <h3 className="text-xl font-medium text-white">{category.name}</h3>
               </div>
 
@@ -75,7 +65,7 @@ const VehicleEquipment = ({ equipment }: VehicleEquipmentProps) => {
                       <Check className="gold-icon w-5 h-5 mt-0.5 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </motion.div>

@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
-import { getVehicleBySlug, getAllVehicleSlugs } from "@/lib/vehicles";
-import VehicleDetail from "@/components/vehicles/VehicleDetail";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import VehicleDetail from "@/components/vehicles/VehicleDetail";
+import { getAllVehicleSlugs, getVehicleBySlug } from "@/lib/vehicles";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next/types";
 
 type Params = {

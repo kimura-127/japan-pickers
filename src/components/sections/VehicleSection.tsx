@@ -1,8 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
-import { useRouter } from "next/navigation";
 
 const vehicles = [
   {
@@ -20,7 +20,12 @@ const vehicles = [
     slug: "camroad-zil",
     image: "/images/IMG_8936.JPG",
     capacity: 6,
-    features: ["キングサイズベッド", "プレミアムサウンドシステム", "Bose®スピーカー", "広々リビングスペース"],
+    features: [
+      "キングサイズベッド",
+      "プレミアムサウンドシステム",
+      "Bose®スピーカー",
+      "広々リビングスペース",
+    ],
     pricePerNight: 45000,
   },
   {
@@ -52,7 +57,7 @@ const VehicleSection = () => {
         root: null,
         rootMargin: "0px",
         threshold: 0.1,
-      }
+      },
     );
 
     const section = sectionRef.current;
@@ -98,7 +103,7 @@ const VehicleSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vehicles.map((vehicle, index) => {
             const key = `vehicle-${vehicle.id}`;
-            
+
             return (
               <div
                 key={key}

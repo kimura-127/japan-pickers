@@ -1,21 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import type { Vehicle } from "@/lib/vehicles";
+import { motion } from "framer-motion";
+import { ArrowLeft, Calendar, Maximize, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  Users,
-  Calendar,
-  ArrowLeft,
-  Maximize
-} from "lucide-react";
-import type { Vehicle } from "@/lib/vehicles";
-import VehicleGallery from "./VehicleGallery";
-import VehicleSpecifications from "./VehicleSpecifications";
-import VehicleEquipment from "./VehicleEquipment";
-import VehicleRecommendedUse from "./VehicleRecommendedUse";
+import { useEffect, useState } from "react";
 import VehicleBooking from "./VehicleBooking";
+import VehicleEquipment from "./VehicleEquipment";
+import VehicleGallery from "./VehicleGallery";
+import VehicleRecommendedUse from "./VehicleRecommendedUse";
+import VehicleSpecifications from "./VehicleSpecifications";
 
 interface VehicleDetailProps {
   vehicle: Vehicle;
@@ -82,9 +77,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-noto-serif-jp font-bold text-white mb-3">
                 {vehicle.name}
               </h1>
-              <p className="text-xl text-jp-silver max-w-3xl">
-                {vehicle.description}
-              </p>
+              <p className="text-xl text-jp-silver max-w-3xl">{vehicle.description}</p>
             </motion.div>
 
             <motion.div
@@ -100,7 +93,9 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               </div>
               <div className="flex items-center gap-2 text-jp-silver">
                 <Maximize className="gold-icon w-5 h-5" />
-                <span>{vehicle.specs.length} × {vehicle.specs.width} × {vehicle.specs.height}</span>
+                <span>
+                  {vehicle.specs.length} × {vehicle.specs.width} × {vehicle.specs.height}
+                </span>
               </div>
               <div className="flex items-center gap-2 text-jp-silver">
                 <Calendar className="gold-icon w-5 h-5" />
@@ -117,7 +112,9 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
             >
               <div>
                 <p className="text-jp-silver text-sm">1泊あたり</p>
-                <p className="text-3xl font-bold text-jp-gold">¥{vehicle.pricePerNight.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-jp-gold">
+                  ¥{vehicle.pricePerNight.toLocaleString()}
+                </p>
               </div>
               <a
                 href="#booking"
@@ -152,9 +149,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
             />
           )}
 
-          {activeTab === "equipment" && (
-            <VehicleEquipment equipment={vehicle.equipment} />
-          )}
+          {activeTab === "equipment" && <VehicleEquipment equipment={vehicle.equipment} />}
 
           {activeTab === "recommended" && (
             <VehicleRecommendedUse recommendedUse={vehicle.recommendedUse} />

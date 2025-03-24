@@ -1,10 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
-import { Menu, X, PhoneCall } from "lucide-react";
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Menu, PhoneCall, X } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import PremiumButton from "../ui/PremiumButton";
 
 const Header = () => {
@@ -38,9 +38,7 @@ const Header = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-8",
-        scrolled
-          ? "bg-jp-black/95 backdrop-blur-md shadow-gold-md"
-          : "bg-transparent"
+        scrolled ? "bg-jp-black/95 backdrop-blur-md shadow-gold-md" : "bg-transparent",
       )}
     >
       <div className="premium-container flex items-center justify-between">
@@ -68,17 +66,14 @@ const Header = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center space-x-4">
-          <a 
-            href="tel:+0120-000-000" 
+          <a
+            href="tel:+0120-000-000"
             className="flex items-center text-jp-gold hover:text-jp-gold-light transition-colors duration-300"
           >
             <PhoneCall className="h-4 w-4 mr-2" />
             <span className="text-sm">0120-000-000</span>
           </a>
-          <PremiumButton 
-            withShimmer
-            onClick={() => router.push("#booking")}
-          >
+          <PremiumButton withShimmer onClick={() => router.push("#booking")}>
             ご予約はこちら
           </PremiumButton>
         </div>
@@ -98,7 +93,7 @@ const Header = () => {
         <div
           className={cn(
             "fixed inset-0 bg-jp-black/95 backdrop-blur-md z-40 transition-transform duration-300 transform md:hidden pt-20",
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+            isMenuOpen ? "translate-x-0" : "translate-x-full",
           )}
         >
           <div className="flex flex-col items-center space-y-6 py-8">
@@ -112,16 +107,16 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-            
+
             <div className="pt-6 space-y-4 w-full px-8">
-              <a 
-                href="tel:+0120-000-000" 
+              <a
+                href="tel:+0120-000-000"
                 className="flex items-center justify-center text-jp-gold hover:text-jp-gold-light transition-colors duration-300"
               >
                 <PhoneCall className="h-4 w-4 mr-2" />
                 <span>0120-000-000</span>
               </a>
-              <PremiumButton 
+              <PremiumButton
                 withShimmer
                 className="w-full"
                 onClick={() => {
