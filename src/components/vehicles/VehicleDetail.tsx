@@ -142,10 +142,8 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
         <div className="premium-container">
           {activeTab === "specs" && (
             <VehicleSpecifications
-              vehicle={vehicle}
               features={vehicle.detailedFeatures}
               specs={vehicle.specs}
-              floorPlan={vehicle.floorPlan}
             />
           )}
 

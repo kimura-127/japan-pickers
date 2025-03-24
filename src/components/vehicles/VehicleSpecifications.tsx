@@ -8,11 +8,9 @@ import type { JSX } from "react";
 interface VehicleSpecificationsProps {
   features: VehicleFeature[];
   specs: VehicleSpec;
-  floorPlan?: string;
-  vehicle: Vehicle;
 }
 
-const VehicleSpecifications = ({ features, specs, vehicle, floorPlan }: VehicleSpecificationsProps) => {
+const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) => {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
