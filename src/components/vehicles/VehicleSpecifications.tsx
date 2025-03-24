@@ -1,6 +1,6 @@
 "use client";
 
-import type { Vehicle, VehicleFeature, VehicleSpec } from "@/lib/vehicles";
+import type { VehicleFeature, VehicleSpec } from "@/lib/vehicles";
 import { motion } from "framer-motion";
 import { Bed, Calendar, Car, Fuel, Gauge, Info, Ruler, Users } from "lucide-react";
 import type { JSX } from "react";
