@@ -3,12 +3,8 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const handleLogin = async ({
     email,
     password,
@@ -17,7 +13,7 @@ export default function LoginPage() {
     password: string;
   }) => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
