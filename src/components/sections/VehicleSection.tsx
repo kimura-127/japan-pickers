@@ -1,43 +1,9 @@
 "use client";
 
+import { vehicles } from "@/lib/vehicles";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
-
-const vehicles = [
-  {
-    id: 1,
-    name: "ランドホームグランデ",
-    slug: "land-home-grande",
-    image: "/images/IMG_8936.JPG",
-    capacity: 4,
-    features: ["フルキッチン", "シャワー/トイレ", "エアコン/暖房", "ソーラーパネル"],
-    pricePerNight: 38000,
-  },
-  {
-    id: 2,
-    name: "カムロードZiL",
-    slug: "camroad-zil",
-    image: "/images/IMG_8936.JPG",
-    capacity: 6,
-    features: [
-      "キングサイズベッド",
-      "プレミアムサウンドシステム",
-      "Bose®スピーカー",
-      "広々リビングスペース",
-    ],
-    pricePerNight: 45000,
-  },
-  {
-    id: 3,
-    name: "コースター ベガ",
-    slug: "coaster-vega",
-    image: "/images/IMG_8936.JPG",
-    capacity: 5,
-    features: ["革張りインテリア", "ガラスルーフ", "ワークステーション", "ワインセラー"],
-    pricePerNight: 40000,
-  },
-];
 
 const VehicleSection = () => {
   const router = useRouter();
@@ -113,7 +79,7 @@ const VehicleSection = () => {
                 className={`reveal reveal-delay-${index + 1}`}
               >
                 <VehicleCard
-                  image={vehicle.image}
+                  image={vehicle.images[0].src}
                   name={vehicle.name}
                   capacity={vehicle.capacity}
                   features={vehicle.features}

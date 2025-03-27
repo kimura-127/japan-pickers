@@ -92,20 +92,31 @@ const VehicleGallery = ({ images, videoTour }: VehicleGalleryProps) => {
 
       {/* サムネイル */}
       <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${
-              currentIndex === index ? "ring-2 ring-jp-gold" : "opacity-70 hover:opacity-100"
-            }`}
-            onClick={() => setCurrentIndex(index)}
-          >
-            <Image src={image.src} alt={image.alt} fill className="object-cover" />
-          </div>
-        ))}
+        {images.map((image, index) => {
+          const key = `thumbnail-${index}`;
 
-        {videoTour && (
+          return (
+            <div
+              key={key}
+              className={`relative aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${
+                currentIndex === index ? "ring-2 ring-jp-gold" : "opacity-70 hover:opacity-100"
+              }`}
+            >
+              <Image
+                onClick={() => setCurrentIndex(index)}
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+              />
+            </div>
+          );
+        })}
+
+        {/* 動画ツアー */}
+        {/* {videoTour && (
           <div
+            
             className="relative aspect-square rounded-lg overflow-hidden cursor-pointer bg-jp-darkgray/50 flex items-center justify-center group"
             onClick={() => setShowVideo(true)}
           >
@@ -115,7 +126,7 @@ const VehicleGallery = ({ images, videoTour }: VehicleGalleryProps) => {
               動画ツアー
             </span>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* フルスクリーンモーダル */}
@@ -141,7 +152,10 @@ const VehicleGallery = ({ images, videoTour }: VehicleGalleryProps) => {
 
           <Button
             onClick={() =>
-              setFullscreenIndex((prev) => (prev === 0 ? images.length - 1 : prev! - 1))
+              setFullscreenIndex((prev: number | null) => {
+                if (prev === null) return 0;
+                return prev === 0 ? images.length - 1 : prev - 1;
+              })
             }
             variant="ghost"
             size="icon"
@@ -151,7 +165,10 @@ const VehicleGallery = ({ images, videoTour }: VehicleGalleryProps) => {
           </Button>
           <Button
             onClick={() =>
-              setFullscreenIndex((prev) => (prev === images.length - 1 ? 0 : prev! + 1))
+              setFullscreenIndex((prev: number | null) => {
+                if (prev === null) return 0;
+                return prev === images.length - 1 ? 0 : prev + 1;
+              })
             }
             variant="ghost"
             size="icon"
@@ -179,7 +196,12 @@ const VehicleGallery = ({ images, videoTour }: VehicleGalleryProps) => {
           </Button>
 
           <div className="relative w-[90vw] aspect-video">
-            <iframe src={videoTour} className="absolute inset-0 w-full h-full" allowFullScreen />
+            <iframe
+              src={videoTour}
+              className="absolute inset-0 w-full h-full"
+              allowFullScreen
+              title="車両ビデオツアー"
+            />
           </div>
         </div>
       )}

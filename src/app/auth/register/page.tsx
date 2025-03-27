@@ -1,10 +1,13 @@
 "use client";
 
 import AuthForm from "@/components/auth/AuthForm";
-import { supabase } from "@/lib/supabase";
+import { createClient_ as createSupabaseClient } from "@/lib/supabase";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   const handleRegister = async ({
     email,
     password,
@@ -15,11 +18,23 @@ export default function RegisterPage() {
     name?: string;
   }) => {
     try {
+      // Supabaseクライアントの作成
+      const supabase = createSupabaseClient();
+
+      // アプリのURLを取得（本番環境とローカル環境で分岐）
+      const siteUrl =
+        process.env.NODE_ENV === "production"
+          ? process.env.NEXT_PUBLIC_SITE_URL || "https://japan-pickers.vercel.app"
+          : "http://localhost:3000";
+
+      const redirectUrl = `${siteUrl}/auth/confirm`;
+
       // Supabaseでユーザー登録
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
+          emailRedirectTo: redirectUrl,
           data: {
             name: name || "",
           },
@@ -27,6 +42,7 @@ export default function RegisterPage() {
       });
 
       if (error) {
+        console.error("登録エラー詳細:", error);
         return {
           success: false,
           message: error.message,
