@@ -214,7 +214,7 @@ export const vehicles: Vehicle[] = [
         type: "interior",
       },
     ],
-    capacity: 4,
+    capacity: 8,
     features: ["フルキッチン", "シャワー/トイレ", "エアコン/暖房", "ソーラーパネル"],
     detailedFeatures: [
       {
@@ -253,8 +253,8 @@ export const vehicles: Vehicle[] = [
       year: 2022,
       mileage: "15,000km",
       driveType: "2WD",
-      capacity: 4,
-      sleepingCapacity: 4,
+      capacity: 8,
+      sleepingCapacity: 6,
     },
     equipment: {
       kitchen: [
@@ -337,7 +337,7 @@ export const vehicles: Vehicle[] = [
       { src: "/images/camload/aboutcar_zil_09.jpg", alt: "カムロードZiL ベッド", type: "interior" },
       { src: "/images/camload/aboutcar_zil_10.jpg", alt: "カムロードZiL ベッド", type: "interior" },
     ],
-    capacity: 6,
+    capacity: 10,
     features: [
       "キングサイズベッド",
       "プレミアムサウンドシステム",
@@ -378,8 +378,8 @@ export const vehicles: Vehicle[] = [
       year: 2023,
       mileage: "8,000km",
       driveType: "2WD",
-      capacity: 6,
-      sleepingCapacity: 4,
+      capacity: 10,
+      sleepingCapacity: 6,
     },
     equipment: {
       kitchen: [
@@ -472,7 +472,7 @@ export const vehicles: Vehicle[] = [
       { src: "/images/vegas/IMG_9145.JPG", alt: "コースター ベガ 内装", type: "interior" },
       { src: "/images/vegas/IMG_9146.JPG", alt: "コースター ベガ 内装", type: "interior" },
     ],
-    capacity: 5,
+    capacity: 6,
     features: ["革張りインテリア", "ガラスルーフ", "ワークステーション", "ワインセラー"],
     detailedFeatures: [
       {
@@ -508,8 +508,8 @@ export const vehicles: Vehicle[] = [
       year: 2021,
       mileage: "25,000km",
       driveType: "2WD",
-      capacity: 5,
-      sleepingCapacity: 5,
+      capacity: 6,
+      sleepingCapacity: 6,
     },
     equipment: {
       kitchen: [
