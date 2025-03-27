@@ -129,7 +129,7 @@ const HeroSection = () => {
             transform: isClient ? `translateY(${calculateParallax(0, 0.2)}px)` : "none",
           }}
         >
-          プレミアムキャンピングカーレンタル
+          キャンピングカーレンタル
         </h1>
 
         <p
@@ -138,7 +138,7 @@ const HeroSection = () => {
             transform: isClient ? `translateY(${calculateParallax(0, 0.15)}px)` : "none",
           }}
         >
-          群馬県で高品質なキャンピングカー・レンタカーサービスを提供。
+          群馬県高崎市で高品質なキャンピングカーレンタルサービスを提供。
           最高級の装備と快適な車内空間で、忘れられない自然の旅をお楽しみいただけます。
         </p>
 

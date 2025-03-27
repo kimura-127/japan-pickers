@@ -4,61 +4,60 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import PlanCard from "../ui/PlanCard";
 
-const plans = [
+const seasonalRates = [
   {
     id: 1,
-    title: "群馬の名湯めぐり",
+    title: "通常シーズン",
     image:
-      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    duration: "2泊3日",
+      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    duration: "レギュラー料金",
     description:
-      "群馬県が誇る名湯を巡る贅沢な旅。草津温泉や伊香保温泉など、名だたる温泉地を巡ります。",
+      "通常期間のレンタル料金です。表示のレンタル料金は税込の２４時間ごとの金額となります。レンタル料金は対人賠償保険料込みです！",
     highlights: [
-      "厳選された名湯へのアクセス情報提供",
-      "温泉施設での優先予約サービス",
-      "地元の名産品とワインのウェルカムパッケージ",
+      "ランドホームグランデ：35,200円～/1日",
+      "カムロードZiL：15,000円～/1日",
+      "コースター ベガ：35,200円～/1日",
     ],
   },
   {
     id: 2,
-    title: "尾瀬・日光国立公園探訪",
+    title: "ハイシーズン",
     image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    duration: "3泊4日",
-    description:
-      "雄大な自然が広がる尾瀬と日光国立公園。季節ごとに移り変わる美しい景色を堪能できます。",
+      "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    duration: "春休み・夏休み・年末",
+    description: "春休み(3/20-4/15)、夏休み(7/1-8/7、8/17-8/31)、年末(12/1-12/25)の特別料金です。",
     highlights: [
-      "専門ガイドによるトレッキングツアー（オプション）",
-      "自然写真家によるフォトスポット案内",
-      "プライベートピクニックセット付き",
+      "ランドホームグランデ：要問合せ",
+      "カムロードZiL：要問合せ",
+      "コースター ベガ：要問合せ",
     ],
   },
   {
     id: 3,
-    title: "赤城山・榛名山プライベートリトリート",
+    title: "プレミアムシーズン",
     image:
-      "https://images.unsplash.com/photo-1496545672447-f699b503d270?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    duration: "1泊2日",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    duration: "GW・お盆・年末年始",
     description:
-      "忙しい日常から離れ、山々の静寂に身を任せるプライベートな時間。心と体をリフレッシュします。",
+      "GW(4/29-5/6)、お盆(8/8-8/16)、年末年始(12/26-1/5)の特別料金です。※プレミアムシーズンのご予約は、最低3日（72時間）以上のご利用が必要となります。",
     highlights: [
-      "プライベートビューポイントへのナビゲーション",
-      "星空観測用の天体望遠鏡レンタル（オプション）",
-      "地元食材を使った簡単調理レシピ付き",
+      "ランドホームグランデ：要問合せ",
+      "カムロードZiL：要問合せ",
+      "コースター ベガ：要問合せ",
     ],
   },
   {
     id: 4,
-    title: "ガストロノミックジャーニー",
+    title: "オプション",
     image:
-      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-    duration: "2泊3日",
+      "https://images.unsplash.com/photo-1496545672447-f699b503d270?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    duration: "快適な旅のために",
     description:
-      "群馬の豊かな食文化を巡る旅。地元の名店や農場を訪れ、新鮮な食材と伝統料理を堪能します。",
+      "より快適な旅行のための各種オプションをご用意しています。ご予約時にお申し付けください。",
     highlights: [
-      "地元の名店予約代行サービス",
-      "ワイナリー・酒蔵見学アレンジ",
-      "シェフによるプライベートクッキングレッスン（オプション）",
+      "寝具セット（布団・シーツ・枕）",
+      "キャンプ用品（テーブル・チェア）",
+      "調理器具セット",
     ],
   },
 ];
@@ -115,17 +114,17 @@ const PlanSection = () => {
       <div className="premium-container">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full border border-jp-gold/30 bg-jp-darkgray/50 backdrop-blur-sm text-jp-gold text-sm mb-4">
-            旅のプラン
+            料金・オプション
           </span>
-          <h2 className="section-title">プレミアムエクスペリエンス</h2>
+          <h2 className="section-title">レンタル料金と特別シーズン</h2>
           <p className="text-jp-silver max-w-2xl mx-auto mt-4">
-            キャンピングカーならではの自由と、ラグジュアリーホテルのような快適さ。
-            最高の旅のための厳選プランをご紹介します。
+            表示のレンタル料金は税込の２４時間ごとの金額となります。
+            レンタル料金は対人賠償保険料込みです！
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {plans.map((plan, index) => {
+          {seasonalRates.map((plan, index) => {
             const key = `plan-${plan.id}`;
 
             return (

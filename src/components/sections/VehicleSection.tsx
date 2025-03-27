@@ -57,12 +57,12 @@ const VehicleSection = () => {
       <div className="premium-container">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full border border-jp-gold/30 bg-jp-darkgray/50 backdrop-blur-sm text-jp-gold text-sm mb-4">
-            ラインナップ
+            車両紹介
           </span>
-          <h2 className="section-title">厳選されたプレミアムラインナップ</h2>
+          <h2 className="section-title">厳選されたキャンピングカー</h2>
           <p className="text-jp-silver max-w-2xl mx-auto mt-4">
-            最高級の素材と快適さを追求した、厳選されたキャンピングカーコレクション。
-            あなただけの特別な旅をサポートします。
+            ジャパンピッカーズが誇る高品質なキャンピングカーをご紹介。
+            あなたの冒険をサポートする特別な一台をお選びください。
           </p>
         </div>
 

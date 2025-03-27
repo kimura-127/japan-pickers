@@ -31,6 +31,8 @@ export interface VehicleEquipment {
   climate: string[];
   entertainment: string[];
   outdoor: string[];
+  safety?: string[];
+  power?: string[];
 }
 
 export interface RecommendedUse {
@@ -68,8 +70,8 @@ export const vehicles: Vehicle[] = [
     name: "ランドホームグランデ",
     slug: "land-home-grande",
     description:
-      "最高級の素材と快適さを追求した、プレミアムキャンピングカー。広々とした室内空間と充実した設備で、贅沢な旅をお楽しみいただけます。",
-    shortDescription: "最高級の素材と快適さを追求したプレミアムモデル",
+      "わたしたちがご用意するのは、最高峰ラグジュアリーサロンモーターホーム、純国産フルコン・ＲＶランドフラッグシップ「ランドホームグランデ」！車両サイズは、641 x 227 x H300cm。当時ＲＶランドから３台しか生産されていない走る高級ホテルと呼ばれ、人を運ぶために設計製造されたマイクロバスがベースです。さらに運転席はレカロシート装備、助手席には専用ＡＶモニターを設置し、長距離運転も快適、乗り心地も抜群です。またキャンピングカー大好き店主がこだわりの電装システムを構築し、外部電源に頼らずとも快適キャンプをお楽しみください。",
+    shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
     image: "/images/landHome/IMG_9021.JPG",
     images: [
       { src: "/images/landHome/IMG_9021.JPG", alt: "ランドホームグランデ 外観", type: "exterior" },
@@ -215,19 +217,25 @@ export const vehicles: Vehicle[] = [
       },
     ],
     capacity: 8,
-    features: ["フルキッチン", "シャワー/トイレ", "エアコン/暖房", "ソーラーパネル"],
+    features: ["8名乗車", "6名就寝", "シャワー・トイレ完備", "FreeWi-fi", "AmazonfireTV"],
     detailedFeatures: [
       {
         icon: "chef-hat",
         name: "フルキッチン",
         description:
-          "IHクッキングヒーター、冷蔵庫、電子レンジを完備した本格的なキッチンで、旅先でも本格的な料理が楽しめます。",
+          "90Lの大型冷蔵庫、電子レンジ、3口ガスコンロを完備。調理器具と食器も揃っていいるので、本格的な料理が楽しめます。",
+      },
+      {
+        icon: "battery-charging",
+        name: "高性能電装システム",
+        description:
+          "ドメティック発電機2500w、10,000w/hサブバッテリー、3,000Wインバーター、外部AC入力、エコフローパワーシステム、走行充電システムを完備し、電源を気にせず快適に過ごせます。",
       },
       {
         icon: "shower-head",
         name: "シャワー/トイレ",
         description:
-          "プライベートな空間で快適に使えるシャワールームとトイレを完備。長期の旅行でも安心です。",
+          "プライベートな空間で快適に使えるシャワールームとカセットトイレを完備。トイレは大便禁止でオプション（清掃費用3,300円）となります。",
       },
       {
         icon: "thermometer",
@@ -240,56 +248,70 @@ export const vehicles: Vehicle[] = [
         description:
           "屋根に設置されたソーラーパネルで電力を自給自足。環境に優しく、電源のない場所でも安心です。",
       },
+      {
+        icon: "truck",
+        name: "運転のしやすさ",
+        description:
+          "オートマ車、バックカメラ、ETCを装備し、長距離の運転も快適に。2017年3月12日以降に普通免許を取得した方は準中型免許が必要です。",
+      },
     ],
     pricePerNight: 35200,
     rating: 4.8,
     reviewCount: 24,
     specs: {
-      length: "6.2m",
-      width: "2.3m",
-      height: "2.8m",
-      engine: "2.5L ディーゼルターボ",
+      length: "641cm",
+      width: "227cm",
+      height: "300cm",
+      engine: "ディーゼル 4007cc",
       fuelEfficiency: "8.5km/L",
       year: 2022,
-      mileage: "15,000km",
+      mileage: "50,000km",
       driveType: "2WD",
       capacity: 8,
       sleepingCapacity: 6,
     },
     equipment: {
       kitchen: [
-        "IHクッキングヒーター（2口）",
-        "冷蔵庫（90L）",
+        "冷蔵庫90L",
         "電子レンジ",
-        "シンク（温水/冷水）",
-        "食器セット（4人用）",
-        "調理器具一式",
+        "3口ガスコンロ",
+        "電気ケトル",
+        "トースター",
         "コーヒーメーカー",
+        "調理器具一式",
+        "食器類一式",
       ],
-      bathroom: ["シャワールーム", "カセットトイレ", "洗面台", "温水ボイラー", "タオルセット"],
-      bedroom: [
-        "ダブルベッド（1台）",
-        "変換ソファベッド（1台）",
-        "高級寝具セット",
-        "収納スペース",
-        "読書灯",
+      bathroom: [
+        "温水シャワー",
+        "外部シャワー",
+        "電気ラジエター温水器",
+        "カセットトイレ",
+        "洗面台",
       ],
-      climate: ["エアコン", "FFヒーター", "サーキュレーター", "断熱材強化"],
+      bedroom: ["ダブルベッド", "シングルベッド×4", "高級マットレス", "リネン一式", "収納スペース"],
+      climate: [
+        "ルーフエアコン",
+        "ルーフベンチレーター×2",
+        "リヤクーラー/ヒーター",
+        "FFヒーター（暖房）",
+      ],
       entertainment: [
-        "32インチスマートTV",
-        "Bluetoothスピーカー",
-        "Wi-Fiルーター（オプション）",
-        "USB充電ポート（6箇所）",
+        "AmazonfireTV",
+        "Bose®サウンドシステム",
+        "Wi-Fi(無料)",
+        "USB充電ポート",
+        "AC100V電源",
       ],
       outdoor: [
-        "電動サイドオーニング",
-        "アウトドアテーブル＆チェア",
-        "BBQグリル（オプション）",
-        "アウトドアシャワー",
+        "4.5mサイドオーニング",
+        "アウトドアテーブル",
+        "アウトドアチェア",
+        "バーベキューセット(オプション)",
       ],
     },
     recommendedUse: {
-      idealGroupSize: "カップルまたは小家族（2〜4名）",
+      idealGroupSize:
+        "最大8名（2017年3月12日以降に普通免許を取得した方は準中型免許が必要、特別会員のみペット可）",
       recommendedTrips: [
         "長期休暇での全国周遊",
         "高原・山岳リゾート",
@@ -319,8 +341,8 @@ export const vehicles: Vehicle[] = [
     name: "カムロードZiL",
     slug: "camroad-zil",
     description:
-      "コンパクトながら機能性に優れた、使い勝手の良いキャンピングカー。初めての方でも運転しやすく、充実した装備で快適な旅を実現します。",
-    shortDescription: "コンパクトながら機能性に優れた万能モデル",
+      "カムロードZiLは、効率性と機能性を兼ね備えたコンパクトなキャンピングカーです。トラックをベースにした4WDディーゼルエンジン車で、アウトドア愛好家に最適な一台。サイズは498 x 211 x H290cmで、比較的小回りが利き、標高の高いキャンプ場や未舗装の道路でも安心して運転できます。コンパクトながらも、室内には必要な設備がすべて整っており、快適な旅を楽しむことができます。",
+    shortDescription: "キャブコン4WDディーゼル｜498 x 211 x H290cm｜トラックがベース",
     image: "/images/IMG_8936.JPG",
     images: [
       { src: "/images/camload/IMG_9029.JPG", alt: "カムロードZiL 外観", type: "exterior" },
@@ -338,74 +360,72 @@ export const vehicles: Vehicle[] = [
       { src: "/images/camload/aboutcar_zil_10.jpg", alt: "カムロードZiL ベッド", type: "interior" },
     ],
     capacity: 10,
-    features: [
-      "キングサイズベッド",
-      "プレミアムサウンドシステム",
-      "Bose®スピーカー",
-      "広々リビングスペース",
-    ],
+    features: ["10名乗車", "6名就寝", "4WD対応", "ペット可", "禁煙車"],
     detailedFeatures: [
       {
         icon: "bed",
-        name: "キングサイズベッド",
-        description: "贅沢な広さのキングサイズベッドで、自宅と同じ寝心地を旅先でも。",
+        name: "広々としたベッドスペース",
+        description:
+          "6名が就寝できる広々としたスペースを確保。快適な睡眠環境で、疲れを癒し、次の冒険に備えることができます。",
       },
       {
-        icon: "music",
-        name: "プレミアムサウンドシステム",
-        description: "高音質サウンドシステムを搭載し、旅の楽しさを音楽で彩ります。",
+        icon: "truck",
+        name: "4WD対応",
+        description:
+          "4WDディーゼルエンジン車なので雪道や悪路、不整地キャンプ場や河川敷など絶対的に安心。普通免許で運転できます。",
       },
       {
-        icon: "speaker",
-        name: "Bose®スピーカー",
-        description: "世界的に有名なBose®のスピーカーを採用し、臨場感あふれるサウンドを実現。",
-      },
-      {
-        icon: "maximize",
-        name: "広々リビングスペース",
-        description: "効率的なレイアウトで実現した、ゆったりとくつろげるリビングスペース。",
+        icon: "pet",
+        name: "ペット同伴OK",
+        description:
+          "大切な家族の一員であるペットと一緒に旅行を楽しめます。ゲージに入れての乗車をお願いしています。",
       },
     ],
     pricePerNight: 15000,
     rating: 4.9,
     reviewCount: 32,
     specs: {
-      length: "5.8m",
-      width: "2.1m",
-      height: "2.7m",
-      engine: "3.0L ガソリン",
+      length: "498cm",
+      width: "211cm",
+      height: "290cm",
+      engine: "ディーゼル 3000cc",
       fuelEfficiency: "7.5km/L",
       year: 2023,
-      mileage: "8,000km",
-      driveType: "2WD",
+      mileage: "35,000km",
+      driveType: "4WD",
       capacity: 10,
       sleepingCapacity: 6,
     },
     equipment: {
       kitchen: [
         "ガスコンロ（2口）",
-        "冷蔵庫（65L）",
+        "冷蔵庫 DC50L",
+        "電子レンジ",
         "シンク（温水/冷水）",
+        "給水・排水タンク各19L",
         "食器セット（6人用）",
         "調理器具一式",
+        "※車内でのコンロ使用は軽食程度とし、油料理は禁止",
       ],
-      bathroom: ["カセットトイレ", "ポータブルシャワー", "洗面台"],
-      bedroom: [
-        "キングサイズベッド（1台）",
-        "変換ダイネットベッド（1台）",
-        "高級寝具セット",
-        "収納スペース",
+      bathroom: ["カセットトイレ", "外部シャワー", "ポータブルトイレ"],
+      bedroom: ["ダブルベッド", "ソファベッド", "展開式ベッド", "寝具一式"],
+      climate: [
+        "セパレートエアコン",
+        "ルーフベンチレーター×2",
+        "リヤクーラー/ヒーター",
+        "FFヒーター（暖房）",
+        "家庭用エアコン",
       ],
-      climate: ["エアコン", "ヒーター", "サーキュレーター"],
-      entertainment: ["Bose®サウンドシステム", "Bluetoothスピーカー", "USB充電ポート（4箇所）"],
+      entertainment: ["TV", "ステレオ", "USB充電ポート", "AC100V電源"],
       outdoor: [
         "サイドオーニング",
-        "アウトドアテーブル＆チェア",
-        "ポータブルBBQグリル（オプション）",
+        "キャンプテーブル",
+        "キャンプチェア",
+        "12～3月頃はスタッドレスタイヤ装着",
       ],
     },
     recommendedUse: {
-      idealGroupSize: "友人グループまたは家族（4〜6名）",
+      idealGroupSize: "普通免許で運転可能、ペット同伴OK（最大10名）",
       recommendedTrips: [
         "週末の短期旅行",
         "フェスティバル参加",
@@ -430,8 +450,8 @@ export const vehicles: Vehicle[] = [
     name: "コースター ベガ",
     slug: "coaster-vega",
     description:
-      "大人数でのグループ旅行に最適な、広々とした空間を持つキャンピングカー。快適な移動と滞在を両立し、思い出に残る旅を演出します。",
-    shortDescription: "大人数でのグループ旅行に最適な広々空間",
+      "コースター ベガは、高級感と機能性を兼ね備えた本格的なキャンピングカーです。広々とした室内空間と、キッチン、バスルーム、リビング、ベッドルームを備えた完全な移動式住宅です。サイズは650 x 230 x H290cmで、長距離移動でも快適な旅を提供します。特に家族やグループでの長期旅行に最適で、外部シャワーやオーニングなど、様々なアウトドア装備も充実しています。",
+    shortDescription: "ハイエンドキャビン｜650 x 230 x H290cm｜コースターがベース",
     image: "/images/IMG_8936.JPG",
     images: [
       { src: "/images/vegas/IMG_9026.JPG", alt: "コースター ベガ 外観", type: "exterior" },
@@ -473,7 +493,7 @@ export const vehicles: Vehicle[] = [
       { src: "/images/vegas/IMG_9146.JPG", alt: "コースター ベガ 内装", type: "interior" },
     ],
     capacity: 6,
-    features: ["革張りインテリア", "ガラスルーフ", "ワークステーション", "ワインセラー"],
+    features: ["6名乗車", "6名就寝", "水洗トイレ完備", "特別会員はペット可", "禁煙車"],
     detailedFeatures: [
       {
         icon: "sofa",
@@ -495,55 +515,59 @@ export const vehicles: Vehicle[] = [
         name: "ワインセラー",
         description: "温度管理された専用ワインセラーで、旅先でも最高の一杯を。",
       },
+      {
+        icon: "truck",
+        name: "マイクロバスベース",
+        description:
+          "人を運ぶために設計製造されたマイクロバスをベースに、フロント部には運転席・助手席共にレカロシート装備、フロント専用ＡＶモニターを設置し、長距離運転も快適で乗り心地は抜群です。",
+      },
+      {
+        icon: "alert-triangle",
+        name: "運転条件",
+        description:
+          "ベースはマイクロバスですので普通車感覚では運転できません。普段大きな車を扱われている方が運転してください。また運転経験が浅い方、運転に自身がない方、緑免許の方、26歳未満の方は運転をご遠慮ください。",
+      },
     ],
     pricePerNight: 35200,
     rating: 4.7,
     reviewCount: 18,
     specs: {
-      length: "7.0m",
-      width: "2.4m",
-      height: "3.0m",
-      engine: "3.0L ディーゼルターボ",
-      fuelEfficiency: "7.0km/L",
-      year: 2021,
-      mileage: "25,000km",
+      length: "650cm",
+      width: "230cm",
+      height: "290cm",
+      engine: "ディーゼル 4007cc",
+      fuelEfficiency: "6.2km/L",
+      year: 2023,
+      mileage: "28,000km",
       driveType: "2WD",
       capacity: 6,
       sleepingCapacity: 6,
     },
     equipment: {
       kitchen: [
-        "IHクッキングヒーター（1口）",
-        "冷蔵庫（80L）",
-        "ワインセラー（6本用）",
+        "ガスコンロ（2口）",
+        "冷蔵庫90L",
+        "電子レンジ",
         "シンク（温水/冷水）",
-        "エスプレッソマシン",
-        "食器セット（5人用）",
+        "食器セット（6人用）",
         "調理器具一式",
       ],
-      bathroom: ["シャワールーム", "カセットトイレ", "洗面台", "温水ボイラー"],
-      bedroom: [
-        "シングルベッド（3台）",
-        "変換ダイネットベッド（1台）",
-        "高級寝具セット",
-        "収納スペース",
-        "読書灯",
-      ],
-      climate: ["エアコン", "FFヒーター", "床暖房"],
-      entertainment: [
-        "27インチスマートTV",
-        "プレミアムサウンドシステム",
-        "Wi-Fiルーター（オプション）",
-        "USB充電ポート（8箇所）",
-      ],
-      outdoor: [
-        "電動サイドオーニング",
-        "アウトドアテーブル＆チェア",
-        "アウトドアシネマセット（オプション）",
+      bathroom: ["水洗トイレ", "洗面台＆ミラー", "シャワー", "温水ボイラー"],
+      bedroom: ["ダブルベッド", "ソファベッド", "展開式ベッド", "寝具一式"],
+      climate: ["家庭用エアコン", "ベンチレーター", "走行リアクーラー", "FFヒーター"],
+      entertainment: ["29インチリアテレビ", "AmazonfireTV", "フリーテレビシステム", "wi-fi"],
+      outdoor: ["4.5Mサイドオーニング", "アウトドアテーブル＆チェア", "外部シャワー"],
+      safety: ["常時バックモニター", "バックカメラ", "ETC"],
+      power: [
+        "軽油ボイラー",
+        "400Aリチウムサブバッテリー",
+        "インバーター1500W",
+        "外部AC入力",
+        "走行充電システム",
       ],
     },
     recommendedUse: {
-      idealGroupSize: "ビジネスグループまたは家族（3〜5名）",
+      idealGroupSize: "6名まで。2017年3月12日以降に普通免許を取得した方は、準中型免許が必要",
       recommendedTrips: [
         "ワーケーション",
         "ラグジュアリーな休暇",
