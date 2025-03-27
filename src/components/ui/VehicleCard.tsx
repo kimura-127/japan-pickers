@@ -10,7 +10,7 @@ interface VehicleCardProps {
   name: string;
   capacity: number;
   features: string[];
-  pricePerNight: number;
+  pricePerNight: string;
   onClick?: () => void;
   onBookingClick?: () => void;
 }
@@ -72,31 +72,30 @@ const VehicleCard = ({
           })}
         </div>
 
-        <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center justify-between my-4">
           <div>
             <p className="text-sm text-jp-silver">1泊あたり</p>
             <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}</p>
           </div>
+        </div>
+        <div className="flex justify-center gap-6">
+          <PremiumButton
+            variant="black"
+            size="sm"
+            onClick={onBookingClick}
+            className="transform transition-transform duration-300 group-hover:scale-105"
+          >
+            予約する
+          </PremiumButton>
 
-          <div className="flex space-x-2">
-            <PremiumButton
-              variant="black"
-              size="sm"
-              onClick={onBookingClick}
-              className="transform transition-transform duration-300 group-hover:scale-105"
-            >
-              予約する
-            </PremiumButton>
-
-            <PremiumButton
-              variant="black"
-              size="sm"
-              onClick={onClick}
-              className="transform transition-transform duration-300 group-hover:scale-105"
-            >
-              詳細を見る
-            </PremiumButton>
-          </div>
+          <PremiumButton
+            variant="black"
+            size="sm"
+            onClick={onClick}
+            className="transform transition-transform duration-300 group-hover:scale-105"
+          >
+            詳細を見る
+          </PremiumButton>
         </div>
       </div>
     </div>
