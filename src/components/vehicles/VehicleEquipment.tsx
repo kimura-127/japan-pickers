@@ -57,7 +57,7 @@ const VehicleEquipment = ({ equipment }: VehicleEquipmentProps) => {
               </div>
 
               <ul className="space-y-3">
-                {items.map((item, itemIndex) => {
+                {items?.map((item, itemIndex) => {
                   const key = `${category.key}-${itemIndex}`;
 
                   return (
