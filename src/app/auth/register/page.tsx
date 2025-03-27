@@ -3,11 +3,8 @@
 import AuthForm from "@/components/auth/AuthForm";
 import { createClient_ as createSupabaseClient } from "@/lib/supabase";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-  const router = useRouter();
-
   const handleRegister = async ({
     email,
     password,

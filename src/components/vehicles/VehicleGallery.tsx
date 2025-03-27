@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import type { VehicleImage } from "@/lib/vehicles";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Maximize2, Play, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
