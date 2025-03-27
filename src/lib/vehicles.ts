@@ -51,7 +51,7 @@ export interface Vehicle {
   capacity: number;
   features: string[];
   detailedFeatures: VehicleFeature[];
-  pricePerNight: string;
+  pricePerNight: number;
   rating: number;
   reviewCount: number;
   specs: VehicleSpec;
@@ -241,7 +241,7 @@ export const vehicles: Vehicle[] = [
           "屋根に設置されたソーラーパネルで電力を自給自足。環境に優しく、電源のない場所でも安心です。",
       },
     ],
-    pricePerNight: "35,200~",
+    pricePerNight: 35200,
     rating: 4.8,
     reviewCount: 24,
     specs: {
@@ -366,7 +366,7 @@ export const vehicles: Vehicle[] = [
         description: "効率的なレイアウトで実現した、ゆったりとくつろげるリビングスペース。",
       },
     ],
-    pricePerNight: "45,000~",
+    pricePerNight: 15000,
     rating: 4.9,
     reviewCount: 32,
     specs: {
@@ -496,7 +496,7 @@ export const vehicles: Vehicle[] = [
         description: "温度管理された専用ワインセラーで、旅先でも最高の一杯を。",
       },
     ],
-    pricePerNight: "40,000~",
+    pricePerNight: 35200,
     rating: 4.7,
     reviewCount: 18,
     specs: {

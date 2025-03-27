@@ -10,7 +10,7 @@ interface VehicleCardProps {
   name: string;
   capacity: number;
   features: string[];
-  pricePerNight: string;
+  pricePerNight: number;
   onClick?: () => void;
   onBookingClick?: () => void;
 }
@@ -75,7 +75,7 @@ const VehicleCard = ({
         <div className="flex items-center justify-between my-4">
           <div>
             <p className="text-sm text-jp-silver">1泊あたり</p>
-            <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}</p>
+            <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}~</p>
           </div>
         </div>
         <div className="flex justify-center gap-6">
