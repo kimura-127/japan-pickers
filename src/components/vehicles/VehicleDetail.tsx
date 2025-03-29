@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Maximize, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+// useState は将来的にタブ機能を実装する際に使用予定
+// import { useState } from "react";
 import VehicleBooking from "./VehicleBooking";
 import VehicleEquipment from "./VehicleEquipment";
 import VehicleGallery from "./VehicleGallery";
