@@ -3,6 +3,8 @@
 import PremiumButton from "@/components/ui/PremiumButton";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { calculateTotalPrice, getDayType, getPriceBreakdown } from "@/lib/pricing";
+import type { DayType, VehicleType } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
 import { ja } from "date-fns/locale";
 import { Calendar as CalendarIcon, Check, ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -22,6 +24,9 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   // const [children, setChildren] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [hasUnavailableDates, setHasUnavailableDates] = useState<boolean>(false);
+  const [priceBreakdown, setPriceBreakdown] = useState<ReturnType<typeof getPriceBreakdown> | null>(
+    null,
+  );
 
   const options = [
     { id: "wifi", name: "Wi-Fiルーター", price: 1000, unit: "日" },
@@ -44,18 +49,24 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // 終了日も含める
   };
 
+  // 料金計算ロジックを新しいものに置き換え
   const calculateTotal = () => {
-    const days = getTotalDays();
-    if (days === 0) return 0;
+    if (!dateRange?.from || !dateRange?.to) return { total: 0, breakdown: null };
 
-    let total = vehicle.pricePerNight * days;
+    // 基本料金を計算
+    const basePrice = calculateTotalPrice(dateRange.from, dateRange.to, vehicle.vehicleType);
+
+    // 料金内訳を計算
+    const breakdown = getPriceBreakdown(dateRange.from, dateRange.to, vehicle.vehicleType);
+
+    let total = basePrice;
 
     // オプション料金を追加
     for (const optionId of selectedOptions) {
       const option = options.find((opt) => opt.id === optionId);
       if (option) {
         if (option.unit.includes("日")) {
-          total += option.price * days;
+          total += option.price * getTotalDays();
         } else if (option.unit.includes("泊")) {
           total += option.price;
         } else {
@@ -64,7 +75,17 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
       }
     }
 
-    return total;
+    return { total, breakdown };
+  };
+
+  // 日付タイプの日本語表示
+  const getDayTypeLabel = (dayType: DayType): string => {
+    const labels = {
+      weekday: "平日",
+      weekend: "週末・祝日",
+      highSeason: "ハイシーズン",
+    };
+    return labels[dayType];
   };
 
   const formatDate = (date: Date | null) => {
@@ -398,20 +419,39 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
 
           <div className="border-t border-jp-darkgray/50 pt-4 mb-6">
             <div className="flex justify-between items-center mb-2">
-              <p className="text-jp-silver">基本料金</p>
+              <p className="text-jp-silver">基本料金（最初の24時間）</p>
               <p className="text-white">
-                {dateRange?.from && dateRange?.to
-                  ? `¥${(vehicle.pricePerNight * getTotalDays()).toLocaleString()}`
-                  : "-"}
+                {priceBreakdown ? `¥${priceBreakdown.initial24h.price.toLocaleString()}` : "-"}
+                {priceBreakdown && (
+                  <span className="text-xs ml-1 text-jp-silver">
+                    （{getDayTypeLabel(priceBreakdown.initial24h.dayType)}）
+                  </span>
+                )}
               </p>
             </div>
+
+            {priceBreakdown && priceBreakdown.additionalDays.length > 0 && (
+              <div className="flex justify-between items-start mb-2">
+                <p className="text-jp-silver">追加日数</p>
+                <div className="text-right">
+                  {priceBreakdown.additionalDays.map((day) => (
+                    <p key={day.date.toISOString()} className="text-white text-sm mb-1">
+                      {formatDate(day.date)}: ¥{day.price.toLocaleString()}
+                      <span className="text-xs ml-1 text-jp-silver">
+                        （{getDayTypeLabel(day.dayType)}）
+                      </span>
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {selectedOptions.length > 0 && (
               <div className="flex justify-between items-center mb-2">
                 <p className="text-jp-silver">オプション料金</p>
                 <p className="text-white">
                   {dateRange?.from && dateRange?.to
-                    ? `¥${(calculateTotal() - vehicle.pricePerNight * getTotalDays()).toLocaleString()}`
+                    ? `¥${(calculateTotal().total - (priceBreakdown?.total || 0)).toLocaleString()}`
                     : "-"}
                 </p>
               </div>
@@ -420,7 +460,9 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
             <div className="flex justify-between items-center text-lg font-medium mt-4">
               <p className="text-white">合計</p>
               <p className="text-jp-gold">
-                {dateRange?.from && dateRange?.to ? `¥${calculateTotal().toLocaleString()}` : "-"}
+                {dateRange?.from && dateRange?.to
+                  ? `¥${calculateTotal().total.toLocaleString()}`
+                  : "-"}
               </p>
             </div>
           </div>

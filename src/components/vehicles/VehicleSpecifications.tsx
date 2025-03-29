@@ -1,16 +1,17 @@
 "use client";
 
-import type { VehicleFeature, VehicleSpec } from "@/lib/vehicles";
+import type { Vehicle, VehicleFeature, VehicleSpec } from "@/lib/vehicles";
 import { motion } from "framer-motion";
 import { Bed, Calendar, Car, Fuel, Gauge, Info, Ruler, Users } from "lucide-react";
 import type { JSX } from "react";
 
 interface VehicleSpecificationsProps {
+  vehicle: Vehicle;
   features: VehicleFeature[];
   specs: VehicleSpec;
 }
 
-const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) => {
+const VehicleSpecifications = ({ vehicle, features, specs }: VehicleSpecificationsProps) => {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -39,6 +40,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-chef-hat"
         >
+          <title>シェフハット</title>
           <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
           <line x1="6" x2="18" y1="17" y2="17" />
         </svg>
@@ -56,6 +58,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-shower-head"
         >
+          <title>シャワーヘッド</title>
           <path d="m4 4 2.5 2.5" />
           <path d="M13.5 6.5a4.95 4.95 0 0 0-7 7" />
           <path d="M15 5 5 15" />
@@ -81,6 +84,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-thermometer"
         >
+          <title>温度計</title>
           <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
         </svg>
       ),
@@ -97,6 +101,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-sun"
         >
+          <title>太陽</title>
           <circle cx="12" cy="12" r="4" />
           <path d="M12 2v2" />
           <path d="M12 20v2" />
@@ -121,6 +126,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-bed"
         >
+          <title>ベッド</title>
           <path d="M2 4v16" />
           <path d="M2 8h18a2 2 0 0 1 2 2v10" />
           <path d="M2 17h20" />
@@ -140,6 +146,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-music"
         >
+          <title>音楽</title>
           <path d="M9 18V5l12-2v13" />
           <circle cx="6" cy="18" r="3" />
           <circle cx="18" cy="16" r="3" />
@@ -158,6 +165,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-speaker"
         >
+          <title>スピーカー</title>
           <rect width="16" height="20" x="4" y="2" rx="2" />
           <circle cx="12" cy="14" r="4" />
           <circle cx="12" cy="7" r="1" />
@@ -176,6 +184,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-maximize"
         >
+          <title>最大化</title>
           <path d="M8 3H5a2 2 0 0 0-2 2v3" />
           <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
           <path d="M3 16v3a2 2 0 0 0 2 2h3" />
@@ -195,6 +204,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-sofa"
         >
+          <title>ソファ</title>
           <path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3" />
           <path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z" />
         </svg>
@@ -212,6 +222,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-laptop"
         >
+          <title>ラップトップ</title>
           <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" />
         </svg>
       ),
@@ -228,6 +239,7 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
           strokeLinejoin="round"
           className="lucide lucide-wine"
         >
+          <title>ワイン</title>
           <path d="M8 22h8" />
           <path d="M7 10h10" />
           <path d="M12 15v7" />
@@ -249,12 +261,12 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
         {features.map((feature, index) => (
           <motion.div
-            key={index}
+            key={`feature-${feature.name}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={fadeIn}
             custom={index}
+            variants={fadeIn}
             className="bg-jp-darkgray/30 rounded-xl p-6 border border-jp-darkgray/50"
           >
             <div className="flex items-start gap-4">

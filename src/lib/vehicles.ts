@@ -42,6 +42,9 @@ export interface RecommendedUse {
   images: VehicleImage[];
 }
 
+// 車両タイプの定義
+export type VehicleType = "vega" | "landHome" | "camroad";
+
 export interface Vehicle {
   id: number;
   name: string;
@@ -61,6 +64,7 @@ export interface Vehicle {
   recommendedUse: RecommendedUse;
   videoTour?: string;
   floorPlan?: string;
+  vehicleType: VehicleType; // 車両タイプを追加
 }
 
 // 車両データ
@@ -335,6 +339,7 @@ export const vehicles: Vehicle[] = [
     },
     videoTour: "https://example.com/videos/land-home-grande-tour.mp4",
     floorPlan: "/images/floor-plans/land-home-grande.svg",
+    vehicleType: "landHome", // 車両タイプを追加
   },
   {
     id: 2,
@@ -444,6 +449,7 @@ export const vehicles: Vehicle[] = [
       ],
     },
     floorPlan: "/images/floor-plans/camroad-zil.svg",
+    vehicleType: "camroad", // 車両タイプを追加
   },
   {
     id: 3,
@@ -591,6 +597,7 @@ export const vehicles: Vehicle[] = [
     },
     videoTour: "https://example.com/videos/coaster-vega-tour.mp4",
     floorPlan: "/images/floor-plans/coaster-vega.svg",
+    vehicleType: "vega", // 車両タイプを追加
   },
 ];
 
