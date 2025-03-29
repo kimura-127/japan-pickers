@@ -17,8 +17,8 @@ interface VehicleDetailProps {
 }
 
 const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
-  const [activeTab, setActiveTab] = useState<string>("specs");
   // 現在は使用していませんが、将来的に使用する予定の状態
+  // const [activeTab, setActiveTab] = useState<string>("specs");
   // const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -140,19 +140,11 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       {/* タブコンテンツ */}
       <section className="py-16 bg-jp-black">
         <div className="premium-container">
-          {activeTab === "specs" && (
-            <VehicleSpecifications
-              vehicle={vehicle}
-              features={vehicle.detailedFeatures}
-              specs={vehicle.specs}
-            />
-          )}
+          <VehicleSpecifications features={vehicle.detailedFeatures} specs={vehicle.specs} />
 
-          {activeTab === "equipment" && <VehicleEquipment equipment={vehicle.equipment} />}
+          <VehicleEquipment equipment={vehicle.equipment} />
 
-          {activeTab === "recommended" && (
-            <VehicleRecommendedUse recommendedUse={vehicle.recommendedUse} />
-          )}
+          <VehicleRecommendedUse recommendedUse={vehicle.recommendedUse} />
         </div>
       </section>
 

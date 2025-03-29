@@ -3,8 +3,8 @@
 import PremiumButton from "@/components/ui/PremiumButton";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { calculateTotalPrice, getDayType, getPriceBreakdown } from "@/lib/pricing";
-import type { DayType, VehicleType } from "@/lib/pricing";
+import { calculateTotalPrice, getPriceBreakdown } from "@/lib/pricing";
+import type { DayType } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
 import { ja } from "date-fns/locale";
 import { Calendar as CalendarIcon, Check, ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -24,9 +24,7 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   // const [children, setChildren] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [hasUnavailableDates, setHasUnavailableDates] = useState<boolean>(false);
-  const [priceBreakdown, setPriceBreakdown] = useState<ReturnType<typeof getPriceBreakdown> | null>(
-    null,
-  );
+  const [priceBreakdown] = useState<ReturnType<typeof getPriceBreakdown> | null>(null);
 
   const options = [
     { id: "wifi", name: "Wi-Fiルーター", price: 1000, unit: "日" },

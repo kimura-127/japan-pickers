@@ -6,12 +6,11 @@ import { Bed, Calendar, Car, Fuel, Gauge, Info, Ruler, Users } from "lucide-reac
 import type { JSX } from "react";
 
 interface VehicleSpecificationsProps {
-  vehicle: Vehicle;
   features: VehicleFeature[];
   specs: VehicleSpec;
 }
 
-const VehicleSpecifications = ({ vehicle, features, specs }: VehicleSpecificationsProps) => {
+const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) => {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
