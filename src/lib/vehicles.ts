@@ -259,7 +259,7 @@ export const vehicles: Vehicle[] = [
           "オートマ車、バックカメラ、ETCを装備し、長距離の運転も快適に。2017年3月12日以降に普通免許を取得した方は準中型免許が必要です。",
       },
     ],
-    pricePerNight: 35200,
+    pricePerNight: 45200,
     rating: 4.8,
     reviewCount: 24,
     specs: {
