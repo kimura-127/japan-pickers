@@ -65,7 +65,6 @@ const VehicleSection = () => {
             あなたの冒険をサポートする特別な一台をお選びください。
           </p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vehicles.map((vehicle, index) => {
             const key = `vehicle-${vehicle.id}`;

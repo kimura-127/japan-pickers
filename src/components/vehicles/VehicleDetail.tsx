@@ -99,10 +99,6 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                   {vehicle.specs.length} × {vehicle.specs.width} × {vehicle.specs.height}
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-jp-silver">
-                <Calendar className="gold-icon w-5 h-5" />
-                <span>{vehicle.specs.year}年式</span>
-              </div>
             </motion.div>
 
             <motion.div
@@ -115,7 +111,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               <div>
                 <p className="text-jp-silver text-sm">1泊あたり</p>
                 <p className="text-3xl font-bold text-jp-gold">
-                  ¥{vehicle.pricePerNight.toLocaleString()}
+                  ¥{vehicle.pricePerNight.toLocaleString()}~
                 </p>
               </div>
               <a

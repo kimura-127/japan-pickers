@@ -3,20 +3,22 @@
 import PremiumButton from "@/components/ui/PremiumButton";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { OptionImageModal } from "@/components/ui/option-image-modal";
 import { calculateTotalPrice, getPriceBreakdown } from "@/lib/pricing";
 import type { DayType } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
 import { ja } from "date-fns/locale";
-import { Calendar as CalendarIcon, Check, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Calendar as CalendarIcon, Check, ChevronLeft, ChevronRight, Image, X } from "lucide-react";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 
 interface VehicleBookingProps {
   vehicle: Vehicle;
+  onShowImages?: (optionName: string) => void;
 }
 
-const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
+const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   // 現在は使用していませんが、将来的に使用する予定の状態
@@ -25,6 +27,8 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [hasUnavailableDates, setHasUnavailableDates] = useState<boolean>(false);
   const [priceBreakdown] = useState<ReturnType<typeof getPriceBreakdown> | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentOption, setCurrentOption] = useState<string>("");
 
   const options = [
     { id: "wifi", name: "Wi-Fiルーター", price: 1000, unit: "日" },
@@ -265,6 +269,12 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
     setDateRange(range);
   };
 
+  const handleShowImages = (optionName: string) => {
+    if (onShowImages) {
+      onShowImages(optionName);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2">
@@ -339,35 +349,49 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {options.map((option) => (
-              <Button
-                key={option.id}
-                type="button"
-                className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 py-6 border transition-colors ${
-                  selectedOptions.includes(option.id)
-                    ? "border-jp-gold"
-                    : "border-jp-darkgray/50 hover:border-jp-gold/50"
-                }`}
-                onClick={() => toggleOption(option.id)}
-                aria-pressed={selectedOptions.includes(option.id)}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-white">{option.name}</p>
-                    <p className="text-sm text-jp-silver">
-                      ¥{option.price.toLocaleString()}/{option.unit}
-                    </p>
+              <div key={option.id} className="relative">
+                <Button
+                  type="button"
+                  className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 py-6 border transition-colors ${
+                    selectedOptions.includes(option.id)
+                      ? "border-jp-gold"
+                      : "border-jp-darkgray/50 hover:border-jp-gold/50"
+                  }`}
+                  onClick={() => toggleOption(option.id)}
+                  aria-pressed={selectedOptions.includes(option.id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-white">{option.name}</p>
+                      <p className="text-sm text-jp-silver">
+                        ¥{option.price.toLocaleString()}/{option.unit}
+                      </p>
+                    </div>
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                        selectedOptions.includes(option.id)
+                          ? "bg-jp-gold text-jp-black"
+                          : "border border-jp-silver text-jp-silver"
+                      }`}
+                    >
+                      {selectedOptions.includes(option.id) && <Check className="w-4 h-4" />}
+                    </div>
                   </div>
-                  <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                      selectedOptions.includes(option.id)
-                        ? "bg-jp-gold text-jp-black"
-                        : "border border-jp-silver text-jp-silver"
-                    }`}
-                  >
-                    {selectedOptions.includes(option.id) && <Check className="w-4 h-4" />}
-                  </div>
-                </div>
-              </Button>
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute bottom-2 right-2 text-jp-silver hover:text-white hover:bg-jp-darkgray/50"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShowImages(option.name);
+                  }}
+                >
+                  <Image className="w-4 h-4 mr-1" />
+                  <span className="text-xs">写真で確認する</span>
+                </Button>
+              </div>
             ))}
           </div>
         </div>
@@ -498,4 +522,24 @@ const VehicleBooking = ({ vehicle }: VehicleBookingProps) => {
   );
 };
 
-export default VehicleBooking;
+// オプション画像モーダルを追加
+export const VehicleBookingWithModals = ({
+  vehicle,
+}: Omit<VehicleBookingProps, "onShowImages">) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentOption, setCurrentOption] = useState("");
+
+  const handleShowImages = (optionName: string) => {
+    setCurrentOption(optionName);
+    setModalOpen(true);
+  };
+
+  return (
+    <>
+      <VehicleBooking vehicle={vehicle} onShowImages={handleShowImages} />
+      <OptionImageModal open={modalOpen} onOpenChange={setModalOpen} optionName={currentOption} />
+    </>
+  );
+};
+
+export default VehicleBookingWithModals;
