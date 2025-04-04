@@ -213,7 +213,7 @@ const BookingSection = () => {
           <span className="inline-block px-4 py-1 rounded-full border border-jp-gold/30 bg-jp-darkgray/50 backdrop-blur-sm text-jp-gold text-sm mb-4">
             ご予約
           </span>
-          <h2 className="section-title">シンプルで洗練された予約システム</h2>
+          <h2 className="section-title">シンプルな予約システム</h2>
           <p className="text-jp-silver max-w-2xl mx-auto mt-4">
             煩わしい手続きなく、スムーズにご予約いただけます。
             専任コンシェルジュが、あなたの特別な旅をサポートします。

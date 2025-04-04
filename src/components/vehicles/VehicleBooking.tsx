@@ -4,6 +4,13 @@ import PremiumButton from "@/components/ui/PremiumButton";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { OptionImageModal } from "@/components/ui/option-image-modal";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { calculateTotalPrice, getPriceBreakdown } from "@/lib/pricing";
 import type { DayType } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
@@ -34,6 +41,8 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [hasUnavailableDates, setHasUnavailableDates] = useState<boolean>(false);
   const [priceBreakdown] = useState<ReturnType<typeof getPriceBreakdown> | null>(null);
+  const [departureTime, setDepartureTime] = useState<string>(""); // 出発時間用の名前を変更
+  const [arrivalTime, setArrivalTime] = useState<string>(""); // 到着時間を追加
 
   const options = [
     { id: "wifi", name: "Wi-Fiルーター", price: 2000 },
@@ -57,7 +66,8 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
 
   // 料金計算ロジックを新しいものに置き換え
   const calculateTotal = () => {
-    if (!dateRange?.from || !dateRange?.to) return { total: 0, breakdown: null };
+    if (!dateRange?.from || !dateRange?.to)
+      return { total: 0, breakdown: null, timeFee: 0, extraHours: 0 };
 
     // 基本料金を計算
     const basePrice = calculateTotalPrice(dateRange.from, dateRange.to, vehicle.vehicleType);
@@ -66,6 +76,8 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
     const breakdown = getPriceBreakdown(dateRange.from, dateRange.to, vehicle.vehicleType);
 
     let total = basePrice;
+    let timeFee = 0;
+    let extraHours = 0;
 
     // オプション料金を追加
     for (const optionId of selectedOptions) {
@@ -75,7 +87,76 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
       }
     }
 
-    return { total, breakdown };
+    // 時間帯が選択されている場合、時間数に基づいて追加料金を計算
+    if (departureTime && arrivalTime && dateRange.from && dateRange.to) {
+      // 出発時間と到着時間を解析
+      const depHour = Number.parseInt(departureTime.split(":")[0]);
+      const arrHour = Number.parseInt(arrivalTime.split(":")[0]);
+
+      // 出発時間と到着時間が同じ場合は追加時間なし
+      if (depHour === arrHour) {
+        extraHours = 0;
+        timeFee = 0;
+      } else {
+        // 日数（切り上げ）を計算
+        const diffDays = getTotalDays() - 1; // 開始日と終了日を含むので1を引く
+
+        // 合計時間数を計算（日数 * 24時間 + 時間差）
+        let totalHours = diffDays * 24;
+
+        // 時間差を計算（arrHour < depHourの場合は一周して24時間後）
+        if (arrHour >= depHour) {
+          totalHours += arrHour - depHour;
+        } else {
+          totalHours += arrHour + 24 - depHour;
+        }
+
+        // 24時間を超える時間数
+        extraHours = Math.max(0, totalHours - 24);
+
+        // 車種と日付タイプに応じた1日の最大料金を取得
+        let dailyMaxFee = 0;
+        if (breakdown && breakdown.additionalDays.length > 0) {
+          const lastDay = breakdown.additionalDays[breakdown.additionalDays.length - 1];
+          const dayType = lastDay.dayType;
+
+          if (vehicle.vehicleType === "camroad") {
+            // カムロードZiLの最大料金
+            if (dayType === "weekday") {
+              dailyMaxFee = 15000; // 平日
+            } else if (dayType === "weekend") {
+              dailyMaxFee = 21250; // 週末
+            } else if (dayType === "highSeason") {
+              dailyMaxFee = 21250; // ハイシーズン（週末と同じと仮定）
+            }
+          } else {
+            // ベガとランドホームグランデの最大料金
+            if (dayType === "weekday") {
+              dailyMaxFee = 35200; // 平日
+            } else if (dayType === "weekend") {
+              dailyMaxFee = 42075; // 週末
+            } else if (dayType === "highSeason") {
+              dailyMaxFee = 49300; // ハイシーズン
+            }
+          }
+        } else {
+          // 日付タイプが不明の場合はデフォルト値を使用
+          dailyMaxFee = vehicle.vehicleType === "camroad" ? 15000 : 35200;
+        }
+
+        // 1時間あたりの料金（車種に応じて）
+        const hourlyRate = vehicle.vehicleType === "camroad" ? 3800 : 6800;
+
+        // 追加料金を計算（時間料金と最大料金の小さい方）
+        const calculatedTimeFee = hourlyRate * extraHours;
+        timeFee = Math.min(calculatedTimeFee, dailyMaxFee);
+      }
+
+      // 追加料金を合計に加算
+      total += timeFee;
+    }
+
+    return { total, breakdown, timeFee, extraHours };
   };
 
   // 日付タイプの日本語表示
@@ -265,6 +346,15 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
 
     // 日付範囲を設定（予約済み日付があっても選択は許可）
     setDateRange(range);
+  };
+
+  // 時間選択時のハンドラー
+  const handleDepartureTimeChange = (value: string) => {
+    setDepartureTime(value);
+  };
+
+  const handleArrivalTimeChange = (value: string) => {
+    setArrivalTime(value);
   };
 
   const handleShowImages = (optionName: string) => {
@@ -469,9 +559,23 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                 <p className="text-jp-silver">オプション料金</p>
                 <p className="text-white">
                   {dateRange?.from && dateRange?.to
-                    ? `¥${(calculateTotal().total - (priceBreakdown?.total || 0)).toLocaleString()}`
+                    ? `¥${(
+                        calculateTotal().total -
+                          (calculateTotal().breakdown?.total || 0) -
+                          calculateTotal().timeFee
+                      ).toLocaleString()}` // 時間料金を除いたオプション料金
                     : "-"}
                 </p>
+              </div>
+            )}
+
+            {/* 時間追加料金の表示 */}
+            {calculateTotal().timeFee > 0 && (
+              <div className="flex justify-between items-center mb-2">
+                <p className="text-jp-silver">
+                  追加時間料金（{calculateTotal().extraHours}時間分）
+                </p>
+                <p className="text-white">¥{calculateTotal().timeFee.toLocaleString()}</p>
               </div>
             )}
 
@@ -484,6 +588,86 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
               </p>
             </div>
           </div>
+
+          {/* 時間帯選択UI */}
+          <div className="mb-4">
+            <label
+              htmlFor="departure-time-select"
+              className="block text-sm font-medium text-jp-silver mb-2"
+            >
+              出発時間を選択
+            </label>
+            <Select
+              value={departureTime}
+              onValueChange={handleDepartureTimeChange}
+              disabled={!dateRange?.from || !dateRange?.to} // 日付が選択されていない場合は無効
+            >
+              <SelectTrigger
+                id="departure-time-select"
+                className="w-full bg-jp-black-light border-jp-gray text-white"
+              >
+                <SelectValue placeholder="出発時間を選択..." />
+              </SelectTrigger>
+              <SelectContent className="bg-jp-black border-jp-gray text-white">
+                {Array.from({ length: 10 }, (_, i) => i + 10).map((hour) => (
+                  <SelectItem key={hour} value={`${hour}:00`} className="hover:bg-jp-gray">
+                    {`${hour}:00`}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="my-4">
+            <label
+              htmlFor="arrival-time-select"
+              className="block text-sm font-medium text-jp-silver mb-2"
+            >
+              到着時間を選択
+            </label>
+            <Select
+              value={arrivalTime}
+              onValueChange={handleArrivalTimeChange}
+              disabled={!dateRange?.from || !dateRange?.to || !departureTime} // 日付と出発時間が選択されていない場合は無効
+            >
+              <SelectTrigger
+                id="arrival-time-select"
+                className="w-full bg-jp-black-light border-jp-gray text-white"
+              >
+                <SelectValue placeholder="到着時間を選択..." />
+              </SelectTrigger>
+              <SelectContent className="bg-jp-black border-jp-gray text-white">
+                {Array.from({ length: 10 }, (_, i) => i + 10).map((hour) => (
+                  <SelectItem key={hour} value={`${hour}:00`} className="hover:bg-jp-gray">
+                    {`${hour}:00`}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {!dateRange?.from || !dateRange?.to ? (
+              <p className="text-xs text-jp-silver mt-1">日付を選択すると時間を指定できます。</p>
+            ) : !departureTime ? (
+              <p className="text-xs text-jp-silver mt-1">出発時間を先に選択してください。</p>
+            ) : null}
+          </div>
+
+          {departureTime && arrivalTime && (
+            <div className="mb-4 p-3 bg-jp-black-light rounded-md border border-jp-gray">
+              <p className="text-sm text-jp-silver">
+                レンタル時間:{" "}
+                <span className="text-white font-medium">
+                  {calculateTotal().extraHours > 0
+                    ? `24時間 + ${calculateTotal().extraHours}時間`
+                    : "24時間以内"}
+                </span>
+              </p>
+              <p className="text-xs text-jp-silver mt-1">
+                {vehicle.vehicleType === "camroad"
+                  ? "※追加時間は1時間あたり3,800円で、最大で1日分の料金までとなります"
+                  : "※追加時間は1時間あたり6,800円で、最大で1日分の料金までとなります"}
+              </p>
+            </div>
+          )}
 
           <PremiumButton
             withShimmer
