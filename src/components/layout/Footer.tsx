@@ -102,14 +102,14 @@ const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </Link>
               <Link
-                href="#"
+                href="https://www.instagram.com/japan.pickers"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </Link>
               <Link
-                href="#"
+                href="https://x.com/JapnPickers"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Twitter"
               >

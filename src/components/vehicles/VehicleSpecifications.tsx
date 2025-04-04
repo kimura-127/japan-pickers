@@ -314,16 +314,6 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
 
           <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
             <div className="flex items-center gap-3 mb-2">
-              <Calendar className="gold-icon w-5 h-5" />
-              <h4 className="text-white">年式・走行距離</h4>
-            </div>
-            <p className="text-jp-silver">
-              {specs.year}年式 / {specs.mileage}
-            </p>
-          </div>
-
-          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
-            <div className="flex items-center gap-3 mb-2">
               <Car className="gold-icon w-5 h-5" />
               <h4 className="text-white">駆動方式</h4>
             </div>

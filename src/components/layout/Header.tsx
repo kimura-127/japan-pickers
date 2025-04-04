@@ -130,7 +130,7 @@ const Header = () => {
             className="flex items-center text-jp-gold hover:text-jp-gold-light transition-colors duration-300"
           >
             <PhoneCall className="h-4 w-4 mr-2" />
-            <span className="text-sm">0120-000-000</span>
+            <span className="text-sm">027-386-9948</span>
           </a>
         </div>
 

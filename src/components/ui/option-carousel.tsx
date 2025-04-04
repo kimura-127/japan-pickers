@@ -1,11 +1,9 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { useEffect, useId, useRef, useState } from "react";
-import { Button } from "./button";
 
 interface SlideData {
   title: string;
-  button: string;
   src: string;
   id: string;
 }
@@ -70,7 +68,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     }
   };
 
-  const { src, button, title } = slide;
+  const { src, title } = slide;
 
   return (
     <div className="[perspective:1200px] [transform-style:preserve-3d]">

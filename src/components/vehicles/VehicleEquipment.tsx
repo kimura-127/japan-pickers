@@ -72,39 +72,6 @@ const VehicleEquipment = ({ equipment }: VehicleEquipmentProps) => {
           );
         })}
       </div>
-
-      <div className="mt-12 p-6 bg-jp-gold/10 border border-jp-gold/30 rounded-xl">
-        <h3 className="text-xl font-medium text-white mb-4">オプション装備</h3>
-        <p className="text-jp-silver mb-4">
-          以下の装備は追加料金でご利用いただけます。予約時にお申し付けください。
-        </p>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <li className="flex items-center gap-2 text-jp-silver">
-            <Check className="gold-icon w-5 h-5" />
-            <span>Wi-Fiルーター（1日1,000円）</span>
-          </li>
-          <li className="flex items-center gap-2 text-jp-silver">
-            <Check className="gold-icon w-5 h-5" />
-            <span>BBQグリルセット（1泊3,000円）</span>
-          </li>
-          <li className="flex items-center gap-2 text-jp-silver">
-            <Check className="gold-icon w-5 h-5" />
-            <span>アウトドアチェア（1脚500円/日）</span>
-          </li>
-          <li className="flex items-center gap-2 text-jp-silver">
-            <Check className="gold-icon w-5 h-5" />
-            <span>追加寝具セット（1セット2,000円）</span>
-          </li>
-          <li className="flex items-center gap-2 text-jp-silver">
-            <Check className="gold-icon w-5 h-5" />
-            <span>電動自転車（1台2,500円/日）</span>
-          </li>
-          <li className="flex items-center gap-2 text-jp-silver">
-            <Check className="gold-icon w-5 h-5" />
-            <span>スキーラック（1セット1,500円）</span>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };

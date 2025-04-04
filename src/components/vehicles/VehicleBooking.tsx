@@ -8,7 +8,14 @@ import { calculateTotalPrice, getPriceBreakdown } from "@/lib/pricing";
 import type { DayType } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
 import { ja } from "date-fns/locale";
-import { Calendar as CalendarIcon, Check, ChevronLeft, ChevronRight, Image, X } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  ImageIcon,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { toast } from "sonner";
@@ -27,16 +34,13 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [hasUnavailableDates, setHasUnavailableDates] = useState<boolean>(false);
   const [priceBreakdown] = useState<ReturnType<typeof getPriceBreakdown> | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentOption, setCurrentOption] = useState<string>("");
 
   const options = [
-    { id: "wifi", name: "Wi-Fiルーター", price: 1000, unit: "日" },
-    { id: "bbq", name: "BBQグリルセット", price: 3000, unit: "泊" },
-    { id: "chair", name: "アウトドアチェア", price: 500, unit: "日/脚" },
-    { id: "bedding", name: "追加寝具セット", price: 2000, unit: "セット" },
-    { id: "bike", name: "電動自転車", price: 2500, unit: "日/台" },
-    { id: "ski", name: "スキーラック", price: 1500, unit: "セット" },
+    { id: "wifi", name: "Wi-Fiルーター", price: 2000 },
+    { id: "bbq", name: "BBQグリルセット", price: 3000 },
+    { id: "chair", name: "アウトドアチェア", price: 1000 },
+    { id: "bedding", name: "追加寝具セット", price: 2000 },
+    { id: "bike", name: "小型トライク", price: 7700 },
   ];
 
   const toggleOption = (optionId: string) => {
@@ -67,13 +71,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
     for (const optionId of selectedOptions) {
       const option = options.find((opt) => opt.id === optionId);
       if (option) {
-        if (option.unit.includes("日")) {
-          total += option.price * getTotalDays();
-        } else if (option.unit.includes("泊")) {
-          total += option.price;
-        } else {
-          total += option.price;
-        }
+        total += option.price;
       }
     }
 
@@ -363,9 +361,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-white">{option.name}</p>
-                      <p className="text-sm text-jp-silver">
-                        ¥{option.price.toLocaleString()}/{option.unit}
-                      </p>
+                      <p className="text-sm text-jp-silver">¥{option.price.toLocaleString()}</p>
                     </div>
                     <div
                       className={`w-6 h-6 rounded-full flex items-center justify-center ${
@@ -388,7 +384,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                     handleShowImages(option.name);
                   }}
                 >
-                  <Image className="w-4 h-4 mr-1" />
+                  <ImageIcon className="w-4 h-4 mr-1" />
                   <span className="text-xs">写真で確認する</span>
                 </Button>
               </div>
@@ -429,7 +425,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                       <li key={optionId} className="text-white">
                         {option.name}
                         <span className="text-jp-silver ml-2 text-sm">
-                          （¥{option.price.toLocaleString()}/{option.unit}）
+                          （¥{option.price.toLocaleString()}）
                         </span>
                       </li>
                     ) : null;
@@ -522,22 +518,19 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
   );
 };
 
-// オプション画像モーダルを追加
 export const VehicleBookingWithModals = ({
   vehicle,
 }: Omit<VehicleBookingProps, "onShowImages">) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentOption, setCurrentOption] = useState("");
-
-  const handleShowImages = (optionName: string) => {
-    setCurrentOption(optionName);
-    setModalOpen(true);
-  };
-
   return (
     <>
-      <VehicleBooking vehicle={vehicle} onShowImages={handleShowImages} />
-      <OptionImageModal open={modalOpen} onOpenChange={setModalOpen} optionName={currentOption} />
+      <VehicleBooking
+        vehicle={vehicle}
+        onShowImages={(optionName) => {
+          // 将来的なオプション画像表示機能のためのコールバック
+          console.log("画像表示:", optionName);
+        }}
+      />
+      <OptionImageModal open={false} onOpenChange={() => {}} optionName="" />
     </>
   );
 };

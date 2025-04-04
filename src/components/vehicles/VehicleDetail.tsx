@@ -2,7 +2,7 @@
 
 import type { Vehicle } from "@/lib/vehicles";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Maximize, Users } from "lucide-react";
+import { ArrowLeft, Maximize, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -11,7 +11,6 @@ import { useEffect } from "react";
 import VehicleBooking from "./VehicleBooking";
 import VehicleEquipment from "./VehicleEquipment";
 import VehicleGallery from "./VehicleGallery";
-import VehicleRecommendedUse from "./VehicleRecommendedUse";
 import VehicleSpecifications from "./VehicleSpecifications";
 
 interface VehicleDetailProps {
@@ -141,8 +140,6 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
           <VehicleSpecifications features={vehicle.detailedFeatures} specs={vehicle.specs} />
 
           <VehicleEquipment equipment={vehicle.equipment} />
-
-          <VehicleRecommendedUse recommendedUse={vehicle.recommendedUse} />
         </div>
       </section>
 
