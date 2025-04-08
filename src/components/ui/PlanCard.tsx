@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils";
-import { CalendarDays } from "lucide-react";
 import Image from "next/image";
-import PremiumButton from "./PremiumButton";
 
 interface PlanCardProps {
   className?: string;
@@ -9,19 +7,9 @@ interface PlanCardProps {
   title: string;
   duration: string;
   description: string;
-  highlights: string[];
-  onClick?: () => void;
 }
 
-const PlanCard = ({
-  className,
-  image,
-  title,
-  duration,
-  description,
-  highlights,
-  onClick,
-}: PlanCardProps) => {
+const PlanCard = ({ className, image, title, duration, description }: PlanCardProps) => {
   return (
     <div
       className={cn(
@@ -40,7 +28,6 @@ const PlanCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-jp-black/90 via-jp-black/50 to-transparent" />
 
         <div className="absolute bottom-4 left-4 flex items-center text-white bg-jp-black/70 px-3 py-1 rounded-full backdrop-blur-sm border border-jp-gold/30">
-          <CalendarDays className="h-4 w-4 text-jp-gold mr-2" />
           <span className="text-sm">{duration}</span>
         </div>
       </div>
@@ -51,23 +38,6 @@ const PlanCard = ({
         </h3>
 
         <p className="text-jp-silver mb-4 text-sm">{description}</p>
-
-        <div className="space-y-2 mb-6">
-          {highlights.map((highlight, index) => {
-            const key = `highlight-${index}`;
-
-            return (
-              <div key={key} className="flex items-start">
-                <span className="text-jp-gold mr-2 text-lg">•</span>
-                <span className="text-sm text-jp-silver">{highlight}</span>
-              </div>
-            );
-          })}
-        </div>
-
-        <PremiumButton onClick={onClick} size="sm" className="w-full">
-          このプランで予約
-        </PremiumButton>
       </div>
     </div>
   );

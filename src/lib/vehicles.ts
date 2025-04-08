@@ -596,6 +596,276 @@ export const vehicles: Vehicle[] = [
   },
 ];
 
+// おもしろ車両データ
+export const otherVehicles: Vehicle[] = [
+  {
+    id: 1,
+    name: "ランドホームグランデ",
+    slug: "land-home-grande",
+    description:
+      "わたしたちがご用意するのは、最高峰ラグジュアリーサロンモーターホーム、純国産フルコン・ＲＶランドフラッグシップ「ランドホームグランデ」！車両サイズは、641 x 227 x H300cm。当時ＲＶランドから３台しか生産されていない走る高級ホテルと呼ばれ、人を運ぶために設計製造されたマイクロバスがベースです。さらに運転席はレカロシート装備、助手席には専用ＡＶモニターを設置し、長距離運転も快適、乗り心地も抜群です。またキャンピングカー大好き店主がこだわりの電装システムを構築し、外部電源に頼らずとも快適キャンプをお楽しみください。",
+    shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
+    image: "/images/landHome/IMG_9021.JPG",
+    images: [
+      { src: "/images/landHome/IMG_9021.JPG", alt: "ランドホームグランデ 外観", type: "exterior" },
+      {
+        src: "/images/landHome/IMG_9018.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9020.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9017.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9043.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9048.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9049.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9050.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9051.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9052.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9053.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9054.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9055.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9056.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9057.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9058.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9059.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9060.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9061.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9062.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9063.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9064.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9065.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9066.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9067.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9068.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9069.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9070.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+      {
+        src: "/images/landHome/IMG_9071.JPG",
+        alt: "ランドホームグランデ キッチン",
+        type: "interior",
+      },
+    ],
+    capacity: 8,
+    features: ["8名乗車", "6名就寝", "シャワー・トイレ完備", "FreeWi-fi", "AmazonfireTV"],
+    detailedFeatures: [
+      {
+        icon: "chef-hat",
+        name: "フルキッチン",
+        description:
+          "90Lの大型冷蔵庫、電子レンジ、3口ガスコンロを完備。調理器具と食器も揃っていいるので、本格的な料理が楽しめます。",
+      },
+      {
+        icon: "battery-charging",
+        name: "高性能電装システム",
+        description:
+          "ドメティック発電機2500w、10,000w/hサブバッテリー、3,000Wインバーター、外部AC入力、エコフローパワーシステム、走行充電システムを完備し、電源を気にせず快適に過ごせます。",
+      },
+      {
+        icon: "shower-head",
+        name: "シャワー/トイレ",
+        description:
+          "プライベートな空間で快適に使えるシャワールームとカセットトイレを完備。トイレは大便禁止でオプション（清掃費用3,300円）となります。",
+      },
+      {
+        icon: "thermometer",
+        name: "エアコン/暖房",
+        description: "オールシーズン快適に過ごせる高性能エアコンと暖房システムを搭載。",
+      },
+      {
+        icon: "sun",
+        name: "ソーラーパネル",
+        description:
+          "屋根に設置されたソーラーパネルで電力を自給自足。環境に優しく、電源のない場所でも安心です。",
+      },
+      {
+        icon: "truck",
+        name: "運転のしやすさ",
+        description:
+          "オートマ車、バックカメラ、ETCを装備し、長距離の運転も快適に。2017年3月12日以降に普通免許を取得した方は準中型免許が必要です。",
+      },
+    ],
+    pricePerNight: 45200,
+    rating: 4.8,
+    reviewCount: 24,
+    specs: {
+      length: "641cm",
+      width: "227cm",
+      height: "300cm",
+      engine: "ディーゼル 4007cc",
+      fuelEfficiency: "7~8km/L",
+      year: 2022,
+      mileage: "50,000km",
+      driveType: "2WD",
+      capacity: 8,
+      sleepingCapacity: 6,
+    },
+    equipment: {
+      kitchen: [
+        "冷蔵庫90L",
+        "電子レンジ",
+        "3口ガスコンロ",
+        "電気ケトル",
+        "トースター",
+        "コーヒーメーカー",
+        "調理器具一式",
+        "食器類一式",
+      ],
+      bathroom: [
+        "温水シャワー",
+        "外部シャワー",
+        "電気ラジエター温水器",
+        "カセットトイレ",
+        "洗面台",
+      ],
+      bedroom: ["ダブルベッド × 2", "展開シングルベット", "収納スペース"],
+      climate: [
+        "ルーフエアコン",
+        "ルーフベンチレーター×2",
+        "リヤクーラー/ヒーター",
+        "FFヒーター（暖房）",
+      ],
+      entertainment: ["AmazonfireTV", "フリーテレビシステム", "USB充電ポート", "AC100V電源"],
+      outdoor: [
+        "4.5mサイドオーニング",
+        "アウトドアテーブル",
+        "アウトドアチェア",
+        "バーベキューセット(オプション)",
+      ],
+    },
+    recommendedUse: {
+      idealGroupSize:
+        "最大8名（2017年3月12日以降に普通免許を取得した方は準中型免許が必要、特別会員のみペット可）",
+      recommendedTrips: [
+        "長期休暇での全国周遊",
+        "高原・山岳リゾート",
+        "海辺でのリラックスステイ",
+        "温泉巡り",
+      ],
+      seasonalAdvice: [
+        "春：桜の名所巡りに最適",
+        "夏：エアコン完備で快適なバカンス",
+        "秋：紅葉狩りと温泉巡り",
+        "冬：暖房完備で雪景色も楽しめる",
+      ],
+      images: [
+        { src: "/images/IMG_8936.JPG", alt: "ランドホームグランデで行く桜旅", type: "feature" },
+        {
+          src: "/images/IMG_8936.JPG",
+          alt: "ランドホームグランデで行く海辺の休日",
+          type: "feature",
+        },
+      ],
+    },
+    videoTour: "https://example.com/videos/land-home-grande-tour.mp4",
+    floorPlan: "/images/floor-plans/land-home-grande.svg",
+    vehicleType: "landHome", // 車両タイプを追加
+  },
+];
+
 // IDで車両を取得する関数
 export function getVehicleById(id: number): Vehicle | undefined {
   return vehicles.find((vehicle) => vehicle.id === id);
