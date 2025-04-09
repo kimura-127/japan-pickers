@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import VehicleBooking from "./VehicleBooking";
 import VehicleEquipment from "./VehicleEquipment";
 import VehicleGallery from "./VehicleGallery";
+import { VehiclePricing } from "./VehiclePricing";
 import VehicleSpecifications from "./VehicleSpecifications";
 
 interface VehicleDetailProps {
@@ -152,6 +153,18 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
           <VehicleBooking vehicle={vehicle} />
         </div>
       </section>
+
+      {/* 料金テーブルセクション */}
+      <section className="py-16 bg-jp-black">
+        <div className="premium-container">
+          <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
+            料金システム
+          </h2>
+          <VehiclePricing pricingPlan={vehicle.pricingPlan} />
+        </div>
+      </section>
+
+      {/* TODO: こちらに料金テーブルを実装 */}
     </>
   );
 };

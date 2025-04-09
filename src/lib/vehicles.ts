@@ -5,6 +5,22 @@ export interface VehicleFeature {
   description: string;
 }
 
+// 料金情報の定義
+export interface PriceInfo {
+  initialDay: number; // 最初の24時間
+  additionalDay: number; // 1日追加
+  hourlyRate: number; // 1時間追加
+  maxHourlyCharge?: number; // 時間課金の上限（オプション）
+}
+
+// 料金プラン情報
+export interface PricingPlan {
+  weekday: PriceInfo; // 平日料金
+  weekend: PriceInfo; // 週末料金（金土日・祝）
+  highSeason: PriceInfo; // ハイシーズン料金
+  premiumSeason?: PriceInfo; // プレミアムシーズン料金（オプション）
+}
+
 export interface VehicleImage {
   src: string;
   alt: string;
@@ -65,6 +81,7 @@ export interface Vehicle {
   videoTour?: string;
   floorPlan?: string;
   vehicleType: VehicleType; // 車両タイプを追加
+  pricingPlan: PricingPlan; // 料金プランを追加
 }
 
 // 車両データ
@@ -292,7 +309,7 @@ export const vehicles: Vehicle[] = [
         "カセットトイレ",
         "洗面台",
       ],
-      bedroom: ["ダブルベッド × 2", "展開シングルベット", "収納スペース"],
+      bedroom: ["ダブルベッド × 2", "展開シングルベッド", "収納スペース"],
       climate: [
         "ルーフエアコン",
         "ルーフベンチレーター×2",
@@ -334,6 +351,32 @@ export const vehicles: Vehicle[] = [
     videoTour: "https://example.com/videos/land-home-grande-tour.mp4",
     floorPlan: "/images/floor-plans/land-home-grande.svg",
     vehicleType: "landHome", // 車両タイプを追加
+    pricingPlan: {
+      weekday: {
+        initialDay: 44000,
+        additionalDay: 35200,
+        hourlyRate: 6800,
+        maxHourlyCharge: 35200,
+      },
+      weekend: {
+        initialDay: 49500,
+        additionalDay: 42075,
+        hourlyRate: 6800,
+        maxHourlyCharge: 42075,
+      },
+      highSeason: {
+        initialDay: 58000,
+        additionalDay: 49300,
+        hourlyRate: 6800,
+        maxHourlyCharge: 49300,
+      },
+      premiumSeason: {
+        initialDay: 68000,
+        additionalDay: 57800,
+        hourlyRate: 6800,
+        maxHourlyCharge: 57800,
+      },
+    },
   },
   {
     id: 2,
@@ -444,6 +487,28 @@ export const vehicles: Vehicle[] = [
     },
     floorPlan: "/images/floor-plans/camroad-zil.svg",
     vehicleType: "camroad", // 車両タイプを追加
+    pricingPlan: {
+      weekday: {
+        initialDay: 19800,
+        additionalDay: 15000,
+        hourlyRate: 3800,
+      },
+      weekend: {
+        initialDay: 25000,
+        additionalDay: 21250,
+        hourlyRate: 3800,
+      },
+      highSeason: {
+        initialDay: 30000,
+        additionalDay: 25000,
+        hourlyRate: 3800,
+      },
+      premiumSeason: {
+        initialDay: 35000,
+        additionalDay: 30000,
+        hourlyRate: 3800,
+      },
+    },
   },
   {
     id: 3,
@@ -593,6 +658,32 @@ export const vehicles: Vehicle[] = [
     videoTour: "https://example.com/videos/coaster-vega-tour.mp4",
     floorPlan: "/images/floor-plans/coaster-vega.svg",
     vehicleType: "vega", // 車両タイプを追加
+    pricingPlan: {
+      weekday: {
+        initialDay: 44000,
+        additionalDay: 35200,
+        hourlyRate: 6800,
+        maxHourlyCharge: 35200,
+      },
+      weekend: {
+        initialDay: 49500,
+        additionalDay: 42075,
+        hourlyRate: 6800,
+        maxHourlyCharge: 42075,
+      },
+      highSeason: {
+        initialDay: 58000,
+        additionalDay: 49300,
+        hourlyRate: 6800,
+        maxHourlyCharge: 49300,
+      },
+      premiumSeason: {
+        initialDay: 68000,
+        additionalDay: 57800,
+        hourlyRate: 6800,
+        maxHourlyCharge: 57800,
+      },
+    },
   },
 ];
 
@@ -720,7 +811,7 @@ export const otherVehicles: Vehicle[] = [
         "カセットトイレ",
         "洗面台",
       ],
-      bedroom: ["ダブルベッド × 2", "展開シングルベット", "収納スペース"],
+      bedroom: ["ダブルベッド × 2", "展開シングルベッド", "収納スペース"],
       climate: [
         "ルーフエアコン",
         "ルーフベンチレーター×2",
@@ -762,6 +853,32 @@ export const otherVehicles: Vehicle[] = [
     videoTour: "https://example.com/videos/land-home-grande-tour.mp4",
     floorPlan: "/images/floor-plans/land-home-grande.svg",
     vehicleType: "landHome", // 車両タイプを追加
+    pricingPlan: {
+      weekday: {
+        initialDay: 44000,
+        additionalDay: 35200,
+        hourlyRate: 6800,
+        maxHourlyCharge: 35200,
+      },
+      weekend: {
+        initialDay: 49500,
+        additionalDay: 42075,
+        hourlyRate: 6800,
+        maxHourlyCharge: 42075,
+      },
+      highSeason: {
+        initialDay: 58000,
+        additionalDay: 49300,
+        hourlyRate: 6800,
+        maxHourlyCharge: 49300,
+      },
+      premiumSeason: {
+        initialDay: 68000,
+        additionalDay: 57800,
+        hourlyRate: 6800,
+        maxHourlyCharge: 57800,
+      },
+    },
   },
   {
     id: 2,
@@ -885,7 +1002,7 @@ export const otherVehicles: Vehicle[] = [
         "カセットトイレ",
         "洗面台",
       ],
-      bedroom: ["ダブルベッド × 2", "展開シングルベット", "収納スペース"],
+      bedroom: ["ダブルベッド × 2", "展開シングルベッド", "収納スペース"],
       climate: [
         "ルーフエアコン",
         "ルーフベンチレーター×2",
@@ -927,6 +1044,32 @@ export const otherVehicles: Vehicle[] = [
     videoTour: "https://example.com/videos/land-home-grande-tour.mp4",
     floorPlan: "/images/floor-plans/land-home-grande.svg",
     vehicleType: "landHome", // 車両タイプを追加
+    pricingPlan: {
+      weekday: {
+        initialDay: 44000,
+        additionalDay: 35200,
+        hourlyRate: 6800,
+        maxHourlyCharge: 35200,
+      },
+      weekend: {
+        initialDay: 49500,
+        additionalDay: 42075,
+        hourlyRate: 6800,
+        maxHourlyCharge: 42075,
+      },
+      highSeason: {
+        initialDay: 58000,
+        additionalDay: 49300,
+        hourlyRate: 6800,
+        maxHourlyCharge: 49300,
+      },
+      premiumSeason: {
+        initialDay: 68000,
+        additionalDay: 57800,
+        hourlyRate: 6800,
+        maxHourlyCharge: 57800,
+      },
+    },
   },
   {
     id: 3,
@@ -1155,7 +1298,7 @@ export const otherVehicles: Vehicle[] = [
         "カセットトイレ",
         "洗面台",
       ],
-      bedroom: ["ダブルベッド × 2", "展開シングルベット", "収納スペース"],
+      bedroom: ["ダブルベッド × 2", "展開シングルベッド", "収納スペース"],
       climate: [
         "ルーフエアコン",
         "ルーフベンチレーター×2",
@@ -1197,6 +1340,32 @@ export const otherVehicles: Vehicle[] = [
     videoTour: "https://example.com/videos/land-home-grande-tour.mp4",
     floorPlan: "/images/floor-plans/land-home-grande.svg",
     vehicleType: "landHome", // 車両タイプを追加
+    pricingPlan: {
+      weekday: {
+        initialDay: 44000,
+        additionalDay: 35200,
+        hourlyRate: 6800,
+        maxHourlyCharge: 35200,
+      },
+      weekend: {
+        initialDay: 49500,
+        additionalDay: 42075,
+        hourlyRate: 6800,
+        maxHourlyCharge: 42075,
+      },
+      highSeason: {
+        initialDay: 58000,
+        additionalDay: 49300,
+        hourlyRate: 6800,
+        maxHourlyCharge: 49300,
+      },
+      premiumSeason: {
+        initialDay: 68000,
+        additionalDay: 57800,
+        hourlyRate: 6800,
+        maxHourlyCharge: 57800,
+      },
+    },
   },
 ];
 
