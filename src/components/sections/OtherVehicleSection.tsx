@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
 
-const VehicleSection = () => {
+const OtherVehicleSection = () => {
   const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
   const vehicleRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -100,4 +100,4 @@ const VehicleSection = () => {
   );
 };
 
-export default VehicleSection;
+export default OtherVehicleSection;
