@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "format": "npx @biomejs/biome check --write ./src",
@@ -79,6 +80,7 @@
     "eslint-config-next": "15.2.3",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
+    "next-sitemap": "^4.2.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
