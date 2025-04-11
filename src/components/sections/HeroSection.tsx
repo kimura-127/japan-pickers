@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { ChevronDown } from "lucide-react";
@@ -90,6 +91,11 @@ const HeroSection = () => {
         background: "linear-gradient(to bottom, #121212, #1A1A1A)",
       }}
     >
+      <img
+        src="/images/top_img.JPG"
+        alt="トップイメージ"
+        className="rounded-full w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover absolute top-10 sm:top-16 md:top-20 left-4 sm:left-6 md:left-10 z-0 max-sm:hidden"
+      />
       {/* Floating particles */}
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none" />
 
@@ -129,7 +135,16 @@ const HeroSection = () => {
             transform: isClient ? `translateY(${calculateParallax(0, 0.2)}px)` : "none",
           }}
         >
-          キャンピングカーレンタル
+          キャンピングカー
+        </h1>
+
+        <h1
+          className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 gold-gradient-text"
+          style={{
+            transform: isClient ? `translateY(${calculateParallax(0, 0.2)}px)` : "none",
+          }}
+        >
+          レンタル
         </h1>
 
         <p

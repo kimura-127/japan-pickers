@@ -44,11 +44,20 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-8",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-2",
         scrolled ? "bg-jp-black/95 backdrop-blur-md shadow-gold-md" : "bg-transparent",
       )}
     >
       <div className="premium-container flex items-center justify-between">
+        {/* eslint-disable @next/next/no-img-element */}
+        <Link href="/">
+          <img
+            src="/images/top_img.JPG"
+            alt="トップイメージ"
+            className="rounded-full w-12 h-12 object-cover z-0 sm:hidden"
+          />
+        </Link>
+
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <div className="flex items-center">
