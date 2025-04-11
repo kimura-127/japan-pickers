@@ -74,6 +74,8 @@ const ContactSection = () => {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -84,13 +86,29 @@ const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
+    setIsSubmitting(true);
+    setError(null);
 
-    // Simulating form submission
-    setTimeout(() => {
-      setIsSubmitted(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "お問い合わせの送信中にエラーが発生しました");
+      }
+
+      console.log("お問い合わせが正常に送信されました:", data);
+
+      // フォームのリセット
       setFormData({
         name: "",
         email: "",
@@ -98,11 +116,21 @@ const ContactSection = () => {
         message: "",
       });
 
-      // Reset the submission status after a delay
+      // 送信完了表示
+      setIsSubmitted(true);
+
+      // 一定時間後に送信完了表示を消す
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1000);
+    } catch (error) {
+      console.error("エラー:", error);
+      setError(
+        error instanceof Error ? error.message : "お問い合わせの送信中にエラーが発生しました",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -206,7 +234,7 @@ const ContactSection = () => {
                 <PremiumButton
                   type="submit"
                   className="flex items-center justify-center gap-2"
-                  disabled={isSubmitted}
+                  disabled={isSubmitting}
                 >
                   <span>送信する</span>
                   <Send className="h-4 w-4" />
@@ -230,6 +258,33 @@ const ContactSection = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Error message */}
+              {error && (
+                <div className="absolute inset-0 bg-jp-black/95 backdrop-blur-md flex items-center justify-center transition-opacity duration-500 rounded-lg">
+                  <div className="text-center p-6">
+                    <div className="inline-block p-3 bg-jp-red/10 rounded-full mb-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-8 w-8 text-jp-red"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <title>エラーアイコン</title>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl text-white font-medium mb-2">送信エラー</h3>
+                    <p className="text-jp-silver">{error}</p>
+                  </div>
+                </div>
+              )}
             </form>
           </div>
 

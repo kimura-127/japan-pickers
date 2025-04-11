@@ -80,8 +80,9 @@ const VehicleSection = () => {
                 <VehicleCard
                   image={vehicle.images[0].src}
                   name={vehicle.name}
-                  capacity={vehicle.capacity}
+                  capacity={vehicle.features[0]}
                   features={vehicle.features}
+                  subText={vehicle.subText}
                   pricePerNight={vehicle.pricePerNight}
                   onClick={() => {
                     router.push(`/vehicles/${vehicle.slug}`);

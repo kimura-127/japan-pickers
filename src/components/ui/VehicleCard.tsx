@@ -8,8 +8,9 @@ interface VehicleCardProps {
   className?: string;
   image: string;
   name: string;
-  capacity: number;
+  capacity: string;
   features: string[];
+  subText?: string;
   pricePerNight: number;
   onClick?: () => void;
   onBookingClick?: () => void;
@@ -21,6 +22,7 @@ const VehicleCard = ({
   name,
   capacity,
   features,
+  subText,
   pricePerNight,
   onClick,
   onBookingClick,
@@ -53,10 +55,11 @@ const VehicleCard = ({
 
       <div className="p-6">
         <h3 className="text-xl font-noto-serif-jp font-medium text-white mb-2">{name}</h3>
+        {subText && <p className="text-jp-silver mb-4 text-sm ml-2">{subText}</p>}
 
         <div className="flex items-center text-jp-silver mb-4">
           <Users className="gold-icon mr-2 h-4 w-4" />
-          <span className="text-sm">{capacity}名様</span>
+          <span className="text-sm">{capacity}</span>
         </div>
 
         <div className="space-y-2 mb-4">
@@ -64,7 +67,10 @@ const VehicleCard = ({
             const key = `feature-${index}`;
 
             return (
-              <div key={key} className="flex items-center text-jp-silver">
+              <div
+                key={key}
+                className={`flex items-center text-jp-silver ${index === 0 && "hidden"}`}
+              >
                 <Cpu className="gold-icon mr-2 h-4 w-4" />
                 <span className="text-sm">{feature}</span>
               </div>

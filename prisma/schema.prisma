@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Vehicle {
@@ -20,7 +21,7 @@ model Vehicle {
   price       Float
   image_url   String?
   capacity    Int
-  features    String[]  // PostgreSQLは配列型をサポートしているので戻す
+  features    String[] // PostgreSQLは配列型をサポートしているので戻す
   slug        String    @unique
   bookings    Booking[]
   created_at  DateTime  @default(now())
@@ -31,7 +32,7 @@ model Booking {
   id         String   @id @default(uuid())
   vehicleId  String
   vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
-  userId     String   // auth.usersテーブルのIDと紐付け
+  userId     String // auth.usersテーブルのIDと紐付け
   startDate  DateTime
   endDate    DateTime
   userName   String
@@ -43,4 +44,21 @@ model Booking {
 
   @@index([vehicleId])
   @@index([userId])
+}
+
+enum ContactStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model Contact {
+  id         String        @id @default(uuid())
+  name       String
+  email      String
+  phone      String
+  message    String
+  status     ContactStatus @default(PENDING)
+  created_at DateTime      @default(now())
+  updated_at DateTime      @updatedAt
 }
