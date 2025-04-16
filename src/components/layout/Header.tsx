@@ -3,6 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 import { LogOut, Menu, PhoneCall, User, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -49,9 +50,10 @@ const Header = () => {
       )}
     >
       <div className="premium-container flex items-center justify-between">
-        {/* eslint-disable @next/next/no-img-element */}
         <Link href="/">
-          <img
+          <Image
+            width={1200}
+            height={1200}
             src="/images/top_img.JPG"
             alt="トップのイメージ"
             className="rounded-full w-12 h-12 object-cover z-0 sm:hidden"
