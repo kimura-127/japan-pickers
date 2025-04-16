@@ -53,7 +53,7 @@ const Header = () => {
         <Link href="/">
           <img
             src="/images/top_img.JPG"
-            alt="トップイメージ"
+            alt="トップのイメージ"
             className="rounded-full w-12 h-12 object-cover z-0 sm:hidden"
           />
         </Link>
