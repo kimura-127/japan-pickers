@@ -8,7 +8,7 @@ interface VehicleCardProps {
   className?: string;
   image: string;
   name: string;
-  capacity: string;
+  capacity: string | number;
   features: string[];
   subText?: string;
   pricePerNight: number;

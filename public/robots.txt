@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://japan-pickers.com
+
+# Sitemaps
+Sitemap: https://japan-pickers.com/sitemap.xml
