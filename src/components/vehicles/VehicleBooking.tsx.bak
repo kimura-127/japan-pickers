@@ -742,14 +742,6 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                 toast.error("予約エラー", {
                   description: "予約日程を選択してください。",
                 });
-              } else if (!departureTime) {
-                toast.error("予約エラー", {
-                  description: "出発時刻を選択してください。",
-                });
-              } else if (!arrivalTime) {
-                toast.error("予約エラー", {
-                  description: "到着時刻を選択してください。",
-                });
               } else if (hasUnavailableDates) {
                 toast.error("予約エラー", {
                   description:
@@ -769,29 +761,30 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
           </p>
         </div>
       </div>
-      {/* 予約フォームモーダル */}
-      <ReservationFormModal
-        open={isReservationModalOpen}
-        onOpenChange={setIsReservationModalOpen}
-        onSubmit={(data) => {
-          console.log("予約情報:", data);
-          // ここでバックエンド連携などの処理を行う予定
-          // 今回はフロントエンドのみの実装のため、モーダルを閉じるだけ
-          setIsReservationModalOpen(false);
-          toast.success("予約が完了しました", {
-            description: "ご予約の詳細をメールでお送りしました。",
-          });
-        }}
-        reservationSummary={{
-          vehicleName: vehicle.name,
-          startDate: dateRange?.from ? formatDate(dateRange.from) : null,
-          endDate: dateRange?.to ? formatDate(dateRange.to) : null,
-          days: getTotalDays(),
-          totalPrice: calculateTotal().total,
-          discountedPrice: calculateTotal().discountedTotal,
-        }}
-      />
     </div>
+
+    {/* 予約フォームモーダル */}
+    <ReservationFormModal
+      open={isReservationModalOpen}
+      onOpenChange={setIsReservationModalOpen}
+      onSubmit={(data) => {
+        console.log("予約情報:", data);
+        // ここでバックエンド連携などの処理を行う予定
+        // 今回はフロントエンドのみの実装のため、モーダルを閉じるだけ
+        setIsReservationModalOpen(false);
+        toast.success("予約が完了しました", {
+          description: "ご予約の詳細をメールでお送りしました。",
+        });
+      }}
+      reservationSummary={{
+        vehicleName: vehicle.name,
+        startDate: dateRange?.from ? formatDate(dateRange.from) : null,
+        endDate: dateRange?.to ? formatDate(dateRange.to) : null,
+        days: getTotalDays(),
+        totalPrice: calculateTotal().total,
+        discountedPrice: calculateTotal().discountedTotal,
+      }}
+    />
   );
 };
 
