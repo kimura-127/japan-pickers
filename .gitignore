@@ -31,7 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+# .env*
+# 以下の特定のファイルのみをignore対象外にする
+!.env
+!.env.local
 
 # vercel
 .vercel

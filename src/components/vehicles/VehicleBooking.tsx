@@ -13,7 +13,9 @@ import {
 } from "@/components/ui/select";
 import { calculateTotalPrice, getPriceBreakdown } from "@/lib/pricing";
 import type { DayType } from "@/lib/pricing";
+import { PRICE_TABLE, getDayType } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
+import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 import { ja } from "date-fns/locale";
 import {
   Calendar as CalendarIcon,
@@ -67,7 +69,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
   // 料金計算ロジックを新しいものに置き換え
   const calculateTotal = () => {
     if (!dateRange?.from || !dateRange?.to)
-      return { total: 0, breakdown: null, timeFee: 0, extraHours: 0 };
+      return { total: 0, breakdown: null, timeFee: 0, extraHours: 0, discountedTotal: 0 };
 
     // 基本料金を計算
     const basePrice = calculateTotalPrice(dateRange.from, dateRange.to, vehicle.vehicleType);
@@ -101,62 +103,56 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
         // 日数（切り上げ）を計算
         const diffDays = getTotalDays() - 1; // 開始日と終了日を含むので1を引く
 
-        // 合計時間数を計算（日数 * 24時間 + 時間差）
-        let totalHours = diffDays * 24;
-
-        // 時間差を計算（arrHour < depHourの場合は一周して24時間後）
-        if (arrHour >= depHour) {
-          totalHours += arrHour - depHour;
-        } else {
-          totalHours += arrHour + 24 - depHour;
-        }
-
-        // 24時間を超える時間数
-        extraHours = Math.max(0, totalHours - 24);
-
-        // 車種と日付タイプに応じた1日の最大料金を取得
-        let dailyMaxFee = 0;
-        if (breakdown && breakdown.additionalDays.length > 0) {
-          const lastDay = breakdown.additionalDays[breakdown.additionalDays.length - 1];
-          const dayType = lastDay.dayType;
-
-          if (vehicle.vehicleType === "camroad") {
-            // カムロードZiLの最大料金
-            if (dayType === "weekday") {
-              dailyMaxFee = 15000; // 平日
-            } else if (dayType === "weekend") {
-              dailyMaxFee = 21250; // 週末
-            } else if (dayType === "highSeason") {
-              dailyMaxFee = 21250; // ハイシーズン（週末と同じと仮定）
-            }
+        // 同日内での予約か複数日にわたる予約かを確認
+        if (diffDays === 0) {
+          // 同日内での予約の場合
+          if (arrHour > depHour) {
+            // 到着時間が出発時間より後の場合のみ追加料金
+            extraHours = arrHour - depHour;
           } else {
-            // ベガとランドホームグランデの最大料金
-            if (dayType === "weekday") {
-              dailyMaxFee = 35200; // 平日
-            } else if (dayType === "weekend") {
-              dailyMaxFee = 42075; // 週末
-            } else if (dayType === "highSeason") {
-              dailyMaxFee = 49300; // ハイシーズン
-            }
+            // 到着時間が出発時間より前の場合は追加時間なし
+            // (例: 13:00出発、12:00到着)
+            extraHours = 0;
           }
         } else {
-          // 日付タイプが不明の場合はデフォルト値を使用
-          dailyMaxFee = vehicle.vehicleType === "camroad" ? 15000 : 35200;
+          // 複数日予約の場合
+          if (arrHour >= depHour) {
+            // 最終日の到着時間が初日の出発時間と同じか後の場合
+            // (例: 1日目13:00出発、2日目14:00到着)
+            extraHours = arrHour - depHour;
+          } else {
+            // 最終日の到着時間が初日の出発時間より前の場合
+            // (例: 1日目13:00出発、2日目12:00到着)
+            extraHours = 0;
+          }
         }
 
-        // 1時間あたりの料金（車種に応じて）
-        const hourlyRate = vehicle.vehicleType === "camroad" ? 3800 : 6800;
+        // 時間料金の計算
+        const totalHours = diffDays * 24 + extraHours;
 
-        // 追加料金を計算（時間料金と最大料金の小さい方）
-        const calculatedTimeFee = hourlyRate * extraHours;
-        timeFee = Math.min(calculatedTimeFee, dailyMaxFee);
+        // 最初の24時間を超える分を計算
+        if (totalHours > 24 && extraHours > 0) {
+          // 日付の種類を取得
+          const dayType = getDayType(dateRange.from);
+
+          // PRICE_TABLEから時間単価と上限料金を取得
+          const hourlyRate = PRICE_TABLE[vehicle.vehicleType][dayType].hourlyRate || 0;
+          const maxHourlyCharge = PRICE_TABLE[vehicle.vehicleType][dayType].hourlyMax;
+
+          // 時間料金を計算（上限がある場合は上限を適用）
+          timeFee = Math.min(extraHours * hourlyRate, maxHourlyCharge || extraHours * hourlyRate);
+        } else {
+          timeFee = 0;
+        }
       }
 
-      // 追加料金を合計に加算
       total += timeFee;
     }
 
-    return { total, breakdown, timeFee, extraHours };
+    // キャンペーン割引を適用（2割引）
+    const discountedTotal = Math.round(total * CAMPAIGN_DISCOUNT_RATE);
+
+    return { total, breakdown, timeFee, extraHours, discountedTotal };
   };
 
   // 日付タイプの日本語表示
@@ -437,10 +433,13 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {options.map((option) => (
-              <div key={option.id} className="relative">
+              <div
+                key={option.id}
+                className="border border-jp-darkgray/50 rounded-xl pt-3 px-5 cursor-pointer"
+              >
                 <Button
                   type="button"
-                  className={`w-full text-left bg-jp-darkgray/30 rounded-xl p-4 py-6 border transition-colors ${
+                  className={`w-full text-left bg-jp-darkgray/30 cursor-pointer transition-colors ${
                     selectedOptions.includes(option.id)
                       ? "border-jp-gold"
                       : "border-jp-darkgray/50 hover:border-jp-gold/50"
@@ -448,11 +447,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                   onClick={() => toggleOption(option.id)}
                   aria-pressed={selectedOptions.includes(option.id)}
                 >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-white">{option.name}</p>
-                      <p className="text-sm text-jp-silver">¥{option.price.toLocaleString()}</p>
-                    </div>
+                  <div className="flex items-center justify-between gap-4">
                     <div
                       className={`w-6 h-6 rounded-full flex items-center justify-center ${
                         selectedOptions.includes(option.id)
@@ -462,21 +457,26 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                     >
                       {selectedOptions.includes(option.id) && <Check className="w-4 h-4" />}
                     </div>
+                    <div>
+                      <p className="text-white">{option.name}</p>
+                      <p className="text-sm text-jp-silver">¥{option.price.toLocaleString()}</p>
+                    </div>
                   </div>
                 </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute bottom-2 right-2 text-jp-silver hover:text-white hover:bg-jp-darkgray/50"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleShowImages(option.name);
-                  }}
-                >
-                  <ImageIcon className="w-4 h-4 mr-1" />
-                  <span className="text-xs">写真で確認する</span>
-                </Button>
+                <div className="flex items-center justify-end">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="text-jp-silver hover:text-white hover:bg-jp-darkgray/50 px-3 py-1.5 flex items-center cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShowImages(option.name);
+                    }}
+                  >
+                    <ImageIcon className="w-4 h-4 mb-1" />
+                    <span className="text-xs">写真で確認する</span>
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -586,6 +586,69 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                   ? `¥${calculateTotal().total.toLocaleString()}`
                   : "-"}
               </p>
+            </div>
+          </div>
+
+          {/* 料金サマリー */}
+          <div className="mt-6 p-4 bg-jp-black-light border border-jp-gray rounded-md">
+            <h3 className="text-xl font-noto-serif-jp font-bold text-white mb-3">料金サマリー</h3>
+
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between">
+                <span className="text-jp-silver">レンタル基本料金</span>
+                <span className="text-white font-medium">
+                  {calculateTotal().breakdown
+                    ? `¥${calculateTotal().total.toLocaleString()}`
+                    : "日程を選択してください"}
+                </span>
+              </div>
+
+              {departureTime && arrivalTime && calculateTotal().timeFee > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-jp-silver">時間追加料金</span>
+                  <span className="text-white font-medium">
+                    ¥{calculateTotal().timeFee.toLocaleString()}
+                  </span>
+                </div>
+              )}
+
+              {selectedOptions.length > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-jp-silver">オプション</span>
+                  <span className="text-white font-medium">
+                    ¥
+                    {selectedOptions
+                      .reduce((sum, id) => {
+                        const option = options.find((o) => o.id === id);
+                        return sum + (option?.price || 0);
+                      }, 0)
+                      .toLocaleString()}
+                  </span>
+                </div>
+              )}
+
+              <div className="border-t border-jp-gray pt-2 flex justify-between">
+                <span className="text-jp-silver">合計</span>
+                <span className="text-white font-medium line-through">
+                  {calculateTotal().total > 0
+                    ? `¥${calculateTotal().total.toLocaleString()}`
+                    : "日程を選択してください"}
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <span className="text-jp-silver flex items-center">
+                  <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
+                    キャンペーン
+                  </span>
+                  20%OFF適用後
+                </span>
+                <span className="text-red-500 font-bold text-xl">
+                  {calculateTotal().total > 0
+                    ? `¥${calculateTotal().discountedTotal.toLocaleString()}`
+                    : "日程を選択してください"}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -705,16 +768,22 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
 export const VehicleBookingWithModals = ({
   vehicle,
 }: Omit<VehicleBookingProps, "onShowImages">) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string>("");
+
+  const handleShowImages = (optionName: string) => {
+    setSelectedOption(optionName);
+    setIsModalOpen(true);
+  };
+
   return (
     <>
-      <VehicleBooking
-        vehicle={vehicle}
-        onShowImages={(optionName) => {
-          // 将来的なオプション画像表示機能のためのコールバック
-          console.log("画像表示:", optionName);
-        }}
+      <VehicleBooking vehicle={vehicle} onShowImages={handleShowImages} />
+      <OptionImageModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        optionName={selectedOption}
       />
-      <OptionImageModal open={false} onOpenChange={() => {}} optionName="" />
     </>
   );
 };

@@ -85,6 +85,9 @@ export interface Vehicle {
   pricingPlan: PricingPlan; // 料金プランを追加
 }
 
+// キャンペーン割引率（20%OFF）
+export const CAMPAIGN_DISCOUNT_RATE = 0.8;
+
 // 車両データ
 export const vehicles: Vehicle[] = [
   {
