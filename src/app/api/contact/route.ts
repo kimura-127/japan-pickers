@@ -1,3 +1,4 @@
+import { sendMail } from "@/lib/email";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -21,6 +22,21 @@ export async function POST(request: NextRequest) {
         // デフォルトのステータスはPENDINGに設定されています
       },
     });
+
+    console.log("お問い合わせが正常に保存されました:", contact);
+    // 管理者へのメール送信
+    await sendMail({
+      to: "japan.pickers@gmail.com",
+      subject: `新規お問い合わせ: ${name}様`,
+      text: `お問い合わせ内容:
+名前: ${name}
+メール: ${email}
+電話: ${phone || "-"}
+メッセージ:
+${message}
+`,
+    });
+    console.log("メール送信成功");
 
     return NextResponse.json({ success: true, data: contact }, { status: 201 });
   } catch (error) {
