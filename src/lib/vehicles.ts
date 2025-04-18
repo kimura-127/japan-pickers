@@ -28,16 +28,19 @@ export interface VehicleImage {
 }
 
 export interface VehicleSpec {
-  length: string;
-  width: string;
-  height: string;
+  length?: string;
+  width?: string;
+  height?: string;
   engine: string;
-  fuelEfficiency: string;
+  fuelEfficiency?: string;
   year: number;
   mileage: string;
-  driveType: string;
+  driveType?: string;
   capacity: number;
-  sleepingCapacity: number;
+  sleepingCapacity?: number;
+  seat?: string;
+  old?: string;
+  rules?: string;
 }
 
 export interface VehicleEquipment {
@@ -774,16 +777,14 @@ export const otherVehicles: Vehicle[] = [
     ],
     pricePerNight: 45200,
     specs: {
-      length: "641",
-      width: "227",
-      height: "300",
-      engine: "ディーゼル 4007cc",
-      fuelEfficiency: "7~8km/L",
+      engine: "ガソリン 2400cc",
+      seat: "左ハンドル",
       year: 2022,
       mileage: "50,000km",
-      driveType: "2WD",
-      capacity: 8,
-      sleepingCapacity: 6,
+      driveType: "4WD",
+      capacity: 4,
+      old: "昭和33年",
+      rules: "旧保安基準のためシートベルトなし",
     },
     isHidden: true,
     rating: 4.8,
@@ -966,16 +967,14 @@ export const otherVehicles: Vehicle[] = [
     ],
     pricePerNight: 45200,
     specs: {
-      length: "641",
-      width: "227",
-      height: "300",
-      engine: "ディーゼル 4007cc",
-      fuelEfficiency: "7~8km/L",
+      engine: "ガソリン 2400cc",
+      seat: "左ハンドル",
       year: 2022,
       mileage: "50,000km",
-      driveType: "2WD",
-      capacity: 8,
-      sleepingCapacity: 6,
+      driveType: "4WD",
+      capacity: 4,
+      old: "昭和32年",
+      rules: "旧保安基準のためシートベルトなし",
     },
     isHidden: true,
     rating: 4.8,
@@ -1071,8 +1070,7 @@ export const otherVehicles: Vehicle[] = [
     id: 3,
     name: "ミニカー",
     slug: "mini-car",
-    description:
-      "わたしたちがご用意するのは、最高峰ラグジュアリーサロンモーターホーム、純国産フルコン・ＲＶランドフラッグシップ「ランドホームグランデ」！車両サイズは、641 x 227 x H300cm。当時ＲＶランドから３台しか生産されていない走る高級ホテルと呼ばれ、人を運ぶために設計製造されたマイクロバスがベースです。さらに運転席はレカロシート装備、助手席には専用ＡＶモニターを設置し、長距離運転も快適、乗り心地も抜群です。またキャンピングカー大好き店主がこだわりの電装システムを構築し、外部電源に頼らずとも快適キャンプをお楽しみください。",
+    description: "ミニカー",
     shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
     image: "/images/otherVehicle/miniCar2.JPG",
     images: [
@@ -1087,137 +1085,27 @@ export const otherVehicles: Vehicle[] = [
         type: "interior",
       },
       {
-        src: "/images/landHome/IMG_9020.JPG",
+        src: "/images/otherVehicle/miniCar3.JPG",
         alt: "ランドホームグランデ キッチン",
         type: "interior",
       },
       {
-        src: "/images/landHome/IMG_9017.JPG",
+        src: "/images/otherVehicle/miniCar4.JPG",
         alt: "ランドホームグランデ キッチン",
         type: "interior",
       },
       {
-        src: "/images/landHome/IMG_9043.JPG",
+        src: "/images/otherVehicle/miniCar5.JPG",
         alt: "ランドホームグランデ キッチン",
         type: "interior",
       },
       {
-        src: "/images/landHome/IMG_9048.JPG",
+        src: "/images/otherVehicle/miniCar6.JPG",
         alt: "ランドホームグランデ キッチン",
         type: "interior",
       },
       {
-        src: "/images/landHome/IMG_9049.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9050.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9051.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9052.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9053.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9054.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9055.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9056.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9057.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9058.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9059.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9060.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9061.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9062.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9063.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9064.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9065.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9066.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9067.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9068.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9069.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9070.JPG",
-        alt: "ランドホームグランデ キッチン",
-        type: "interior",
-      },
-      {
-        src: "/images/landHome/IMG_9071.JPG",
+        src: "/images/otherVehicle/miniCar7.JPG",
         alt: "ランドホームグランデ キッチン",
         type: "interior",
       },
@@ -1264,16 +1152,13 @@ export const otherVehicles: Vehicle[] = [
     ],
     pricePerNight: 45200,
     specs: {
-      length: "641",
-      width: "227",
-      height: "300",
-      engine: "ディーゼル 4007cc",
-      fuelEfficiency: "7~8km/L",
+      length: "175.5",
+      width: "180",
+      height: "145.5",
+      engine: "ガソリン 49cc",
       year: 2022,
       mileage: "50,000km",
-      driveType: "2WD",
-      capacity: 8,
-      sleepingCapacity: 6,
+      capacity: 1,
     },
     isHidden: true,
     rating: 4.8,

@@ -90,7 +90,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                 <Users className="gold-icon w-5 h-5" />
                 <span>{vehicle.capacity}名様</span>
               </div>
-              {vehicle.isHidden || (
+              {vehicle.specs.length && vehicle.specs.width && vehicle.specs.height && (
                 <div className="flex items-center gap-2 text-jp-silver">
                   <Maximize className="gold-icon w-5 h-5" />
                   <span>
@@ -158,14 +158,16 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       </section> */}
 
       {/* 料金テーブルセクション */}
-      <section className="py-16 bg-jp-black">
-        <div className="premium-container">
-          <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
-            料金システム
-          </h2>
-          <VehiclePricing pricingPlan={vehicle.pricingPlan} />
-        </div>
-      </section>
+      {!vehicle.isHidden && (
+        <section className="py-16 bg-jp-black">
+          <div className="premium-container">
+            <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
+              料金システム
+            </h2>
+            <VehiclePricing pricingPlan={vehicle.pricingPlan} />
+          </div>
+        </section>
+      )}
 
       {/* TODO: こちらに料金テーブルを実装 */}
     </>

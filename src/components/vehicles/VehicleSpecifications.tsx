@@ -295,15 +295,17 @@ const VehicleSpecifications = ({
         <h3 className="text-xl font-noto-serif-jp font-bold text-white mb-6">車両スペック</h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
-            <div className="flex items-center gap-3 mb-2">
-              <Ruler className="gold-icon w-5 h-5" />
-              <h4 className="text-white">寸法</h4>
+          {specs.length && specs.width && specs.height && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Ruler className="gold-icon w-5 h-5" />
+                <h4 className="text-white">寸法</h4>
+              </div>
+              <p className="text-jp-silver">
+                {specs.length} × {specs.width} × {specs.height}
+              </p>
             </div>
-            <p className="text-jp-silver">
-              {specs.length} × {specs.width} × {specs.height}
-            </p>
-          </div>
+          )}
 
           <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
             <div className="flex items-center gap-3 mb-2">
@@ -313,22 +315,25 @@ const VehicleSpecifications = ({
             <p className="text-jp-silver">{specs.engine}</p>
           </div>
 
-          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
-            <div className="flex items-center gap-3 mb-2">
-              <Gauge className="gold-icon w-5 h-5" />
-              <h4 className="text-white">燃費</h4>
+          {specs.fuelEfficiency && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Gauge className="gold-icon w-5 h-5" />
+                <h4 className="text-white">燃費</h4>
+              </div>
+              <p className="text-jp-silver">{specs.fuelEfficiency}</p>
             </div>
-            <p className="text-jp-silver">{specs.fuelEfficiency}</p>
-          </div>
+          )}
 
-          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
-            <div className="flex items-center gap-3 mb-2">
-              <Car className="gold-icon w-5 h-5" />
-              <h4 className="text-white">駆動方式</h4>
+          {specs.driveType && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Car className="gold-icon w-5 h-5" />
+                <h4 className="text-white">駆動方式</h4>
+              </div>
+              <p className="text-jp-silver">{specs.driveType}</p>
             </div>
-            <p className="text-jp-silver">{specs.driveType}</p>
-          </div>
-
+          )}
           <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
             <div className="flex items-center gap-3 mb-2">
               <Users className="gold-icon w-5 h-5" />
@@ -337,13 +342,45 @@ const VehicleSpecifications = ({
             <p className="text-jp-silver">{specs.capacity}名</p>
           </div>
 
-          <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
-            <div className="flex items-center gap-3 mb-2">
-              <Bed className="gold-icon w-5 h-5" />
-              <h4 className="text-white">就寝人数</h4>
+          {specs.sleepingCapacity && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Bed className="gold-icon w-5 h-5" />
+                <h4 className="text-white">就寝人数</h4>
+              </div>
+              <p className="text-jp-silver">{specs.sleepingCapacity}名</p>
             </div>
-            <p className="text-jp-silver">{specs.sleepingCapacity}名</p>
-          </div>
+          )}
+
+          {specs.old && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Bed className="gold-icon w-5 h-5" />
+                <h4 className="text-white">年式</h4>
+              </div>
+              <p className="text-jp-silver">{specs.old}年</p>
+            </div>
+          )}
+
+          {specs.rules && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Bed className="gold-icon w-5 h-5" />
+                <h4 className="text-white">規則</h4>
+              </div>
+              <p className="text-jp-silver">{specs.rules}</p>
+            </div>
+          )}
+
+          {specs.seat && (
+            <div className="bg-jp-darkgray/30 rounded-xl p-4 border border-jp-darkgray/50">
+              <div className="flex items-center gap-3 mb-2">
+                <Bed className="gold-icon w-5 h-5" />
+                <h4 className="text-white">座席配置</h4>
+              </div>
+              <p className="text-jp-silver">{specs.seat}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
