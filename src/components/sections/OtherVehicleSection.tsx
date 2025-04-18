@@ -79,9 +79,11 @@ const OtherVehicleSection = () => {
                 className={`reveal reveal-delay-${index + 1}`}
               >
                 <VehicleCard
+                  isHidden={vehicle.isHidden}
                   image={vehicle.images[0].src}
                   name={vehicle.name}
                   capacity={vehicle.capacity}
+                  subText={vehicle.subText}
                   features={vehicle.features}
                   pricePerNight={vehicle.pricePerNight}
                   onClick={() => {

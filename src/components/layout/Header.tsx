@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
-import { LogOut, Menu, PhoneCall, User, X } from "lucide-react";
+import { LogOut, Menu, PhoneCall, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -81,7 +81,7 @@ const Header = () => {
             </Link>
           ))}
           {/* 認証状態によって表示切り替え */}
-          {user ? (
+          {/* {user ? (
             <div className="relative group">
               <button
                 type="button"
@@ -128,7 +128,7 @@ const Header = () => {
                 会員登録
               </Link>
             </>
-          )}
+          )} */}
           <PremiumButton withShimmer onClick={() => router.push("#booking")}>
             ご予約はこちら
           </PremiumButton>

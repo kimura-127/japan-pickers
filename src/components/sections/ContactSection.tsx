@@ -302,8 +302,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-white text-sm font-medium mb-1">お電話</h4>
-                    <p className="text-jp-gold text-lg font-medium">0120-000-000</p>
-                    <p className="text-jp-silver text-sm">受付時間: 9:00〜18:00（年中無休）</p>
+                    <p className="text-jp-gold text-lg font-medium">027-386-9948</p>
+                    <p className="text-jp-silver text-sm">受付時間: 10:00〜18:00</p>
                   </div>
                 </div>
 
@@ -313,7 +313,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-white text-sm font-medium mb-1">メール</h4>
-                    <p className="text-jp-gold text-lg font-medium">info@japan-pickers.com</p>
+                    <p className="text-jp-gold text-lg font-medium">japan.pickers@gmail.com</p>
                     <p className="text-jp-silver text-sm">24時間受付中</p>
                   </div>
                 </div>
@@ -325,17 +325,27 @@ const ContactSection = () => {
                   <div>
                     <h4 className="text-white text-sm font-medium mb-1">所在地</h4>
                     <p className="text-jp-gold text-lg font-medium">群馬県高崎市</p>
-                    <p className="text-jp-silver text-sm">〒370-0001 群馬県高崎市XXX-XXX</p>
-                    <p className="text-jp-silver text-sm">営業時間: 9:00〜18:00（年中無休）</p>
+                    <p className="text-jp-silver text-sm">〒370-3521 群馬県高崎市棟高町50-1</p>
+                    <p className="text-jp-silver text-sm">営業時間: 10:00〜18:00</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Map placeholder */}
+            {/* Map */}
             <div className="glass-card p-4">
+              {/* 住所表示 */}
+              <p className="text-jp-silver text-sm mb-2">〒370-3521 群馬県高崎市棟高町50-1</p>
               <div className="bg-jp-darkgray/50 h-72 flex items-center justify-center">
-                <p className="text-jp-silver">Google Maps地図が表示されます</p>
+                {/* Google Maps埋め込みiframe */}
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.google.com/maps?q=〒370-3521+群馬県高崎市棟高町50-1&hl=ja&output=embed"
+                  title="群馬県高崎市棟高町50-1 の地図"
+                  allowFullScreen
+                  loading="lazy"
+                  aria-hidden="false"
+                />
               </div>
             </div>
           </div>

@@ -83,6 +83,7 @@ export interface Vehicle {
   vehicleType: VehicleType; // 車両タイプを追加
   subText?: string;
   pricingPlan: PricingPlan; // 料金プランを追加
+  isHidden?: boolean;
 }
 
 // キャンペーン割引率（20%OFF）
@@ -740,8 +741,9 @@ export const otherVehicles: Vehicle[] = [
         type: "interior",
       },
     ],
-    capacity: 8,
-    features: ["8名乗車", "6名就寝", "シャワー・トイレ完備", "FreeWi-fi", "AmazonfireTV"],
+    capacity: 4,
+    subText: "※要問い合わせ",
+    features: [],
     detailedFeatures: [
       {
         icon: "chef-hat",
@@ -780,6 +782,7 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     pricePerNight: 45200,
+    isHidden: true,
     rating: 4.8,
     reviewCount: 24,
     specs: {
@@ -931,8 +934,9 @@ export const otherVehicles: Vehicle[] = [
         type: "interior",
       },
     ],
-    capacity: 8,
-    features: ["8名乗車", "6名就寝", "シャワー・トイレ完備", "FreeWi-fi", "AmazonfireTV"],
+    capacity: 2,
+    subText: "※要問い合わせ",
+    features: [],
     detailedFeatures: [
       {
         icon: "chef-hat",
@@ -971,6 +975,7 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     pricePerNight: 45200,
+    isHidden: true,
     rating: 4.8,
     reviewCount: 24,
     specs: {
@@ -1227,8 +1232,9 @@ export const otherVehicles: Vehicle[] = [
         type: "interior",
       },
     ],
-    capacity: 8,
-    features: ["8名乗車", "6名就寝", "シャワー・トイレ完備", "FreeWi-fi", "AmazonfireTV"],
+    capacity: 1,
+    subText: "※要問い合わせ",
+    features: [],
     detailedFeatures: [
       {
         icon: "chef-hat",
@@ -1267,6 +1273,7 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     pricePerNight: 45200,
+    isHidden: true,
     rating: 4.8,
     reviewCount: 24,
     specs: {

@@ -6,9 +6,6 @@ import { ArrowLeft, Maximize, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-// useState は将来的にタブ機能を実装する際に使用予定
-// import { useState } from "react";
-import VehicleBooking from "./VehicleBooking";
 import VehicleEquipment from "./VehicleEquipment";
 import VehicleGallery from "./VehicleGallery";
 import { VehiclePricing } from "./VehiclePricing";
@@ -145,14 +142,14 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       </section>
 
       {/* 予約セクション */}
-      <section id="booking" className="py-16 bg-jp-darkgray/30">
+      {/* <section id="booking" className="py-16 bg-jp-darkgray/30">
         <div className="premium-container">
           <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
             空き状況・予約
           </h2>
           <VehicleBooking vehicle={vehicle} />
         </div>
-      </section>
+      </section> */}
 
       {/* 料金テーブルセクション */}
       <section className="py-16 bg-jp-black">

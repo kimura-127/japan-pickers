@@ -773,14 +773,50 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
       <ReservationFormModal
         open={isReservationModalOpen}
         onOpenChange={setIsReservationModalOpen}
-        onSubmit={(data) => {
-          console.log("予約情報:", data);
-          // ここでバックエンド連携などの処理を行う予定
-          // 今回はフロントエンドのみの実装のため、モーダルを閉じるだけ
-          setIsReservationModalOpen(false);
-          toast.success("予約が完了しました", {
-            description: "ご予約の詳細をメールでお送りしました。",
-          });
+        onSubmit={async (data) => {
+          try {
+            console.log("予約情報:", data);
+            console.log("vehicle ID:", vehicle.id, "型:", typeof vehicle.id);
+
+            // ユーザー認証情報（実際のアプリでは適切な認証方法を使用）
+            const userId = "temp-user-id"; // 一時的なユーザーID（実際の実装では認証から取得）
+
+            // 予約情報をAPIに送信
+            const response = await fetch("/api/bookings", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                vehicleId: String(vehicle.id), // 文字列に変換
+                userId: userId,
+                startDate: dateRange?.from?.toISOString(),
+                endDate: dateRange?.to?.toISOString(),
+                departureTime: departureTime,
+                arrivalTime: arrivalTime,
+                userName: data.name,
+                userEmail: data.email,
+                userPhone: data.phone,
+              }),
+            });
+
+            const result = await response.json();
+            console.log("予約結果:", result);
+            if (!response.ok) {
+              throw new Error(result.message || "予約処理中にエラーが発生しました");
+            }
+
+            // 予約成功
+            setIsReservationModalOpen(false);
+            toast.success("予約が完了しました", {
+              description: "ご予約の詳細をメールでお送りしました。",
+            });
+          } catch (error) {
+            console.error("予約処理中のエラー:", error);
+            toast.error("予約処理中にエラーが発生しました", {
+              description: "後ほど再度お試しいただくか、お電話でご連絡ください。",
+            });
+          }
         }}
         reservationSummary={{
           vehicleName: vehicle.name,

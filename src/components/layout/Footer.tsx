@@ -69,22 +69,22 @@ const Footer = () => {
               <li className="flex items-start">
                 <Phone className="h-5 w-5 text-jp-gold mr-2 flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-white text-sm">0120-000-000</p>
-                  <p className="text-jp-silver text-xs">受付時間: 9:00〜18:00</p>
+                  <p className="text-white text-sm">027-386-9948</p>
+                  <p className="text-jp-silver text-xs">受付時間: 10:00〜18:00</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <Mail className="h-5 w-5 text-jp-gold mr-2 flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-white text-sm">info@japan-pickers.com</p>
+                  <p className="text-white text-sm">japan.pickers@gmail.com</p>
                   <p className="text-jp-silver text-xs">24時間受付中</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-jp-gold mr-2 flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-white text-sm">〒370-0001</p>
-                  <p className="text-jp-silver text-xs">群馬県高崎市XXX-XXX</p>
+                  <p className="text-white text-sm">〒370-3521</p>
+                  <p className="text-jp-silver text-xs">群馬県高崎市棟高町50-1</p>
                 </div>
               </li>
             </ul>

@@ -14,35 +14,20 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Vehicle {
-  id          String    @id @default(uuid())
-  name        String
-  description String
-  price       Float
-  image_url   String?
-  capacity    Int
-  features    String[] // PostgreSQLは配列型をサポートしているので戻す
-  slug        String    @unique
-  bookings    Booking[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
-}
-
 model Booking {
-  id         String   @id @default(uuid())
-  vehicleId  String
-  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
-  userId     String // auth.usersテーブルのIDと紐付け
-  startDate  DateTime
-  endDate    DateTime
-  userName   String
-  userEmail  String
-  userPhone  String
-  status     String   @default("pending")
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id            String   @id @default(uuid())
+  userId        String // auth.usersテーブルのIDと紐付け
+  startDate     DateTime
+  endDate       DateTime
+  departureTime String // 出発時刻（例: "10:00"）
+  arrivalTime   String // 到着時刻（例: "18:00"）
+  userName      String
+  userEmail     String
+  userPhone     String
+  status        String   @default("pending")
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  @@index([vehicleId])
   @@index([userId])
 }
 
@@ -53,12 +38,12 @@ enum ContactStatus {
 }
 
 model Contact {
-  id        String        @id @default(uuid())
-  name      String
-  email     String
-  phone     String?
-  message   String
-  status    ContactStatus @default(PENDING)
-  created_at DateTime     @default(now())
-  updated_at DateTime     @updatedAt
+  id         String        @id @default(uuid())
+  name       String
+  email      String
+  phone      String?
+  message    String
+  status     ContactStatus @default(PENDING)
+  created_at DateTime      @default(now())
+  updated_at DateTime      @updatedAt
 }

@@ -14,6 +14,7 @@ interface VehicleCardProps {
   pricePerNight: number;
   onClick?: () => void;
   onBookingClick?: () => void;
+  isHidden?: boolean;
 }
 
 const VehicleCard = ({
@@ -26,6 +27,7 @@ const VehicleCard = ({
   pricePerNight,
   onClick,
   onBookingClick,
+  isHidden = false,
 }: VehicleCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -78,12 +80,14 @@ const VehicleCard = ({
           })}
         </div>
 
-        <div className="flex items-center justify-between my-4">
-          <div>
-            <p className="text-sm text-jp-silver">1泊あたり</p>
-            <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}~</p>
+        {!isHidden && (
+          <div className="flex items-center justify-between my-4">
+            <div>
+              <p className="text-sm text-jp-silver">1泊あたり</p>
+              <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}~</p>
+            </div>
           </div>
-        </div>
+        )}
         <div className="flex justify-center gap-6">
           <PremiumButton
             variant="black"
