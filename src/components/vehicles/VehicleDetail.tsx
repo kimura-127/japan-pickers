@@ -135,9 +135,13 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       {/* タブコンテンツ */}
       <section className="py-16 bg-jp-black">
         <div className="premium-container">
-          <VehicleSpecifications features={vehicle.detailedFeatures} specs={vehicle.specs} />
+          <VehicleSpecifications
+            features={vehicle.detailedFeatures}
+            specs={vehicle.specs}
+            isHidden={vehicle.isHidden}
+          />
 
-          <VehicleEquipment equipment={vehicle.equipment} />
+          <VehicleEquipment equipment={vehicle.equipment} isHidden={vehicle.isHidden} />
         </div>
       </section>
 

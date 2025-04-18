@@ -249,8 +249,7 @@ export const vehicles: Vehicle[] = [
       {
         icon: "chef-hat",
         name: "フルキッチン",
-        description:
-          "90Lの大型冷蔵庫、電子レンジ、3口ガスコンロを完備。調理器具と食器も揃っていいるので、本格的な料理が楽しめます。",
+        description: "90Lの大型冷蔵庫、電子レンジ、3口ガスコンロを完備。",
       },
       {
         icon: "battery-charging",
@@ -303,10 +302,7 @@ export const vehicles: Vehicle[] = [
         "電子レンジ",
         "3口ガスコンロ",
         "電気ケトル",
-        "トースター",
-        "コーヒーメーカー",
-        "調理器具一式",
-        "食器類一式",
+        "※車内でのコンロ使用は軽食程度とし、油料理は禁止",
       ],
       bathroom: [
         "温水シャワー",
@@ -452,8 +448,6 @@ export const vehicles: Vehicle[] = [
         "電子レンジ",
         "シンク（温水/冷水）",
         "給水・排水タンク各19L",
-        "食器セット（6人用）",
-        "調理器具一式",
         "※車内でのコンロ使用は軽食程度とし、油料理は禁止",
       ],
       bathroom: ["カセットトイレ", "外部シャワー", "ポータブルトイレ"],
@@ -616,8 +610,6 @@ export const vehicles: Vehicle[] = [
         "冷蔵庫90L",
         "電子レンジ",
         "シンク（温水/冷水）",
-        "食器セット（6人用）",
-        "調理器具一式",
         "※車内でのコンロ使用は軽食程度とし、油料理は禁止",
       ],
       bathroom: ["水洗トイレ", "洗面台＆ミラー", "シャワー", "温水ボイラー"],
@@ -695,8 +687,7 @@ export const otherVehicles: Vehicle[] = [
     id: 1,
     name: "Jeep ミリタリー色",
     slug: "jeep-military",
-    description:
-      "わたしたちがご用意するのは、最高峰ラグジュアリーサロンモーターホーム、純国産フルコン・ＲＶランドフラッグシップ「ランドホームグランデ」！車両サイズは、641 x 227 x H300cm。当時ＲＶランドから３台しか生産されていない走る高級ホテルと呼ばれ、人を運ぶために設計製造されたマイクロバスがベースです。さらに運転席はレカロシート装備、助手席には専用ＡＶモニターを設置し、長距離運転も快適、乗り心地も抜群です。またキャンピングカー大好き店主がこだわりの電装システムを構築し、外部電源に頼らずとも快適キャンプをお楽しみください。",
+    description: "三菱ジープ",
     shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
     image: "/images/otherVehicle/jeep_military4.JPG",
     images: [
@@ -782,9 +773,6 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     pricePerNight: 45200,
-    isHidden: true,
-    rating: 4.8,
-    reviewCount: 24,
     specs: {
       length: "641",
       width: "227",
@@ -797,6 +785,9 @@ export const otherVehicles: Vehicle[] = [
       capacity: 8,
       sleepingCapacity: 6,
     },
+    isHidden: true,
+    rating: 4.8,
+    reviewCount: 24,
     equipment: {
       kitchen: [
         "冷蔵庫90L",
@@ -888,8 +879,7 @@ export const otherVehicles: Vehicle[] = [
     id: 2,
     name: "Jeep カーキ色",
     slug: "jeep-khaki",
-    description:
-      "わたしたちがご用意するのは、最高峰ラグジュアリーサロンモーターホーム、純国産フルコン・ＲＶランドフラッグシップ「ランドホームグランデ」！車両サイズは、641 x 227 x H300cm。当時ＲＶランドから３台しか生産されていない走る高級ホテルと呼ばれ、人を運ぶために設計製造されたマイクロバスがベースです。さらに運転席はレカロシート装備、助手席には専用ＡＶモニターを設置し、長距離運転も快適、乗り心地も抜群です。またキャンピングカー大好き店主がこだわりの電装システムを構築し、外部電源に頼らずとも快適キャンプをお楽しみください。",
+    description: "三菱ジープ",
     shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
     image: "/images/otherVehicle/jeep_khaki1.JPG",
     images: [
@@ -975,9 +965,6 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     pricePerNight: 45200,
-    isHidden: true,
-    rating: 4.8,
-    reviewCount: 24,
     specs: {
       length: "641",
       width: "227",
@@ -990,6 +977,9 @@ export const otherVehicles: Vehicle[] = [
       capacity: 8,
       sleepingCapacity: 6,
     },
+    isHidden: true,
+    rating: 4.8,
+    reviewCount: 24,
     equipment: {
       kitchen: [
         "冷蔵庫90L",
@@ -1273,9 +1263,6 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     pricePerNight: 45200,
-    isHidden: true,
-    rating: 4.8,
-    reviewCount: 24,
     specs: {
       length: "641",
       width: "227",
@@ -1288,6 +1275,9 @@ export const otherVehicles: Vehicle[] = [
       capacity: 8,
       sleepingCapacity: 6,
     },
+    isHidden: true,
+    rating: 4.8,
+    reviewCount: 24,
     equipment: {
       kitchen: [
         "冷蔵庫90L",

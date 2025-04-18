@@ -8,9 +8,14 @@ import type { JSX } from "react";
 interface VehicleSpecificationsProps {
   features: VehicleFeature[];
   specs: VehicleSpec;
+  isHidden?: boolean;
 }
 
-const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) => {
+const VehicleSpecifications = ({
+  features,
+  specs,
+  isHidden = false,
+}: VehicleSpecificationsProps) => {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -252,34 +257,38 @@ const VehicleSpecifications = ({ features, specs }: VehicleSpecificationsProps) 
 
   return (
     <div>
-      <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
-        基本情報・特徴
-      </h2>
+      {!isHidden && (
+        <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
+          基本情報・特徴
+        </h2>
+      )}
 
       {/* 特徴セクション */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        {features.map((feature, index) => (
-          <motion.div
-            key={`feature-${feature.name}`}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={index}
-            variants={fadeIn}
-            className="bg-jp-darkgray/30 rounded-xl p-6 border border-jp-darkgray/50"
-          >
-            <div className="flex items-start gap-4">
-              <div className="gold-icon p-3 bg-jp-black/50 rounded-full">
-                {getIcon(feature.icon)}
+      {!isHidden && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {features.map((feature, index) => (
+            <motion.div
+              key={`feature-${feature.name}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={index}
+              variants={fadeIn}
+              className="bg-jp-darkgray/30 rounded-xl p-6 border border-jp-darkgray/50"
+            >
+              <div className="flex items-start gap-4">
+                <div className="gold-icon p-3 bg-jp-black/50 rounded-full">
+                  {getIcon(feature.icon)}
+                </div>
+                <div>
+                  <h3 className="text-xl font-medium text-white mb-2">{feature.name}</h3>
+                  <p className="text-jp-silver">{feature.description}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-medium text-white mb-2">{feature.name}</h3>
-                <p className="text-jp-silver">{feature.description}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
 
       {/* 仕様セクション */}
       <div className="mb-16">
