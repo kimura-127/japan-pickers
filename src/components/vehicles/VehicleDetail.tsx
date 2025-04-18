@@ -90,12 +90,14 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                 <Users className="gold-icon w-5 h-5" />
                 <span>{vehicle.capacity}名様</span>
               </div>
-              <div className="flex items-center gap-2 text-jp-silver">
-                <Maximize className="gold-icon w-5 h-5" />
-                <span>
-                  {vehicle.specs.length} × {vehicle.specs.width} × H{vehicle.specs.height}cm
-                </span>
-              </div>
+              {vehicle.isHidden || (
+                <div className="flex items-center gap-2 text-jp-silver">
+                  <Maximize className="gold-icon w-5 h-5" />
+                  <span>
+                    {vehicle.specs.length} × {vehicle.specs.width} × H{vehicle.specs.height}cm
+                  </span>
+                </div>
+              )}
             </motion.div>
 
             <motion.div
