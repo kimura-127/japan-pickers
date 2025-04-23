@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 import { Cpu, Users } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -83,8 +84,28 @@ const VehicleCard = ({
         {!isHidden && (
           <div className="flex items-center justify-between my-4">
             <div>
-              <p className="text-sm text-jp-silver">1泊あたり</p>
-              <p className="text-xl font-medium text-jp-gold">¥{pricePerNight.toLocaleString()}~</p>
+              <p className="text-sm text-jp-silver">24h</p>
+              {CAMPAIGN_DISCOUNT_RATE ? (
+                <>
+                  <div className="flex justify-between items-center text-lg font-medium mb-1">
+                    <p className="text-white line-through">¥{pricePerNight.toLocaleString()}~</p>
+                  </div>
+                  <div className="flex justify-between items-center gap-4">
+                    <span className="text-red-500 font-bold text-xl">
+                      ¥{Math.round(pricePerNight * CAMPAIGN_DISCOUNT_RATE).toLocaleString()}~
+                    </span>
+                    <span className="text-jp-silver flex items-center">
+                      <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
+                        キャンペーン
+                      </span>
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <p className="text-xl font-medium text-jp-gold">
+                  ¥{pricePerNight.toLocaleString()}~
+                </p>
+              )}
             </div>
           </div>
         )}

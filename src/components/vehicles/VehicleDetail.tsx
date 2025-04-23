@@ -1,11 +1,13 @@
 "use client";
 
 import type { Vehicle } from "@/lib/vehicles";
+import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 import { motion } from "framer-motion";
 import { ArrowLeft, Maximize, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import VehicleBooking from "./VehicleBooking";
 import VehicleEquipment from "./VehicleEquipment";
 import VehicleGallery from "./VehicleGallery";
 import { VehiclePricing } from "./VehiclePricing";
@@ -108,10 +110,32 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               className="flex items-center gap-4 mt-8"
             >
               <div>
-                <p className="text-jp-silver text-sm">1泊あたり</p>
-                <p className="text-3xl font-bold text-jp-gold">
-                  ¥{vehicle.pricePerNight.toLocaleString()}~
-                </p>
+                <p className="text-jp-silver text-sm">24h</p>
+                {CAMPAIGN_DISCOUNT_RATE ? (
+                  <>
+                    <p className="text-2xl font-bold text-white line-through mb-1">
+                      ¥{vehicle.pricePerNight.toLocaleString()}~
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <p className="text-3xl font-bold text-red-500">
+                        ¥
+                        {Math.round(
+                          vehicle.pricePerNight * CAMPAIGN_DISCOUNT_RATE,
+                        ).toLocaleString()}
+                        ~
+                      </p>
+                      <span className="text-jp-silver flex items-center">
+                        <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
+                          キャンペーン
+                        </span>
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <p className="text-3xl font-bold text-jp-gold">
+                    ¥{vehicle.pricePerNight.toLocaleString()}~
+                  </p>
+                )}
               </div>
               <a
                 href="#booking"
@@ -148,14 +172,14 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       </section>
 
       {/* 予約セクション */}
-      {/* <section id="booking" className="py-16 bg-jp-darkgray/30">
+      <section id="booking" className="py-16 bg-jp-darkgray/30">
         <div className="premium-container">
           <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
             空き状況・予約
           </h2>
           <VehicleBooking vehicle={vehicle} />
         </div>
-      </section> */}
+      </section>
 
       {/* 料金テーブルセクション */}
       {!vehicle.isHidden && (
