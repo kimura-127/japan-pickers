@@ -85,7 +85,6 @@ const OtherVehicleSection = () => {
                   capacity={vehicle.capacity}
                   subText={vehicle.subText}
                   features={vehicle.features}
-                  pricePerNight={vehicle.pricePerNight}
                   onClick={() => {
                     router.push(`/vehicles/${vehicle.slug}`);
                   }}

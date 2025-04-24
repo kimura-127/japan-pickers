@@ -13,7 +13,7 @@ interface VehicleCardProps {
   capacity: string | number;
   features: string[];
   subText?: string;
-  vehicleType: "vega" | "landHome" | "camroad";
+  vehicleType?: "vega" | "landHome" | "camroad";
   onClick?: () => void;
   onBookingClick?: () => void;
   isHidden?: boolean;
@@ -82,7 +82,7 @@ const VehicleCard = ({
           })}
         </div>
 
-        {!isHidden && (
+        {!isHidden && vehicleType && (
           <div className="flex items-center justify-between my-4">
             <div>
               <p className="text-sm text-jp-silver">24h</p>

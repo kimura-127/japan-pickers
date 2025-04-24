@@ -91,7 +91,7 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
                 )}
               </TableCell>
             </TableRow>
-            {pricingPlan.premiumSeason && (
+            {/* {pricingPlan.premiumSeason && (
               <TableRow className="border-white hover:bg-gray-900">
                 <TableCell className="border-r border-white text-white font-medium p-3">
                   プレミアムシーズン
@@ -114,7 +114,7 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
                   )}
                 </TableCell>
               </TableRow>
-            )}
+            )} */}
           </TableBody>
         </Table>
       </div>
