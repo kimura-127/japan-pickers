@@ -64,7 +64,7 @@ const Header = () => {
         <Link href="/" className="flex items-center">
           <div className="flex items-center">
             <span className="font-playfair text-2xl font-bold gold-gradient-text">
-              ジャパンピッカーズ
+              ピッカーズレンタカー
             </span>
           </div>
         </Link>

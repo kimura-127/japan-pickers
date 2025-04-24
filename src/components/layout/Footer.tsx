@@ -1,7 +1,8 @@
 "use client";
 
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import { Info, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
+import { SiLine } from "react-icons/si";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,6 +15,8 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center">
               <span className="font-playfair text-2xl font-bold gold-gradient-text">
+                合同会社
+                <br />
                 ジャパンピッカーズ
               </span>
             </div>
@@ -67,6 +70,12 @@ const Footer = () => {
             <h3 className="text-jp-gold text-lg font-medium mb-4">コンタクト</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
+                <Info className="h-5 w-5 text-jp-gold mr-2 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-white text-sm">合同会社ジャパンピッカーズ</p>
+                </div>
+              </li>
+              <li className="flex items-start">
                 <Phone className="h-5 w-5 text-jp-gold mr-2 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white text-sm">027-386-9948</p>
@@ -97,9 +106,9 @@ const Footer = () => {
               <Link
                 href="#"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
-                aria-label="Facebook"
+                aria-label="LINE"
               >
-                <Facebook className="h-5 w-5" />
+                <SiLine className="h-5 w-5" />
               </Link>
               <Link
                 href="https://www.instagram.com/japan.pickers"
