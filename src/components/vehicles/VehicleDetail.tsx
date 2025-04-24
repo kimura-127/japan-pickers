@@ -3,11 +3,10 @@
 import type { Vehicle } from "@/lib/vehicles";
 import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 import { motion } from "framer-motion";
-import { ArrowLeft, Maximize, Users } from "lucide-react";
+import { Maximize, Users } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect } from "react";
-// import VehicleBooking from "./VehicleBooking";
+import VehicleBooking from "./VehicleBooking";
 import VehicleEquipment from "./VehicleEquipment";
 import VehicleGallery from "./VehicleGallery";
 import { VehiclePricing } from "./VehiclePricing";
@@ -60,14 +59,6 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
 
         <div className="relative z-10 h-full flex flex-col justify-end">
           <div className="premium-container">
-            <Link
-              href="/#vehicles"
-              className="inline-flex items-center gap-2 text-jp-silver hover:text-jp-gold transition-colors mb-6"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>車両一覧に戻る</span>
-            </Link>
-
             <motion.div
               initial="hidden"
               animate="visible"
@@ -174,14 +165,14 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       </section>
 
       {/* 予約セクション */}
-      {/* <section id="booking" className="py-16 bg-jp-darkgray/30">
+      <section id="booking" className="py-16 bg-jp-darkgray/30">
         <div className="premium-container">
           <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
             空き状況・予約
           </h2>
           <VehicleBooking vehicle={vehicle} />
         </div>
-      </section> */}
+      </section>
 
       {/* 料金テーブルセクション */}
       {!vehicle.isHidden && (

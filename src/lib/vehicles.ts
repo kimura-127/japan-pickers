@@ -90,7 +90,7 @@ export interface Vehicle {
 }
 
 // キャンペーン割引率（20%OFF）
-export const CAMPAIGN_DISCOUNT_RATE = 0.8;
+export const CAMPAIGN_DISCOUNT_RATE = 0.85;
 
 // 車両データ
 export const vehicles: Vehicle[] = [
@@ -365,28 +365,28 @@ export const vehicles: Vehicle[] = [
     vehicleType: "landHome", // 車両タイプを追加
     pricingPlan: {
       weekday: {
-        initialDay: 44000,
-        additionalDay: 35200,
+        initialDay: 54000,
+        additionalDay: 55200,
         hourlyRate: 6800,
-        maxHourlyCharge: 35200,
+        maxHourlyCharge: 55200,
       },
       weekend: {
-        initialDay: 49500,
-        additionalDay: 42075,
+        initialDay: 59500,
+        additionalDay: 52075,
         hourlyRate: 6800,
-        maxHourlyCharge: 42075,
+        maxHourlyCharge: 52075,
       },
       highSeason: {
-        initialDay: 58000,
-        additionalDay: 49300,
+        initialDay: 68000,
+        additionalDay: 59300,
         hourlyRate: 6800,
-        maxHourlyCharge: 49300,
+        maxHourlyCharge: 59300,
       },
       premiumSeason: {
-        initialDay: 68000,
-        additionalDay: 57800,
+        initialDay: 78000,
+        additionalDay: 67800,
         hourlyRate: 6800,
-        maxHourlyCharge: 57800,
+        maxHourlyCharge: 67800,
       },
     },
   },

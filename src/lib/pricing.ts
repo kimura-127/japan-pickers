@@ -41,22 +41,22 @@ export const PRICE_TABLE: Record<VehicleType, Record<DayType, PriceStructure>> =
   },
   landHome: {
     weekday: {
-      initial24h: 44000,
-      additionalDay: 35200,
+      initial24h: 54000,
+      additionalDay: 45200,
       hourlyRate: 6800,
-      hourlyMax: 35200,
+      hourlyMax: 45200,
     },
     weekend: {
-      initial24h: 49500,
-      additionalDay: 42075,
+      initial24h: 59500,
+      additionalDay: 52075,
       hourlyRate: 6800,
-      hourlyMax: 42075,
+      hourlyMax: 52075,
     },
     highSeason: {
-      initial24h: 58000,
-      additionalDay: 49300,
+      initial24h: 68000,
+      additionalDay: 59300,
       hourlyRate: 6800,
-      hourlyMax: 49300,
+      hourlyMax: 59300,
     },
   },
   // カムロードZiLの料金
@@ -85,8 +85,8 @@ export const HIGH_SEASON_PERIODS = [
   { start: { month: 7, day: 14 }, end: { month: 8, day: 31 } },
   // 年末: 12/27～1/3
   { start: { month: 12, day: 27 }, end: { month: 1, day: 3 } },
-  // 春休み: 3/20-4/15
-  { start: { month: 3, day: 20 }, end: { month: 4, day: 15 } },
+  // 春休み: 3/20-4/5
+  { start: { month: 3, day: 20 }, end: { month: 4, day: 5 } },
   // GW: 4/29-5/6
   { start: { month: 4, day: 29 }, end: { month: 5, day: 6 } },
 ];

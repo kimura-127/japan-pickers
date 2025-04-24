@@ -151,7 +151,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
       total += timeFee;
     }
 
-    // キャンペーン割引を適用（2割引）
+    // キャンペーン割引を適用
     const discountedTotal = Math.round(total * CAMPAIGN_DISCOUNT_RATE);
 
     return { total, breakdown, timeFee, extraHours, discountedTotal };
@@ -643,7 +643,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                   <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
                     キャンペーン
                   </span>
-                  20%OFF適用後
+                  {`${((1 - CAMPAIGN_DISCOUNT_RATE) * 100).toFixed(0)}%OFF適用後`}
                 </span>
                 <span className="text-red-500 font-bold text-xl">
                   {calculateTotal().total > 0

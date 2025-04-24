@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -9,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import { formatPrice } from "@/lib/utils";
 import type { PricingPlan } from "@/lib/vehicles";
+import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 
 interface VehiclePricingProps {
   pricingPlan: PricingPlan;
@@ -38,16 +38,16 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
                 平日
               </TableCell>
               <TableCell className="border-r border-white text-white p-3">
-                {formatPrice(pricingPlan.weekday.initialDay)}
+                {formatPrice(pricingPlan.weekday.initialDay * CAMPAIGN_DISCOUNT_RATE)}
               </TableCell>
               <TableCell className="border-r border-white text-white p-3">
-                {formatPrice(pricingPlan.weekday.additionalDay)}
+                {formatPrice(pricingPlan.weekday.additionalDay * CAMPAIGN_DISCOUNT_RATE)}
               </TableCell>
               <TableCell className="text-white p-3">
                 {formatPrice(pricingPlan.weekday.hourlyRate)}
                 {pricingPlan.weekday.maxHourlyCharge && (
                   <span className="text-sm block text-white/70">
-                    最大 {formatPrice(pricingPlan.weekday.maxHourlyCharge)}
+                    最大 {formatPrice(pricingPlan.weekday.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE)}
                   </span>
                 )}
               </TableCell>
@@ -57,16 +57,16 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
                 週末（金土日・祝）
               </TableCell>
               <TableCell className="border-r border-white text-white p-3">
-                {formatPrice(pricingPlan.weekend.initialDay)}
+                {formatPrice(pricingPlan.weekend.initialDay * CAMPAIGN_DISCOUNT_RATE)}
               </TableCell>
               <TableCell className="border-r border-white text-white p-3">
-                {formatPrice(pricingPlan.weekend.additionalDay)}
+                {formatPrice(pricingPlan.weekend.additionalDay * CAMPAIGN_DISCOUNT_RATE)}
               </TableCell>
               <TableCell className="text-white p-3">
                 {formatPrice(pricingPlan.weekend.hourlyRate)}
                 {pricingPlan.weekend.maxHourlyCharge && (
                   <span className="text-sm block text-white/70">
-                    最大 {formatPrice(pricingPlan.weekend.maxHourlyCharge)}
+                    最大 {formatPrice(pricingPlan.weekend.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE)}
                   </span>
                 )}
               </TableCell>
@@ -76,16 +76,17 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
                 ハイシーズン
               </TableCell>
               <TableCell className="border-r border-white text-white p-3">
-                {formatPrice(pricingPlan.highSeason.initialDay)}
+                {formatPrice(pricingPlan.highSeason.initialDay * CAMPAIGN_DISCOUNT_RATE)}
               </TableCell>
               <TableCell className="border-r border-white text-white p-3">
-                {formatPrice(pricingPlan.highSeason.additionalDay)}
+                {formatPrice(pricingPlan.highSeason.additionalDay * CAMPAIGN_DISCOUNT_RATE)}
               </TableCell>
               <TableCell className="text-white p-3">
                 {formatPrice(pricingPlan.highSeason.hourlyRate)}
                 {pricingPlan.highSeason.maxHourlyCharge && (
                   <span className="text-sm block text-white/70">
-                    最大 {formatPrice(pricingPlan.highSeason.maxHourlyCharge)}
+                    最大{" "}
+                    {formatPrice(pricingPlan.highSeason.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE)}
                   </span>
                 )}
               </TableCell>
@@ -96,27 +97,36 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
                   プレミアムシーズン
                 </TableCell>
                 <TableCell className="border-r border-white text-white p-3">
-                  {formatPrice(pricingPlan.premiumSeason.initialDay)}
+                  {formatPrice(pricingPlan.premiumSeason.initialDay * CAMPAIGN_DISCOUNT_RATE)}
                 </TableCell>
                 <TableCell className="border-r border-white text-white p-3">
-                  {formatPrice(pricingPlan.premiumSeason.additionalDay)}
+                  {formatPrice(pricingPlan.premiumSeason.additionalDay * CAMPAIGN_DISCOUNT_RATE)}
                 </TableCell>
                 <TableCell className="text-white p-3">
                   {formatPrice(pricingPlan.premiumSeason.hourlyRate)}
                   {pricingPlan.premiumSeason.maxHourlyCharge && (
                     <span className="text-sm block text-white/70">
-                      最大 {formatPrice(pricingPlan.premiumSeason.maxHourlyCharge)}
+                      最大{" "}
+                      {formatPrice(
+                        pricingPlan.premiumSeason.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE,
+                      )}
                     </span>
                   )}
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
-          <TableCaption className="mt-4 text-white/80 pb-2">
-            ※ ハイシーズン:
-            夏休み(7/14～8/31)、年末年始(12/27～1/3)、春休み(3/20～4/15)、GW(4/29～5/6)
-          </TableCaption>
         </Table>
+      </div>
+      <div className="mt-4 text-sm text-jp-silver">
+        <p>
+          ※ハイシーズン：夏休み（7/14～8/31）、年末年始（12/27～1/3）、春休み（3/20～4/5）、GW（4/29～5/6）
+        </p>
+        <p>※プレミアムシーズン：特定の連休や特別期間（お盆、年末年始など）</p>
+        <p>※表示価格はすべて税込みです</p>
+        <p className="mt-2 text-red-500">
+          ※現在、キャンペーン割引（{((1 - CAMPAIGN_DISCOUNT_RATE) * 100).toFixed(0)}%OFF）適用中
+        </p>
       </div>
     </div>
   );

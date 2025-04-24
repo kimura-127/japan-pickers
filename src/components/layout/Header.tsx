@@ -35,6 +35,7 @@ const Header = () => {
     { name: "車両ラインナップ", href: "#vehicles" },
     { name: "予約システム", href: "#booking" },
     { name: "よくある質問", href: "#faq" },
+    { name: "保険・補償制度", href: "/insurance-policy" },
   ];
 
   const handleSignOut = async () => {
