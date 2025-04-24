@@ -1,3 +1,4 @@
+import { PRICE_TABLE } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 import { Cpu, Users } from "lucide-react";
@@ -12,7 +13,7 @@ interface VehicleCardProps {
   capacity: string | number;
   features: string[];
   subText?: string;
-  pricePerNight: number;
+  vehicleType: "vega" | "landHome" | "camroad";
   onClick?: () => void;
   onBookingClick?: () => void;
   isHidden?: boolean;
@@ -25,7 +26,7 @@ const VehicleCard = ({
   capacity,
   features,
   subText,
-  pricePerNight,
+  vehicleType,
   onClick,
   onBookingClick,
   isHidden = false,
@@ -88,11 +89,17 @@ const VehicleCard = ({
               {CAMPAIGN_DISCOUNT_RATE ? (
                 <>
                   <div className="flex justify-between items-center text-lg font-medium mb-1">
-                    <p className="text-white line-through">¥{pricePerNight.toLocaleString()}~</p>
+                    <p className="text-white line-through">
+                      ¥{PRICE_TABLE[vehicleType].weekday.initial24h.toLocaleString()}~
+                    </p>
                   </div>
                   <div className="flex justify-between items-center gap-4">
                     <span className="text-red-500 font-bold text-xl">
-                      ¥{Math.round(pricePerNight * CAMPAIGN_DISCOUNT_RATE).toLocaleString()}~
+                      ¥
+                      {Math.round(
+                        PRICE_TABLE[vehicleType].weekday.initial24h * CAMPAIGN_DISCOUNT_RATE,
+                      ).toLocaleString()}
+                      ~
                     </span>
                     <span className="text-jp-silver flex items-center">
                       <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
@@ -103,7 +110,7 @@ const VehicleCard = ({
                 </>
               ) : (
                 <p className="text-xl font-medium text-jp-gold">
-                  ¥{pricePerNight.toLocaleString()}~
+                  ¥{PRICE_TABLE[vehicleType].weekday.initial24h.toLocaleString()}~
                 </p>
               )}
             </div>
