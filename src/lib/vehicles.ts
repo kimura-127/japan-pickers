@@ -364,9 +364,9 @@ export const vehicles: Vehicle[] = [
     pricingPlan: {
       weekday: {
         initialDay: 54000,
-        additionalDay: 55200,
+        additionalDay: 45200,
         hourlyRate: 6800,
-        maxHourlyCharge: 55200,
+        maxHourlyCharge: 45200,
       },
       weekend: {
         initialDay: 59500,
@@ -379,12 +379,6 @@ export const vehicles: Vehicle[] = [
         additionalDay: 59300,
         hourlyRate: 6800,
         maxHourlyCharge: 59300,
-      },
-      premiumSeason: {
-        initialDay: 78000,
-        additionalDay: 67800,
-        hourlyRate: 6800,
-        maxHourlyCharge: 67800,
       },
     },
   },
@@ -509,11 +503,6 @@ export const vehicles: Vehicle[] = [
       highSeason: {
         initialDay: 30000,
         additionalDay: 25000,
-        hourlyRate: 3800,
-      },
-      premiumSeason: {
-        initialDay: 35000,
-        additionalDay: 30000,
         hourlyRate: 3800,
       },
     },
@@ -683,12 +672,6 @@ export const vehicles: Vehicle[] = [
         additionalDay: 49300,
         hourlyRate: 6800,
         maxHourlyCharge: 49300,
-      },
-      premiumSeason: {
-        initialDay: 68000,
-        additionalDay: 57800,
-        hourlyRate: 6800,
-        maxHourlyCharge: 57800,
       },
     },
   },

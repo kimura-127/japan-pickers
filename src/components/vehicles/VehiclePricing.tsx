@@ -67,17 +67,6 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
               </TableCell>
               <TableCell className="text-white p-3">
                 {formatPrice(pricingPlan.weekday.hourlyRate)}
-                {pricingPlan.weekday.maxHourlyCharge && (
-                  <span className="text-sm block">
-                    <span className="text-gray-400 line-through">
-                      最大 {formatPrice(pricingPlan.weekday.maxHourlyCharge)}
-                    </span>
-                    <span className="text-red-500 font-bold">
-                      最大{" "}
-                      {formatPrice(pricingPlan.weekday.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE)}
-                    </span>
-                  </span>
-                )}
               </TableCell>
             </TableRow>
             <TableRow className="border-white hover:bg-gray-900">
@@ -102,17 +91,6 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
               </TableCell>
               <TableCell className="text-white p-3">
                 {formatPrice(pricingPlan.weekend.hourlyRate)}
-                {pricingPlan.weekend.maxHourlyCharge && (
-                  <span className="text-sm block">
-                    <span className="text-gray-400 line-through">
-                      最大 {formatPrice(pricingPlan.weekend.maxHourlyCharge)}
-                    </span>
-                    <span className="text-red-500 font-bold">
-                      最大{" "}
-                      {formatPrice(pricingPlan.weekend.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE)}
-                    </span>
-                  </span>
-                )}
               </TableCell>
             </TableRow>
             <TableRow className="border-white hover:bg-gray-900">
@@ -137,17 +115,6 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
               </TableCell>
               <TableCell className="text-white p-3">
                 {formatPrice(pricingPlan.highSeason.hourlyRate)}
-                {pricingPlan.highSeason.maxHourlyCharge && (
-                  <span className="text-sm block">
-                    <span className="text-gray-400 line-through">
-                      最大 {formatPrice(pricingPlan.highSeason.maxHourlyCharge)}
-                    </span>
-                    <span className="text-red-500 font-bold">
-                      最大{" "}
-                      {formatPrice(pricingPlan.highSeason.maxHourlyCharge * CAMPAIGN_DISCOUNT_RATE)}
-                    </span>
-                  </span>
-                )}
               </TableCell>
             </TableRow>
             {/* {pricingPlan.premiumSeason && (

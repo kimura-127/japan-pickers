@@ -46,7 +46,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
   return (
     <>
       {/* ヒーローセクション */}
-      <section className="relative h-[80vh] min-h-[600px] bg-jp-black">
+      <section className="relative h-[70vh] sm:h-[75vh] md:h-[80vh] min-h-[500px] bg-jp-black">
         <div className="absolute inset-0 z-0">
           <Image
             src={vehicle.images[0].src}
@@ -58,19 +58,21 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
           <div className="absolute inset-0 bg-gradient-to-b from-jp-black/80 via-jp-black/50 to-jp-black" />
         </div>
 
-        <div className="relative z-10 h-full flex flex-col justify-end">
-          <div className="premium-container">
+        <div className="relative z-10 h-full flex flex-col justify-end pb-8 md:pb-12">
+          <div className="premium-container px-4 sm:px-6 md:px-8">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={fadeIn}
               custom={0}
-              className="mb-4"
+              className="mb-2 sm:mb-3 md:mb-4"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-noto-serif-jp font-bold text-white mb-3">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-noto-serif-jp font-bold text-white mb-2 sm:mb-3">
                 {vehicle.name}
               </h1>
-              <p className="text-xl text-jp-silver max-w-3xl">{vehicle.description}</p>
+              <p className="text-base sm:text-lg md:text-xl text-jp-silver max-w-3xl">
+                {vehicle.description}
+              </p>
             </motion.div>
 
             <motion.div
@@ -78,16 +80,16 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               animate="visible"
               variants={fadeIn}
               custom={1}
-              className="flex flex-wrap gap-6 md:gap-10 mt-8 mb-6"
+              className="flex flex-wrap gap-4 sm:gap-5 md:gap-6 lg:gap-10 mt-4 sm:mt-6 md:mt-8 mb-4 sm:mb-5 md:mb-6"
             >
               <div className="flex items-center gap-2 text-jp-silver">
-                <Users className="gold-icon w-5 h-5" />
-                <span>{vehicle.capacity}名様</span>
+                <Users className="gold-icon w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">{vehicle.capacity}名様</span>
               </div>
               {vehicle.specs.length && vehicle.specs.width && vehicle.specs.height && (
                 <div className="flex items-center gap-2 text-jp-silver">
-                  <Maximize className="gold-icon w-5 h-5" />
-                  <span>
+                  <Maximize className="gold-icon w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">
                     {vehicle.specs.length} × {vehicle.specs.width} × H{vehicle.specs.height}cm
                   </span>
                 </div>
@@ -100,17 +102,17 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                 animate="visible"
                 variants={fadeIn}
                 custom={2}
-                className="flex items-center gap-4 mt-8"
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-4 sm:mt-6 md:mt-8"
               >
                 <div>
-                  <p className="text-jp-silver text-sm">24h</p>
+                  <p className="text-xs sm:text-sm text-jp-silver">24h</p>
                   {CAMPAIGN_DISCOUNT_RATE ? (
                     <>
-                      <p className="text-2xl font-bold text-white line-through mb-1">
+                      <p className="text-lg sm:text-xl md:text-2xl font-bold text-white line-through mb-1">
                         ¥{PRICE_TABLE[vehicle.vehicleType].weekday.initial24h.toLocaleString()}~
                       </p>
-                      <div className="flex items-center gap-4">
-                        <p className="text-3xl font-bold text-red-500">
+                      <div className="flex items-center gap-2 sm:gap-4">
+                        <p className="text-xl sm:text-2xl md:text-3xl font-bold text-red-500">
                           ¥
                           {Math.round(
                             PRICE_TABLE[vehicle.vehicleType].weekday.initial24h *
@@ -126,14 +128,14 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                       </div>
                     </>
                   ) : (
-                    <p className="text-3xl font-bold text-jp-gold">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-jp-gold">
                       ¥{PRICE_TABLE[vehicle.vehicleType].weekday.initial24h.toLocaleString()}~
                     </p>
                   )}
                 </div>
                 <a
                   href="#booking"
-                  className="px-8 py-4 bg-jp-gold text-jp-black font-bold rounded-full hover:bg-jp-gold/90 transition-colors"
+                  className="px-6 sm:px-8 py-3 sm:py-4 bg-jp-gold text-jp-black font-bold rounded-full hover:bg-jp-gold/90 transition-colors text-sm sm:text-base"
                 >
                   予約する
                 </a>
