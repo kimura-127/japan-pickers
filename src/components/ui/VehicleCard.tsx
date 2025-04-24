@@ -110,14 +110,16 @@ const VehicleCard = ({
           </div>
         )}
         <div className="flex justify-center gap-6">
-          <PremiumButton
-            variant="black"
-            size="sm"
-            onClick={onBookingClick}
-            className="transform transition-transform duration-300 group-hover:scale-105"
-          >
-            予約する
-          </PremiumButton>
+          {!isHidden && (
+            <PremiumButton
+              variant="black"
+              size="sm"
+              onClick={onBookingClick}
+              className="transform transition-transform duration-300 group-hover:scale-105"
+            >
+              予約する
+            </PremiumButton>
+          )}
 
           <PremiumButton
             variant="black"

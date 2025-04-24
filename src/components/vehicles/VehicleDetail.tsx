@@ -102,48 +102,50 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               )}
             </motion.div>
 
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              custom={2}
-              className="flex items-center gap-4 mt-8"
-            >
-              <div>
-                <p className="text-jp-silver text-sm">24h</p>
-                {CAMPAIGN_DISCOUNT_RATE ? (
-                  <>
-                    <p className="text-2xl font-bold text-white line-through mb-1">
+            {!vehicle.isHidden && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeIn}
+                custom={2}
+                className="flex items-center gap-4 mt-8"
+              >
+                <div>
+                  <p className="text-jp-silver text-sm">24h</p>
+                  {CAMPAIGN_DISCOUNT_RATE ? (
+                    <>
+                      <p className="text-2xl font-bold text-white line-through mb-1">
+                        ¥{vehicle.pricePerNight.toLocaleString()}~
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <p className="text-3xl font-bold text-red-500">
+                          ¥
+                          {Math.round(
+                            vehicle.pricePerNight * CAMPAIGN_DISCOUNT_RATE,
+                          ).toLocaleString()}
+                          ~
+                        </p>
+                        <span className="text-jp-silver flex items-center">
+                          <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
+                            キャンペーン
+                          </span>
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-3xl font-bold text-jp-gold">
                       ¥{vehicle.pricePerNight.toLocaleString()}~
                     </p>
-                    <div className="flex items-center gap-4">
-                      <p className="text-3xl font-bold text-red-500">
-                        ¥
-                        {Math.round(
-                          vehicle.pricePerNight * CAMPAIGN_DISCOUNT_RATE,
-                        ).toLocaleString()}
-                        ~
-                      </p>
-                      <span className="text-jp-silver flex items-center">
-                        <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
-                          キャンペーン
-                        </span>
-                      </span>
-                    </div>
-                  </>
-                ) : (
-                  <p className="text-3xl font-bold text-jp-gold">
-                    ¥{vehicle.pricePerNight.toLocaleString()}~
-                  </p>
-                )}
-              </div>
-              <a
-                href="#booking"
-                className="px-8 py-4 bg-jp-gold text-jp-black font-bold rounded-full hover:bg-jp-gold/90 transition-colors"
-              >
-                予約する
-              </a>
-            </motion.div>
+                  )}
+                </div>
+                <a
+                  href="#booking"
+                  className="px-8 py-4 bg-jp-gold text-jp-black font-bold rounded-full hover:bg-jp-gold/90 transition-colors"
+                >
+                  予約する
+                </a>
+              </motion.div>
+            )}
           </div>
         </div>
       </section>

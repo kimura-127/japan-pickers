@@ -132,10 +132,16 @@ const Footer = () => {
                 プライバシーポリシー
               </Link>
               <Link
-                href="#"
+                href="/terms-of-service"
                 className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
               >
                 利用規約
+              </Link>
+              <Link
+                href="/insurance-policy"
+                className="block text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
+              >
+                保険・補償制度
               </Link>
             </div>
           </div>
