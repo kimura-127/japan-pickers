@@ -1,5 +1,6 @@
 "use client";
 
+import { PRICE_TABLE } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
 import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
 import { motion } from "framer-motion";
@@ -106,13 +107,14 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                   {CAMPAIGN_DISCOUNT_RATE ? (
                     <>
                       <p className="text-2xl font-bold text-white line-through mb-1">
-                        ¥{vehicle.pricePerNight.toLocaleString()}~
+                        ¥{PRICE_TABLE[vehicle.vehicleType].weekday.initial24h.toLocaleString()}~
                       </p>
                       <div className="flex items-center gap-4">
                         <p className="text-3xl font-bold text-red-500">
                           ¥
                           {Math.round(
-                            vehicle.pricePerNight * CAMPAIGN_DISCOUNT_RATE,
+                            PRICE_TABLE[vehicle.vehicleType].weekday.initial24h *
+                              CAMPAIGN_DISCOUNT_RATE,
                           ).toLocaleString()}
                           ~
                         </p>
@@ -125,7 +127,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                     </>
                   ) : (
                     <p className="text-3xl font-bold text-jp-gold">
-                      ¥{vehicle.pricePerNight.toLocaleString()}~
+                      ¥{PRICE_TABLE[vehicle.vehicleType].weekday.initial24h.toLocaleString()}~
                     </p>
                   )}
                 </div>

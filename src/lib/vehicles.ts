@@ -75,7 +75,6 @@ export interface Vehicle {
   capacity: number;
   features: string[];
   detailedFeatures: VehicleFeature[];
-  pricePerNight: number;
   rating: number;
   reviewCount: number;
   specs: VehicleSpec;
@@ -296,7 +295,6 @@ export const vehicles: Vehicle[] = [
           "大切な家族の一員であるペットと一緒に旅行を楽しめます。ゲージに入れての乗車をお願いしています。",
       },
     ],
-    pricePerNight: 55000,
     rating: 4.8,
     reviewCount: 24,
     specs: {
@@ -436,7 +434,6 @@ export const vehicles: Vehicle[] = [
           "大切な家族の一員であるペットと一緒に旅行を楽しめます。ゲージに入れての乗車をお願いしています。",
       },
     ],
-    pricePerNight: 19800,
     rating: 4.9,
     reviewCount: 32,
     specs: {
@@ -606,7 +603,6 @@ export const vehicles: Vehicle[] = [
           "大切な家族の一員であるペットと一緒に旅行を楽しめます。ゲージに入れての乗車をお願いしています。",
       },
     ],
-    pricePerNight: 44000,
     rating: 4.7,
     reviewCount: 18,
     specs: {
@@ -789,7 +785,6 @@ export const otherVehicles: Vehicle[] = [
           "オートマ車、バックカメラ、ETCを装備し、長距離の運転も快適に。2017年3月12日以降に普通免許を取得した方は準中型免許が必要です。",
       },
     ],
-    pricePerNight: 45200,
     specs: {
       engine: "ガソリン 2400cc",
       seat: "左ハンドル",
@@ -979,7 +974,6 @@ export const otherVehicles: Vehicle[] = [
           "オートマ車、バックカメラ、ETCを装備し、長距離の運転も快適に。2017年3月12日以降に普通免許を取得した方は準中型免許が必要です。",
       },
     ],
-    pricePerNight: 45200,
     specs: {
       engine: "ガソリン 2400cc",
       seat: "左ハンドル",
@@ -1164,7 +1158,6 @@ export const otherVehicles: Vehicle[] = [
           "オートマ車、バックカメラ、ETCを装備し、長距離の運転も快適に。2017年3月12日以降に普通免許を取得した方は準中型免許が必要です。",
       },
     ],
-    pricePerNight: 45200,
     specs: {
       length: "175.5",
       width: "180",
