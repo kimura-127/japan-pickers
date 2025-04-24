@@ -115,7 +115,6 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
           <TableCaption className="mt-4 text-white/80 pb-2">
             ※ ハイシーズン:
             夏休み(7/14～8/31)、年末年始(12/27～1/3)、春休み(3/20～4/15)、GW(4/29～5/6)
-            <br />※ 追加料金は、予約時間を超過した場合に適用されます
           </TableCaption>
         </Table>
       </div>
