@@ -600,7 +600,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
                 <span className="text-jp-silver">レンタル基本料金</span>
                 <span className="text-white font-medium">
                   {calculateTotal().breakdown
-                    ? `¥${calculateTotal().total.toLocaleString()}`
+                    ? `¥${(calculateTotal().total - calculateTotal().timeFee).toLocaleString()}`
                     : "日程を選択してください"}
                 </span>
               </div>
@@ -639,7 +639,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-jp-silver flex items-center">
+                <span className="text-jp-silver flex items-center flex-col">
                   <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
                     キャンペーン
                   </span>
