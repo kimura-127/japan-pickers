@@ -1,6 +1,7 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import BookingSection from "@/components/sections/BookingSection";
+import CampingSpotsSection from "@/components/sections/CampingSpotsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import HeroSection from "@/components/sections/HeroSection";
@@ -28,6 +29,7 @@ export default function Home() {
         <OtherVehicleSection /> {/* おもしろ車両 */}
         <PlanSection /> {/* おすすめオプション */}
         <ServicesSection /> {/* サービス一覧 */}
+        <CampingSpotsSection /> {/* おすすめの車中泊スポット */}
         <FeaturesSection /> {/* 借りるメリット */}
         <BookingSection /> {/* 予約 */}
         <ContactSection /> {/* お問い合わせ */}
