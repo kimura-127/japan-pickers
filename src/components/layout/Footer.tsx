@@ -51,7 +51,7 @@ const Footer = () => {
                   href="#plans"
                   className="text-jp-silver hover:text-jp-gold transition-colors duration-300 text-sm"
                 >
-                  旅のプラン
+                  おすすめオプション
                 </Link>
               </li>
               <li>
@@ -104,9 +104,11 @@ const Footer = () => {
             <h3 className="text-jp-gold text-lg font-medium mb-4">フォローする</h3>
             <div className="flex space-x-4">
               <Link
-                href="#"
+                href="https://lin.ee/64a5pBo"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="LINE"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <SiLine className="h-5 w-5" />
               </Link>
@@ -114,6 +116,8 @@ const Footer = () => {
                 href="https://www.instagram.com/japan.pickers"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Instagram className="h-5 w-5" />
               </Link>
@@ -121,6 +125,8 @@ const Footer = () => {
                 href="https://x.com/JapnPickers"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="Twitter"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Twitter className="h-5 w-5" />
               </Link>
@@ -128,6 +134,8 @@ const Footer = () => {
                 href="#"
                 className="bg-jp-darkgray text-jp-gold hover:text-jp-gold-light p-2 rounded-full transition-colors duration-300"
                 aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Youtube className="h-5 w-5" />
               </Link>

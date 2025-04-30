@@ -449,10 +449,10 @@ export const vehicles: Vehicle[] = [
         "電子レンジ",
         "シンク（温水/冷水）",
         "給水・排水タンク各19L",
-        "※車内でのコンロ使用は軽食程度とし、油料理は禁止",
+        "※車内でのコンロ使用は軽食程度のみ",
       ],
       bathroom: ["カセットトイレ", "外部シャワー", "ポータブルトイレ"],
-      bedroom: ["ダブルベッド", "ソファベッド", "展開式ベッド", "寝具一式"],
+      bedroom: ["バンクベッド", "１階部フルフラットベッド", "ソファベッド"],
       climate: [
         "セパレートエアコン",
         "ルーフベンチレーター×2",
@@ -516,6 +516,7 @@ export const vehicles: Vehicle[] = [
     shortDescription: "ハイエンドキャビン｜624 x 220 x H300cm｜コースターがベース",
     image: "/images/IMG_8936.JPG",
     images: [
+      { src: "/images/vegas/vegaTop.JPG", alt: "コースター ベガ 外観", type: "exterior" },
       { src: "/images/vegas/IMG_9026.JPG", alt: "コースター ベガ 外観", type: "exterior" },
       { src: "/images/vegas/IMG_9028.JPG", alt: "コースター ベガ 外装", type: "interior" },
       { src: "/images/vegas/IMG_9029.JPG", alt: "コースター ベガ 外装", type: "interior" },
@@ -612,7 +613,7 @@ export const vehicles: Vehicle[] = [
         "冷蔵庫90L",
         "電子レンジ",
         "シンク（温水/冷水）",
-        "※車内でのコンロ使用は軽食程度とし、油料理は禁止",
+        "※車内でのコンロ使用は軽食程度のみ",
       ],
       bathroom: ["水洗トイレ", "洗面台＆ミラー", "シャワー", "温水ボイラー"],
       bedroom: ["ツインベッド or クイーンサイズベッド", "二段ベッド", "展開式ベッド", "寝具一式"],
@@ -684,7 +685,8 @@ export const otherVehicles: Vehicle[] = [
     name: "Jeep ミリタリー色",
     slug: "jeep-military",
     description: "三菱ジープ",
-    shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
+    shortDescription:
+      "※ 一般利用客へのレンタルは現在行っておりません。ロケや撮影(映画・TV番組・Youtube撮影)等の使用のみとなります。",
     image: "/images/otherVehicle/jeep_military4.JPG",
     images: [
       {
@@ -729,7 +731,8 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     capacity: 4,
-    subText: "※要問い合わせ",
+    subText:
+      "※ 一般利用客へのレンタルは現在行っておりません。問い合わせを行っていただき、ロケや撮影(映画・TV番組・Youtube撮影)等の使用のみとなります。",
     features: [],
     detailedFeatures: [
       {
@@ -873,7 +876,8 @@ export const otherVehicles: Vehicle[] = [
     name: "Jeep カーキ色",
     slug: "jeep-khaki",
     description: "三菱ジープ",
-    shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
+    shortDescription:
+      "※ 一般利用客へのレンタルは現在行っておりません。ロケや撮影(映画・TV番組・Youtube撮影)等の使用のみとなります。",
     image: "/images/otherVehicle/jeep_khaki1.JPG",
     images: [
       {
@@ -918,7 +922,8 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     capacity: 2,
-    subText: "※要問い合わせ",
+    subText:
+      "※ 一般利用客へのレンタルは現在行っておりません。問い合わせを行っていただき、ロケや撮影(映画・TV番組・Youtube撮影)等の使用のみとなります。",
     features: [],
     detailedFeatures: [
       {
@@ -1062,7 +1067,8 @@ export const otherVehicles: Vehicle[] = [
     name: "ミニカー",
     slug: "mini-car",
     description: "ミニカー",
-    shortDescription: "国産最高クラスキャンピングカー｜641 x 227 x H300cm｜マイクロバスがベース",
+    shortDescription:
+      "※ 一般利用客へのレンタルは現在行っておりません。ロケや撮影(映画・TV番組・Youtube撮影)等の使用のみとなります。",
     image: "/images/otherVehicle/miniCar2.JPG",
     images: [
       {
@@ -1102,7 +1108,8 @@ export const otherVehicles: Vehicle[] = [
       },
     ],
     capacity: 1,
-    subText: "※要問い合わせ",
+    subText:
+      "※ 一般利用客へのレンタルは現在行っておりません。問い合わせを行っていただき、ロケや撮影(映画・TV番組・Youtube撮影)等の使用のみとなります。",
     features: [],
     detailedFeatures: [
       {

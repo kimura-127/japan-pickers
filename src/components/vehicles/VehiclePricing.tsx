@@ -23,7 +23,7 @@ export const VehiclePricing: React.FC<VehiclePricingProps> = ({ pricingPlan }) =
       <div className="bg-red-600 text-white p-4 rounded-t-md flex items-center justify-between mb-1">
         <div className="flex items-center">
           <span className="text-2xl font-bold mr-2">🎉</span>
-          <span className="font-bold">期間限定キャンペーン</span>
+          <span className="font-bold">春のキャンペーン</span>
         </div>
         <div className="text-xl font-bold">
           {((1 - CAMPAIGN_DISCOUNT_RATE) * 100).toFixed(0)}%OFF

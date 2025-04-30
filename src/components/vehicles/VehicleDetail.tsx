@@ -73,6 +73,12 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               <p className="text-xs sm:text-sm md:text-base text-jp-silver max-w-3xl">
                 {vehicle.description}
               </p>
+
+              {vehicle.isHidden && (
+                <p className="text-xs sm:text-sm md:text-base text-jp-silver max-w-3xl">
+                  {vehicle.shortDescription}
+                </p>
+              )}
             </motion.div>
 
             <motion.div

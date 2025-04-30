@@ -180,13 +180,13 @@ const HeroSection = () => {
             variant="black"
             onClick={() => {
               if (!isClient) return;
-              const plansSection = document.getElementById("plans");
-              if (plansSection) {
-                plansSection.scrollIntoView({ behavior: "smooth" });
+              const contactSection = document.getElementById("contact");
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: "smooth" });
               }
             }}
           >
-            プランを見る
+            お問い合わせ
           </PremiumButton>
         </div>
       </div>

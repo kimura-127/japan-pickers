@@ -114,7 +114,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div id="faq" className="max-w-3xl mx-auto" style={{ scrollMarginTop: "calc(50vh - 100px)" }}>
       <h3 className="text-2xl text-white font-noto-serif-jp font-medium mb-6 text-center">
         よくある質問
       </h3>
