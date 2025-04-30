@@ -6,6 +6,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import HeroSection from "@/components/sections/HeroSection";
 import OtherVehicleSection from "@/components/sections/OtherVehicleSection";
 import PlanSection from "@/components/sections/PlanSection";
+import ServicesSection from "@/components/sections/ServicesSection";
 import VehicleSection from "@/components/sections/VehicleSection";
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function Home() {
         <VehicleSection /> {/* 車両 */}
         <OtherVehicleSection /> {/* おもしろ車両 */}
         <PlanSection /> {/* おすすめオプション */}
+        <ServicesSection /> {/* サービス一覧 */}
         <FeaturesSection /> {/* 借りるメリット */}
         <BookingSection /> {/* 予約 */}
         <ContactSection /> {/* お問い合わせ */}
