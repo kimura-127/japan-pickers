@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -24,22 +24,31 @@ export async function POST(request: Request) {
     const validatedData = bookingSchema.parse(body);
     console.log("バリデーション成功:", validatedData);
 
+    // Supabaseクライアントを作成
+    const supabase = await createServerSupabaseClient();
+    
     // データベースに予約情報を保存
-    console.log("Prisma操作開始", validatedData);
+    console.log("Supabase操作開始", validatedData);
     try {
-      const booking = await prisma.booking.create({
-        data: {
-          userId: validatedData.userId,
-          startDate: validatedData.startDate,
-          endDate: validatedData.endDate,
-          departureTime: validatedData.departureTime,
-          arrivalTime: validatedData.arrivalTime,
-          userName: validatedData.userName,
-          userEmail: validatedData.userEmail,
-          userPhone: validatedData.userPhone,
+      const { data: booking, error } = await supabase
+        .from('booking')
+        .insert({
+          user_id: validatedData.userId,
+          start_date: validatedData.startDate.toISOString(),
+          end_date: validatedData.endDate.toISOString(),
+          departure_time: validatedData.departureTime,
+          arrival_time: validatedData.arrivalTime,
+          user_name: validatedData.userName,
+          user_email: validatedData.userEmail,
+          user_phone: validatedData.userPhone,
           status: "pending", // 初期ステータス
-        },
-      });
+        })
+        .select()
+        .single();
+
+      if (error) {
+        throw error;
+      }
 
       console.log("予約作成成功:", booking);
 
@@ -92,11 +101,16 @@ export async function POST(request: Request) {
 // 予約一覧を取得するGETエンドポイント（管理者用）
 export async function GET() {
   try {
-    const bookings = await prisma.booking.findMany({
-      orderBy: {
-        created_at: "desc",
-      },
-    });
+    const supabase = await createServerSupabaseClient();
+    
+    const { data: bookings, error } = await supabase
+      .from('booking')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      throw error;
+    }
 
     return NextResponse.json({
       success: true,
