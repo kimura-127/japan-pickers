@@ -1,5 +1,5 @@
 import { sendMail } from "@/lib/email";
-import prisma from "@/lib/prisma";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -12,16 +12,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "必須項目が入力されていません" }, { status: 400 });
     }
 
+    // Supabaseクライアントを作成
+    const supabase = await createServerSupabaseClient();
+    
     // データベースに保存
-    const contact = await prisma.contact.create({
-      data: {
+    const { data: contact, error } = await supabase
+      .from('contact')
+      .insert({
         name,
         email,
         phone: phone || "", // 電話番号が空の場合に対応
         message,
-        // デフォルトのステータスはPENDINGに設定されています
-      },
-    });
+        status: 'PENDING', // デフォルトステータス
+      })
+      .select()
+      .single();
+
+    if (error) {
+      throw error;
+    }
 
     console.log("お問い合わせが正常に保存されました:", contact);
     // 管理者へのメール送信
