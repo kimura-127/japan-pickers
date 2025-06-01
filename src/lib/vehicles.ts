@@ -89,7 +89,7 @@ export interface Vehicle {
 }
 
 // キャンペーン割引率（20%OFF）
-export const CAMPAIGN_DISCOUNT_RATE = 0.85;
+export const CAMPAIGN_DISCOUNT_RATE = 1;
 
 // 車両データ
 export const vehicles: Vehicle[] = [
