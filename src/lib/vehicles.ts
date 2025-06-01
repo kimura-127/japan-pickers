@@ -514,9 +514,9 @@ export const vehicles: Vehicle[] = [
     description:
       "コースターVega630は日本最高峰キャンピングカーです。 広々とした室内空間と、キッチン、マルチルーム、リビング、ツインベッドルームを備えたモーターホームです。  日本に十台ほどしかないこのキャンピングカーは見た目の豪華さはもちろん、設備の性能、使い勝手を考慮し各所に工夫を凝らしており、照明も鮮やかに演出しています。 極上のラグジュアリーキャンピングカーコースターベガで素敵なお時間をお過ごしください。",
     shortDescription: "ハイエンドキャビン｜624 x 220 x H300cm｜コースターがベース",
-    image: "/images/IMG_8936.JPG",
+    image: "/images/vegas/vegaTop.jpg",
     images: [
-      { src: "/images/vegas/vegaTop.JPG", alt: "コースター ベガ 外観", type: "exterior" },
+      { src: "/images/vegas/vegaTop.jpg", alt: "コースター ベガ 外観", type: "exterior" },
       { src: "/images/vegas/IMG_9026.JPG", alt: "コースター ベガ 外観", type: "exterior" },
       { src: "/images/vegas/IMG_9028.JPG", alt: "コースター ベガ 外装", type: "interior" },
       { src: "/images/vegas/IMG_9029.JPG", alt: "コースター ベガ 外装", type: "interior" },
@@ -644,9 +644,13 @@ export const vehicles: Vehicle[] = [
         "冬：温泉地での贅沢な滞在に",
       ],
       images: [
-        { src: "/images/IMG_8936.JPG", alt: "コースター ベガでのワーケーション", type: "feature" },
         {
-          src: "/images/IMG_8936.JPG",
+          src: "/images/vegas/vegaTop.jpg",
+          alt: "コースター ベガでのワーケーション",
+          type: "feature",
+        },
+        {
+          src: "/images/vegas/vegaTop.jpg",
           alt: "コースター ベガで行くワイナリーツアー",
           type: "feature",
         },
