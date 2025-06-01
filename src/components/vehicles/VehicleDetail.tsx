@@ -112,7 +112,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
               >
                 <div>
                   <p className="text-xs sm:text-sm text-jp-silver">24h</p>
-                  {CAMPAIGN_DISCOUNT_RATE ? (
+                  {CAMPAIGN_DISCOUNT_RATE && CAMPAIGN_DISCOUNT_RATE < 1 ? (
                     <>
                       <p className="text-lg sm:text-xl md:text-2xl font-bold text-white line-through mb-1">
                         ¥{PRICE_TABLE[vehicle.vehicleType].weekday.initial24h.toLocaleString()}~

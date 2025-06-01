@@ -86,7 +86,7 @@ const VehicleCard = ({
           <div className="flex items-center justify-between my-4">
             <div>
               <p className="text-sm text-jp-silver">24h</p>
-              {CAMPAIGN_DISCOUNT_RATE ? (
+              {CAMPAIGN_DISCOUNT_RATE && CAMPAIGN_DISCOUNT_RATE < 1 ? (
                 <>
                   <div className="flex justify-between items-center text-lg font-medium mb-1">
                     <p className="text-white line-through">
