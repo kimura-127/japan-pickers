@@ -61,6 +61,11 @@ tmux send-keys -t president 'claude' C-m
 for i in {0..3}; do tmux send-keys -t multiagent:0.$i 'claude' C-m; done
 ```
 
+**こちらでマウスカーソルでtmux切り替えが可能になる**
+```bash
+tmux set-option -g mouse o
+```
+
 ### 4. デモ実行
 
 PRESIDENTセッションで直接入力：
