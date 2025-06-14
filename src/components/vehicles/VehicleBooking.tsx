@@ -181,10 +181,11 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
 
+      //  *** 予約日チェック、水曜日のチェックを一旦コメントアウトする。今後はDBにある予約データを取得してすでに予約が入っている日付があった場合に予約チャックフラグが起動するようにする。 ***
       // 水曜日（3）以外の日を予約可能とする
-      if (date.getDay() !== 3) {
-        availableDates.push(date);
-      }
+      // if (date.getDay() !== 3) {
+      availableDates.push(date);
+      // }
     }
 
     return availableDates;
@@ -313,34 +314,36 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
       return;
     }
 
+    //  *** 予約日チェック、水曜日のチェックを一旦コメントアウトする。今後はDBにある予約データを取得してすでに予約が入っている日付があった場合に予約チャックフラグが起動するようにする。 ***
+
     // 選択範囲内に予約済みの日付があるかチェック
     const startDate = new Date(range.from);
     const endDate = new Date(range.to);
 
     // 日付の範囲内に水曜日が含まれているかチェック
-    let hasWednesday = false;
+    // let hasWednesday = false;
     const currentDate = new Date(startDate);
 
     while (currentDate <= endDate) {
-      if (currentDate.getDay() === 3) {
-        // 水曜日
-        hasWednesday = true;
-        break;
-      }
+      // if (currentDate.getDay() === 3) {
+      //   // 水曜日
+      //   hasWednesday = true;
+      //   break;
+      // }
       currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    if (hasWednesday) {
-      // 警告トーストを表示
-      toast.error("予約エラー", {
-        description:
-          "選択した期間内に既に予約が入っている日付があります。別の日程を選択してください。",
-      });
-      // 予約不可フラグを設定
-      setHasUnavailableDates(true);
-    } else {
-      setHasUnavailableDates(false);
-    }
+    // if (hasWednesday) {
+    //   // 警告トーストを表示
+    //   toast.error("予約エラー", {
+    //     description:
+    //       "選択した期間内に既に予約が入っている日付があります。別の日程を選択してください。",
+    //   });
+    //   // 予約不可フラグを設定
+    //   setHasUnavailableDates(true);
+    // } else {
+    setHasUnavailableDates(false);
+    // }
 
     // 日付範囲を設定（予約済み日付があっても選択は許可）
     setDateRange(range);
@@ -631,26 +634,30 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
 
               <div className="border-t border-jp-gray pt-2 flex justify-between">
                 <span className="text-jp-silver">合計</span>
-                <span className="text-white font-medium line-through">
+                <span
+                  className={`text-white font-medium ${CAMPAIGN_DISCOUNT_RATE === 1 ? "font-bold text-xl" : "line-through"}`}
+                >
                   {calculateTotal().total > 0
                     ? `¥${calculateTotal().total.toLocaleString()}`
-                    : "日程を選択してください"}
+                    : "¥0"}
                 </span>
               </div>
 
-              <div className="flex justify-between items-center">
-                <span className="text-jp-silver flex items-center flex-col">
-                  <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
-                    キャンペーン
+              {CAMPAIGN_DISCOUNT_RATE < 1 && (
+                <div className="flex justify-between items-center">
+                  <span className="text-jp-silver flex items-center flex-col">
+                    <span className="text-white bg-red-600 text-xs px-2 py-0.5 rounded mr-2">
+                      キャンペーン
+                    </span>
+                    {`${((1 - CAMPAIGN_DISCOUNT_RATE) * 100).toFixed(0)}%OFF適用後`}
                   </span>
-                  {`${((1 - CAMPAIGN_DISCOUNT_RATE) * 100).toFixed(0)}%OFF適用後`}
-                </span>
-                <span className="text-red-500 font-bold text-xl">
-                  {calculateTotal().total > 0
-                    ? `¥${calculateTotal().discountedTotal.toLocaleString()}`
-                    : "日程を選択してください"}
-                </span>
-              </div>
+                  <span className="text-red-500 font-bold text-xl">
+                    {calculateTotal().total > 0
+                      ? `¥${calculateTotal().discountedTotal.toLocaleString()}`
+                      : "日程を選択してください"}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
