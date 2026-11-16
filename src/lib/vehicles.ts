@@ -91,6 +91,9 @@ export interface Vehicle {
 // キャンペーン割引率（20%OFF）
 export const CAMPAIGN_DISCOUNT_RATE = 1;
 
+// オンライン予約の受付可否（false の間は予約UIを非表示にし、予約ボタンはお問い合わせフォームへ誘導する）
+export const ONLINE_BOOKING_ENABLED = false;
+
 // 車両データ
 export const vehicles: Vehicle[] = [
   {

@@ -1,6 +1,6 @@
 "use client";
 
-import { vehicles } from "@/lib/vehicles";
+import { ONLINE_BOOKING_ENABLED, vehicles } from "@/lib/vehicles";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import VehicleCard from "../ui/VehicleCard";
@@ -89,7 +89,9 @@ const VehicleSection = () => {
                     router.push(`/vehicles/${vehicle.slug}`);
                   }}
                   onBookingClick={() => {
-                    router.push(`/vehicles/${vehicle.slug}#booking`);
+                    router.push(
+                      ONLINE_BOOKING_ENABLED ? `/vehicles/${vehicle.slug}#booking` : "/#contact",
+                    );
                   }}
                 />
               </div>
