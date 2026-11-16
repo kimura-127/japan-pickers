@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning data-scroll-behavior="smooth">
       <meta name="google-site-verification" content="CJZs3NCDwFV0OmcBMYfqxSj7hOQGDIVZaQF7JjO93cY" />
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider>
