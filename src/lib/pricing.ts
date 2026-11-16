@@ -174,8 +174,13 @@ export function calculateTotalPrice(
   // 日付の差分を計算（ミリ秒）
   const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
 
-  // 日数を計算（終了日を含む）
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+  // 日数を計算（宿泊数 = 終了日 - 開始日）
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  // 同日の場合は料金0円
+  if (diffDays === 0) {
+    return 0;
+  }
 
   // 1日未満（24時間以内）の短期レンタルの場合
   if (diffDays === 1 && isHourly && hours !== undefined) {
@@ -227,7 +232,16 @@ export function calculateTotalPrice(
  */
 export function getPriceBreakdown(startDate: Date, endDate: Date, vehicleType: VehicleType) {
   const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  // 同日の場合は料金0円
+  if (diffDays === 0) {
+    return {
+      initial24h: { price: 0, dayType: "weekday" as DayType },
+      additionalDays: [],
+      total: 0,
+    };
+  }
 
   const firstDayType = getDayType(startDate);
   const initial24hPrice = PRICE_TABLE[vehicleType][firstDayType].initial24h;

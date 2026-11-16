@@ -65,7 +65,7 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
   const getTotalDays = () => {
     if (!dateRange?.from || !dateRange?.to) return 0;
     const diffTime = Math.abs(dateRange.to.getTime() - dateRange.from.getTime());
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // 終了日も含める
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 宿泊数（終了日-開始日）
   };
 
   // 料金計算ロジックを新しいものに置き換え
@@ -102,8 +102,8 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
         extraHours = 0;
         timeFee = 0;
       } else {
-        // 日数（切り上げ）を計算
-        const diffDays = getTotalDays() - 1; // 開始日と終了日を含むので1を引く
+        // 宿泊数を計算
+        const diffDays = getTotalDays();
 
         // 同日内での予約か複数日にわたる予約かを確認
         if (diffDays === 0) {
@@ -311,6 +311,16 @@ const VehicleBooking = ({ vehicle, onShowImages }: VehicleBookingProps) => {
     if (!range || !range.from || !range.to) {
       setDateRange(range);
       setHasUnavailableDates(false);
+      return;
+    }
+
+    // 同日選択の場合は警告トーストを表示
+    if (range.from.getTime() === range.to.getTime()) {
+      toast.error("日程選択エラー", {
+        description: "同じ日付での貸出・返却はできません。異なる日付を選択してください。",
+      });
+      setDateRange(undefined); // 選択をクリア
+      setHasUnavailableDates(true);
       return;
     }
 
