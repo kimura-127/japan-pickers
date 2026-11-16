@@ -88,28 +88,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-// 予約一覧を取得するGETエンドポイント（管理者用）
-export async function GET() {
-  try {
-    const bookings = await prisma.booking.findMany({
-      orderBy: {
-        created_at: "desc",
-      },
-    });
-
-    return NextResponse.json({
-      success: true,
-      data: bookings,
-    });
-  } catch (error) {
-    console.error("予約データの取得中にエラーが発生しました:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "予約データの取得中にエラーが発生しました",
-      },
-      { status: 500 },
-    );
-  }
-}

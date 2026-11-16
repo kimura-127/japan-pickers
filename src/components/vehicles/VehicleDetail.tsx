@@ -175,14 +175,16 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       </section>
 
       {/* 予約セクション */}
-      <section id="booking" className="py-16 bg-jp-darkgray/30">
-        <div className="premium-container">
-          <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
-            空き状況・予約
-          </h2>
-          <VehicleBooking vehicle={vehicle} />
-        </div>
-      </section>
+      {!vehicle.isHidden && (
+        <section id="booking" className="py-16 bg-jp-darkgray/30">
+          <div className="premium-container">
+            <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
+              空き状況・予約
+            </h2>
+            <VehicleBooking vehicle={vehicle} />
+          </div>
+        </section>
+      )}
 
       {/* 料金テーブルセクション */}
       {!vehicle.isHidden && (
