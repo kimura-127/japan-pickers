@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { ONLINE_BOOKING_ENABLED } from "@/lib/vehicles";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -16,6 +17,13 @@ const bookingSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  if (!ONLINE_BOOKING_ENABLED) {
+    return NextResponse.json(
+      { success: false, message: "現在オンライン予約は受け付けておりません" },
+      { status: 503 },
+    );
+  }
+
   try {
     const body = await request.json();
     console.log("リクエストボディ:", body);

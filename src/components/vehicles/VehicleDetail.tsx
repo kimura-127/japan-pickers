@@ -2,7 +2,7 @@
 
 import { PRICE_TABLE } from "@/lib/pricing";
 import type { Vehicle } from "@/lib/vehicles";
-import { CAMPAIGN_DISCOUNT_RATE } from "@/lib/vehicles";
+import { CAMPAIGN_DISCOUNT_RATE, ONLINE_BOOKING_ENABLED } from "@/lib/vehicles";
 import { motion } from "framer-motion";
 import { Maximize, Users } from "lucide-react";
 import Image from "next/image";
@@ -140,7 +140,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
                   )}
                 </div>
                 <a
-                  href="#booking"
+                  href={ONLINE_BOOKING_ENABLED ? "#booking" : "/#contact"}
                   className="px-6 sm:px-8 py-3 sm:py-4 bg-jp-gold text-jp-black font-bold rounded-full hover:bg-jp-gold/90 transition-colors text-sm sm:text-base"
                 >
                   予約する
@@ -175,7 +175,7 @@ const VehicleDetail = ({ vehicle }: VehicleDetailProps) => {
       </section>
 
       {/* 予約セクション */}
-      {!vehicle.isHidden && (
+      {ONLINE_BOOKING_ENABLED && !vehicle.isHidden && (
         <section id="booking" className="py-16 bg-jp-darkgray/30">
           <div className="premium-container">
             <h2 className="text-2xl md:text-3xl font-noto-serif-jp font-bold text-white mb-8">
