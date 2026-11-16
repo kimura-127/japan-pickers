@@ -104,7 +104,8 @@ export function ReservationFormModal({
               {reservationSummary.startDate && reservationSummary.endDate && (
                 <p>
                   <span className="text-jp-silver">期間:</span> {reservationSummary.startDate} 〜{" "}
-                  {reservationSummary.endDate}（{reservationSummary.days}日間）
+                  {reservationSummary.endDate}（{reservationSummary.days}泊
+                  {reservationSummary.days + 1}日）
                 </p>
               )}
               <p className="flex justify-between items-center pt-2 border-t border-jp-darkgray/50 mt-2">
