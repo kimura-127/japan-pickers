@@ -494,18 +494,18 @@ export const vehicles: Vehicle[] = [
     vehicleType: "camroad", // 車両タイプを追加
     pricingPlan: {
       weekday: {
-        initialDay: 19800,
-        additionalDay: 15000,
+        initialDay: 29800,
+        additionalDay: 25000,
         hourlyRate: 3800,
       },
       weekend: {
-        initialDay: 25000,
-        additionalDay: 21250,
+        initialDay: 35000,
+        additionalDay: 31500,
         hourlyRate: 3800,
       },
       highSeason: {
-        initialDay: 30000,
-        additionalDay: 25000,
+        initialDay: 40000,
+        additionalDay: 35000,
         hourlyRate: 3800,
       },
     },
