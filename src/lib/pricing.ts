@@ -62,18 +62,18 @@ export const PRICE_TABLE: Record<VehicleType, Record<DayType, PriceStructure>> =
   // カムロードZiLの料金
   camroad: {
     weekday: {
-      initial24h: 29800,
-      additionalDay: 25000,
+      initial24h: 33000,
+      additionalDay: 28200,
       hourlyRate: 3800,
     },
     weekend: {
-      initial24h: 35000,
-      additionalDay: 31500,
+      initial24h: 38200,
+      additionalDay: 34700,
       hourlyRate: 3800,
     },
     highSeason: {
-      initial24h: 40000,
-      additionalDay: 35000,
+      initial24h: 43200,
+      additionalDay: 38200,
       hourlyRate: 3800,
     },
   },
